@@ -320,6 +320,30 @@ entity/Player.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ZOOrk.dir\build.make CMakeFiles/ZOOrk.dir/entity/Player.cpp.s
 .PHONY : entity/Player.cpp.s
 
+location/Cell.obj: location/Cell.cpp.obj
+.PHONY : location/Cell.obj
+
+# target to build an object file
+location/Cell.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ZOOrk.dir\build.make CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj
+.PHONY : location/Cell.cpp.obj
+
+location/Cell.i: location/Cell.cpp.i
+.PHONY : location/Cell.i
+
+# target to preprocess a source file
+location/Cell.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ZOOrk.dir\build.make CMakeFiles/ZOOrk.dir/location/Cell.cpp.i
+.PHONY : location/Cell.cpp.i
+
+location/Cell.s: location/Cell.cpp.s
+.PHONY : location/Cell.s
+
+# target to generate assembly for a file
+location/Cell.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ZOOrk.dir\build.make CMakeFiles/ZOOrk.dir/location/Cell.cpp.s
+.PHONY : location/Cell.cpp.s
+
 location/Location.obj: location/Location.cpp.obj
 .PHONY : location/Location.obj
 
@@ -497,6 +521,9 @@ help:
 	@echo ... entity/Player.obj
 	@echo ... entity/Player.i
 	@echo ... entity/Player.s
+	@echo ... location/Cell.obj
+	@echo ... location/Cell.i
+	@echo ... location/Cell.s
 	@echo ... location/Location.obj
 	@echo ... location/Location.i
 	@echo ... location/Location.s

@@ -110,10 +110,24 @@ CMakeFiles/ZOOrk.dir/location/Location.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZOOrk.dir/location/Location.cpp.s"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PSD\assessment3\ZOOrk\location\Location.cpp -o CMakeFiles\ZOOrk.dir\location\Location.cpp.s
 
+CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
+CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj: D:/PSD/assessment3/ZOOrk/location/Cell.cpp
+CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj"
+	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj -MF CMakeFiles\ZOOrk.dir\location\Cell.cpp.obj.d -o CMakeFiles\ZOOrk.dir\location\Cell.cpp.obj -c D:\PSD\assessment3\ZOOrk\location\Cell.cpp
+
+CMakeFiles/ZOOrk.dir/location/Cell.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ZOOrk.dir/location/Cell.cpp.i"
+	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PSD\assessment3\ZOOrk\location\Cell.cpp > CMakeFiles\ZOOrk.dir\location\Cell.cpp.i
+
+CMakeFiles/ZOOrk.dir/location/Cell.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ZOOrk.dir/location/Cell.cpp.s"
+	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PSD\assessment3\ZOOrk\location\Cell.cpp -o CMakeFiles\ZOOrk.dir\location\Cell.cpp.s
+
 CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj: D:/PSD/assessment3/ZOOrk/location/room/Room.cpp
 CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj -MF CMakeFiles\ZOOrk.dir\location\room\Room.cpp.obj.d -o CMakeFiles\ZOOrk.dir\location\room\Room.cpp.obj -c D:\PSD\assessment3\ZOOrk\location\room\Room.cpp
 
 CMakeFiles/ZOOrk.dir/location/room/Room.cpp.i: cmake_force
@@ -127,7 +141,7 @@ CMakeFiles/ZOOrk.dir/location/room/Room.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj: D:/PSD/assessment3/ZOOrk/location/passage/Passage.cpp
 CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj -MF CMakeFiles\ZOOrk.dir\location\passage\Passage.cpp.obj.d -o CMakeFiles\ZOOrk.dir\location\passage\Passage.cpp.obj -c D:\PSD\assessment3\ZOOrk\location\passage\Passage.cpp
 
 CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.i: cmake_force
@@ -141,7 +155,7 @@ CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj: D:/PSD/assessment3/ZOOrk/location/room/NullRoom.cpp
 CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj -MF CMakeFiles\ZOOrk.dir\location\room\NullRoom.cpp.obj.d -o CMakeFiles\ZOOrk.dir\location\room\NullRoom.cpp.obj -c D:\PSD\assessment3\ZOOrk\location\room\NullRoom.cpp
 
 CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.i: cmake_force
@@ -155,7 +169,7 @@ CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.obj: D:/PSD/assessment3/ZOOrk/location/passage/NullPassage.cpp
 CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.obj -MF CMakeFiles\ZOOrk.dir\location\passage\NullPassage.cpp.obj.d -o CMakeFiles\ZOOrk.dir\location\passage\NullPassage.cpp.obj -c D:\PSD\assessment3\ZOOrk\location\passage\NullPassage.cpp
 
 CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.i: cmake_force
@@ -169,7 +183,7 @@ CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.obj: D:/PSD/assessment3/ZOOrk/command/NullCommand.cpp
 CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.obj -MF CMakeFiles\ZOOrk.dir\command\NullCommand.cpp.obj.d -o CMakeFiles\ZOOrk.dir\command\NullCommand.cpp.obj -c D:\PSD\assessment3\ZOOrk\command\NullCommand.cpp
 
 CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.i: cmake_force
@@ -183,7 +197,7 @@ CMakeFiles/ZOOrk.dir/command/NullCommand.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.obj: D:/PSD/assessment3/ZOOrk/command/RoomDefaultEnterCommand.cpp
 CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.obj -MF CMakeFiles\ZOOrk.dir\command\RoomDefaultEnterCommand.cpp.obj.d -o CMakeFiles\ZOOrk.dir\command\RoomDefaultEnterCommand.cpp.obj -c D:\PSD\assessment3\ZOOrk\command\RoomDefaultEnterCommand.cpp
 
 CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.i: cmake_force
@@ -197,7 +211,7 @@ CMakeFiles/ZOOrk.dir/command/RoomDefaultEnterCommand.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.obj: D:/PSD/assessment3/ZOOrk/command/PassageDefaultEnterCommand.cpp
 CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.obj -MF CMakeFiles\ZOOrk.dir\command\PassageDefaultEnterCommand.cpp.obj.d -o CMakeFiles\ZOOrk.dir\command\PassageDefaultEnterCommand.cpp.obj -c D:\PSD\assessment3\ZOOrk\command\PassageDefaultEnterCommand.cpp
 
 CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.i: cmake_force
@@ -211,7 +225,7 @@ CMakeFiles/ZOOrk.dir/command/PassageDefaultEnterCommand.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/entity/Character.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/entity/Character.cpp.obj: D:/PSD/assessment3/ZOOrk/entity/Character.cpp
 CMakeFiles/ZOOrk.dir/entity/Character.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ZOOrk.dir/entity/Character.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ZOOrk.dir/entity/Character.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/entity/Character.cpp.obj -MF CMakeFiles\ZOOrk.dir\entity\Character.cpp.obj.d -o CMakeFiles\ZOOrk.dir\entity\Character.cpp.obj -c D:\PSD\assessment3\ZOOrk\entity\Character.cpp
 
 CMakeFiles/ZOOrk.dir/entity/Character.cpp.i: cmake_force
@@ -225,7 +239,7 @@ CMakeFiles/ZOOrk.dir/entity/Character.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj: D:/PSD/assessment3/ZOOrk/entity/Player.cpp
 CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj -MF CMakeFiles\ZOOrk.dir\entity\Player.cpp.obj.d -o CMakeFiles\ZOOrk.dir\entity\Player.cpp.obj -c D:\PSD\assessment3\ZOOrk\entity\Player.cpp
 
 CMakeFiles/ZOOrk.dir/entity/Player.cpp.i: cmake_force
@@ -239,7 +253,7 @@ CMakeFiles/ZOOrk.dir/entity/Player.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.obj: D:/PSD/assessment3/ZOOrk/core/ZOOrkEngine.cpp
 CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.obj -MF CMakeFiles\ZOOrk.dir\core\ZOOrkEngine.cpp.obj.d -o CMakeFiles\ZOOrk.dir\core\ZOOrkEngine.cpp.obj -c D:\PSD\assessment3\ZOOrk\core\ZOOrkEngine.cpp
 
 CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.i: cmake_force
@@ -253,7 +267,7 @@ CMakeFiles/ZOOrk.dir/core/ZOOrkEngine.cpp.s: cmake_force
 CMakeFiles/ZOOrk.dir/main.cpp.obj: CMakeFiles/ZOOrk.dir/flags.make
 CMakeFiles/ZOOrk.dir/main.cpp.obj: D:/PSD/assessment3/ZOOrk/main.cpp
 CMakeFiles/ZOOrk.dir/main.cpp.obj: CMakeFiles/ZOOrk.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ZOOrk.dir/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/ZOOrk.dir/main.cpp.obj"
 	C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ZOOrk.dir/main.cpp.obj -MF CMakeFiles\ZOOrk.dir\main.cpp.obj.d -o CMakeFiles\ZOOrk.dir\main.cpp.obj -c D:\PSD\assessment3\ZOOrk\main.cpp
 
 CMakeFiles/ZOOrk.dir/main.cpp.i: cmake_force
@@ -269,6 +283,7 @@ ZOOrk_OBJECTS = \
 "CMakeFiles/ZOOrk.dir/entity/GameObject.cpp.obj" \
 "CMakeFiles/ZOOrk.dir/entity/Item.cpp.obj" \
 "CMakeFiles/ZOOrk.dir/location/Location.cpp.obj" \
+"CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj" \
 "CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj" \
 "CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj" \
 "CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj" \
@@ -287,6 +302,7 @@ ZOOrk_EXTERNAL_OBJECTS =
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/entity/GameObject.cpp.obj
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/entity/Item.cpp.obj
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/location/Location.cpp.obj
+ZOOrk.exe: CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/location/passage/Passage.cpp.obj
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/location/room/NullRoom.cpp.obj
@@ -302,7 +318,7 @@ ZOOrk.exe: CMakeFiles/ZOOrk.dir/build.make
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/linkLibs.rsp
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/objects1.rsp
 ZOOrk.exe: CMakeFiles/ZOOrk.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable ZOOrk.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\PSD\assessment3\ZOOrk\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable ZOOrk.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\ZOOrk.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

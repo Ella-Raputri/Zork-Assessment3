@@ -6,11 +6,13 @@
 
 #include <utility>
 #include <algorithm>
+#include <iostream>
 
-ZOOrkEngine::ZOOrkEngine(std::shared_ptr<Room> start) {
+ZOOrkEngine::ZOOrkEngine(std::shared_ptr<Room> start, int startX, int startY) {
     player = Player::instance();
     player->setCurrentRoom(start.get());
-    player->getCurrentRoom()->enter();
+    player->setPosition(startX, startY);
+    player->getCurrentRoom()->render(startX, startY);
 }
 
 void ZOOrkEngine::run() {
@@ -32,7 +34,7 @@ void ZOOrkEngine::run() {
             handleTakeCommand(arguments);
         } else if (command == "drop") {
             handleDropCommand(arguments);
-        } else if (command == "quit") {
+        } else if (command == "quit" || command == "q") {
             handleQuitCommand(arguments);
         } else {
             std::cout << "I don't understand that command.\n";
@@ -44,26 +46,51 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     std::string direction;
     if (arguments[0] == "n" || arguments[0] == "north") {
         direction = "north";
-    } else if (arguments[0] == "s" || arguments[0] == "south") {
+    } 
+    else if (arguments[0] == "s" || arguments[0] == "south") {
         direction = "south";
-    } else if (arguments[0] == "e" || arguments[0] == "east") {
+    } 
+    else if (arguments[0] == "e" || arguments[0] == "east") {
         direction = "east";
-    } else if (arguments[0] == "w" || arguments[0] == "west") {
+    } 
+    else if (arguments[0] == "w" || arguments[0] == "west") {
         direction = "west";
-    } else if (arguments[0] == "u" || arguments[0] == "up") {
-        direction = "up";
-    } else if (arguments[0] == "d" || arguments[0] == "down") {
-        direction = "down";
+    // } else if (arguments[0] == "u" || arguments[0] == "up") {
+    //     direction = "up";
+    // } else if (arguments[0] == "d" || arguments[0] == "down") {
+    //     direction = "down";
     } else {
         direction = arguments[0];
     }
 
-    Room* currentRoom = player->getCurrentRoom();
-    auto passage = currentRoom->getPassage(direction);
+    int dx = 0, dy = 0;
+    if (direction == "north") dy = -1;
+    else if (direction == "south") dy = +1;
+    else if (direction == "east")  dx = +1;
+    else if (direction == "west")  dx = -1;
 
-    std::cout << "Passage name: " << passage->getName() << "\n";
-    passage->enter();
-    player->setCurrentRoom(passage->getTo());
+    Room* currentRoom = player->getCurrentRoom();
+    int currX = player->getX(), currY = player->getY();
+    int newX = currX + dx, newY = currY + dy;
+
+    std::string reason = currentRoom->canMoveTo(currX, currY, newX, newY);
+
+    if (!reason.empty()) {
+        auto passage = currentRoom->getPassage(direction);
+        if(passage->getName() == "null"){
+            std::cout << reason << std::endl;
+            return;
+        };
+        passage->enter();
+        player->setCurrentRoom(passage->getTo());
+        player->setPosition(passage->getToX(), passage->getToY());
+    }
+    else {
+        player->setPosition(newX, newY);
+        std::cout << currentRoom->getCell(newX, newY).getDescription() << "\n";
+    }
+
+    player->getCurrentRoom()->render(player->getX(), player->getY());
 }
 
 void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {

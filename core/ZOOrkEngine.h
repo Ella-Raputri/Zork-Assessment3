@@ -16,7 +16,7 @@
 
 class ZOOrkEngine {
 public:
-    ZOOrkEngine(std::shared_ptr<Room>);
+    ZOOrkEngine(std::shared_ptr<Room>, int startX, int startY);
 
     void run();
 

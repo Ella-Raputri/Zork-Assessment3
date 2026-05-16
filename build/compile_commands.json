@@ -19,6 +19,12 @@
 },
 {
   "directory": "D:/PSD/assessment3/ZOOrk/build",
+  "command": "C:\\Users\\Asus\\Downloads\\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\ZOOrk.dir\\location\\Cell.cpp.obj -c D:\\PSD\\assessment3\\ZOOrk\\location\\Cell.cpp",
+  "file": "D:/PSD/assessment3/ZOOrk/location/Cell.cpp",
+  "output": "CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj"
+},
+{
+  "directory": "D:/PSD/assessment3/ZOOrk/build",
   "command": "C:\\Users\\Asus\\Downloads\\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\ZOOrk.dir\\location\\room\\Room.cpp.obj -c D:\\PSD\\assessment3\\ZOOrk\\location\\room\\Room.cpp",
   "file": "D:/PSD/assessment3/ZOOrk/location/room/Room.cpp",
   "output": "CMakeFiles/ZOOrk.dir/location/room/Room.cpp.obj"

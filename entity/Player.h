@@ -20,19 +20,22 @@ public:
     }
 
     void setCurrentRoom(Room*);
-
     Room* getCurrentRoom() const;
 
-    Player(const Player &) = delete;
+    void setPosition(int newX, int newY); 
+    int getX() const ;
+    int getY() const ;
 
+    Player(const Player &) = delete;
     Player &operator=(const Player &) = delete;
 
 private:
     static Player *playerInstance;
     Room* currentRoom;
+    int posX, posY;
 
     Player() : Character("You", "You are a person, alike in dignity to any other, but uniquely you."),
-               currentRoom(new NullRoom()) {}
+               currentRoom(new NullRoom()), posX(0), posY(0) {}
 };
 
 #endif //ZOORK_PLAYER_H

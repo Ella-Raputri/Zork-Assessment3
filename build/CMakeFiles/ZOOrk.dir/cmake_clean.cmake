@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ZOOrk.dir/entity/Item.cpp.obj.d"
   "CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj"
   "CMakeFiles/ZOOrk.dir/entity/Player.cpp.obj.d"
+  "CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj"
+  "CMakeFiles/ZOOrk.dir/location/Cell.cpp.obj.d"
   "CMakeFiles/ZOOrk.dir/location/Location.cpp.obj"
   "CMakeFiles/ZOOrk.dir/location/Location.cpp.obj.d"
   "CMakeFiles/ZOOrk.dir/location/passage/NullPassage.cpp.obj"

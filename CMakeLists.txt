@@ -10,8 +10,11 @@ add_executable(ZOOrk
     command/Command.h
     entity/Item.h
     entity/Item.cpp
+
     location/Location.cpp
     location/Location.h
+    location/Cell.cpp
+    location/Cell.h
 
     location/room/Room.cpp
     location/room/Room.h
