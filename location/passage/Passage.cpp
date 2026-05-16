@@ -1,5 +1,6 @@
 //
 // Created by Richard Skarbez on 5/7/23.
+// Modified by Ella Raputri on 5/16/26
 //
 
 #include "Passage.h"
@@ -20,28 +21,36 @@ std::string Passage::oppositeDirection(const std::string &s) {
 }
 
 void Passage::createBasicPassage(Room* from, Room* to,
-                                   const std::string &direction,
-                                   int fromX, int fromY,   
-                                   int toX,   int toY,     
-                                   bool bidirectional) {
+                                 const std::string &direction,
+                                 int fromDoorX, int fromDoorY,
+                                 int toDoorX,   int toDoorY,
+                                 int fromArriveX, int fromArriveY,
+                                 int toArriveX,   int toArriveY,
+                                 bool bidirectional) {
+    std::string name1 = from->getName() + "_to_" + to->getName();
+    auto p1 = std::make_shared<Passage>(name1, "A totally normal passageway.",
+                                        from, to,
+                                        fromDoorX, fromDoorY,
+                                        toArriveX, toArriveY);
+    from->addPassage(direction, p1);
 
-    std::string passageName = from->getName() + "_to_" + to->getName();
-    auto temp1 = std::make_shared<Passage>(passageName, "A totally normal passageway.", from, to, fromX, fromY, toX, toY);
-    from->addPassage(direction, temp1);
-    
     if (bidirectional) {
-        std::string passageName2 = to->getName() + "_to_" + from->getName();
-        auto temp2 = std::make_shared<Passage>(passageName2, "A totally normal passageway.", to, from, toX, toY, fromX, fromY);
-        to->addPassage(oppositeDirection(direction), temp2);
+        std::string name2 = to->getName() + "_to_" + from->getName();
+        auto p2 = std::make_shared<Passage>(name2, "A totally normal passageway.",
+                                            to, from,
+                                            toDoorX, toDoorY,
+                                            fromArriveX, fromArriveY);
+        to->addPassage(oppositeDirection(direction), p2);
     }
 }
 
 Passage::Passage(const std::string &n, const std::string &d,
-            Room* from, Room* to,
-            int fromX, int fromY,
-            int toX,   int toY)
-        : Location(n, d), fromRoom(from), toRoom(to),
-        fromX(fromX), fromY(fromY), toX(toX), toY(toY) {
+                 Room* from, Room* to,
+                 int doorX, int doorY,
+                 int arriveX, int arriveY)
+    : Location(n, d), fromRoom(from), toRoom(to),
+      doorX(doorX), doorY(doorY),
+      arriveX(arriveX), arriveY(arriveY) {
     setEnterCommand(std::make_shared<PassageDefaultEnterCommand>(this));
 }
 
@@ -65,18 +74,7 @@ Room* Passage::getTo() const {
     return toRoom;
 }
 
-int Passage::getFromX() const {
-    return fromX;
-}
-
-int Passage::getFromY() const {
-    return fromY;
-}
-
-int Passage::getToX() const {
-    return toX;
-}
-
-int Passage::getToY() const {
-    return toY;
-}
+int Passage::getDoorX()   const { return doorX; }
+int Passage::getDoorY()   const { return doorY; }
+int Passage::getArriveX() const { return arriveX; }
+int Passage::getArriveY() const { return arriveY; }

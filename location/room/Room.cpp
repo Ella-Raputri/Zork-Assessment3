@@ -1,5 +1,6 @@
 //
 // Created by Richard Skarbez on 5/7/23.
+// Modified by Ella Raputri on 5/16/26
 //
 #include "Room.h"
 #include "../passage/NullPassage.h"
@@ -7,10 +8,11 @@
 #include <utility>
 #include <memory>
 #include <iostream>
+#include <algorithm>
 
 
-Room::Room(const std::string &n, const std::string &d, int width, int height)
-        : Location(n, d), width(width), height(height) {
+Room::Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH)
+        : Location(n, d), width(width), height(height), viewW(viewW), viewH(viewH) {
     enterCommand = std::make_shared<RoomDefaultEnterCommand>(this);
     grid.resize(height, std::vector<Cell>(width));
 }
@@ -48,13 +50,18 @@ std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY) const {
     return "";
 };
 
-void Room::render(int playerX, int playerY) const {
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
+void Room::render(int playerX, int playerY, int viewW, int viewH) const {
+    int startX = std::clamp(playerX - viewW / 2, 0, std::max(0, width - viewW));
+    int startY = std::clamp(playerY - viewH / 2, 0, std::max(0, height - viewH));
+
+    for (int y = startY; y < startY + viewH; y++) {
+        for (int x = startX; x < startX + viewW; x++) {
             if (x == playerX && y == playerY)
                 std::cout << '@';
-            else
+            else if (x < width && y < height)
                 std::cout << grid[y][x].getSymbol();
+            else
+                std::cout << ' ';
         }
         std::cout << '\n';
     }
@@ -65,6 +72,12 @@ int Room::getWidth() const {
 }
 int Room::getHeight() const { 
     return height; 
+}
+int Room::getViewW() const { 
+    return viewW; 
+}
+int Room::getViewH() const { 
+    return viewH; 
 }
 
 // Room::Room(const std::string &n, const std::string &d, std::shared_ptr<Command> c) : Location(n, d, std::move(c)) {}
@@ -86,4 +99,12 @@ std::shared_ptr<Passage> Room::getPassage(const std::string &direction) {
         std::cout << "It is impossible to go " << direction << "!\n";
         return std::make_shared<NullPassage>(this);
     }
+}
+
+std::shared_ptr<Passage> Room::getPassageByPosition(int x, int y) {
+    for (auto& [dir, passage] : passageMap) {
+        if (passage->getDoorX() == x && passage->getDoorY() == y)
+            return passage;
+    }
+    return std::make_shared<NullPassage>(this);
 }

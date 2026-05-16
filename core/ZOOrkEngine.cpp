@@ -1,5 +1,6 @@
 //
 // Created by Richard Skarbez on 5/7/23.
+// Modified by Ella Raputri on 5/16/26
 //
 
 #include "ZOOrkEngine.h"
@@ -12,7 +13,7 @@ ZOOrkEngine::ZOOrkEngine(std::shared_ptr<Room> start, int startX, int startY) {
     player = Player::instance();
     player->setCurrentRoom(start.get());
     player->setPosition(startX, startY);
-    player->getCurrentRoom()->render(startX, startY);
+    player->getCurrentRoom()->render(startX, startY, player->getCurrentRoom()->getViewW(), player->getCurrentRoom()->getViewH());
 }
 
 void ZOOrkEngine::run() {
@@ -76,21 +77,31 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     std::string reason = currentRoom->canMoveTo(currX, currY, newX, newY);
 
     if (!reason.empty()) {
-        auto passage = currentRoom->getPassage(direction);
-        if(passage->getName() == "null"){
-            std::cout << reason << std::endl;
-            return;
-        };
-        passage->enter();
-        player->setCurrentRoom(passage->getTo());
-        player->setPosition(passage->getToX(), passage->getToY());
+        std::cout << reason << std::endl;
+        return;
     }
-    else {
+
+    if (currentRoom->getCell(newX, newY).getType() == CellType::Door) {
+        auto passage = currentRoom->getPassage(direction);
+        if (passage->getName() == "null") {
+            passage = currentRoom->getPassageByPosition(newX, newY);
+        }
+        if (passage->getName() != "null") {
+            std::cout<<"hehe"<< std::endl;
+            passage->enter();
+            player->setCurrentRoom(passage->getTo());
+            player->setPosition(passage->getArriveX(), passage->getArriveY());
+        }
+    } else {
         player->setPosition(newX, newY);
         std::cout << currentRoom->getCell(newX, newY).getDescription() << "\n";
     }
 
-    player->getCurrentRoom()->render(player->getX(), player->getY());
+    player->getCurrentRoom()->render(player->getX(), player->getY(),
+        player->getCurrentRoom()->getViewW(),
+        player->getCurrentRoom()->getViewH());
+    // in handleGoCommand after passage fires
+    std::cout << "DEBUG arrived at: " << player->getX() << "," << player->getY() << "\n";
 }
 
 void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {

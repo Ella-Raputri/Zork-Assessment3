@@ -1,5 +1,6 @@
 //
 // Created by Richard Skarbez on 5/7/23.
+// Modified by Ella Raputri on 5/16/26
 //
 
 #ifndef ZOORK_ROOM_H
@@ -19,7 +20,7 @@ class Passage;
 
 class Room : public Location {
 public:
-    Room(const std::string &n, const std::string &d, int width, int height);
+    Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH);
 
     // Room(const std::string &n, const std::string &d, std::shared_ptr<Command>);
 
@@ -35,19 +36,23 @@ public:
                  bool passable);
     
     std::string canMoveTo(int fromX, int fromY, int toX, int toY) const;
-    void render(int playerX, int playerY) const;
+    void render(int playerX, int playerY, int viewW, int viewH) const;
 
     int getWidth() const;
     int getHeight() const;
+    int getViewW() const;
+    int getViewH() const;
 
     void addPassage(const std::string & direction, std::shared_ptr<Passage> p);
     void removePassage(const std::string & direction);
     std::shared_ptr<Passage> getPassage(const std::string & direction);
+    std::shared_ptr<Passage> getPassageByPosition(int x, int y);
 
 protected:
 //    std::vector<Item*> items;
 //    std::vector<Character*> characters;
     int width, height;
+    int viewW, viewH;
     std::vector<std::vector<Cell>> grid;  // grid[y][x]
     std::map<std::string, std::shared_ptr<Passage>> passageMap;
 };

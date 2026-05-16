@@ -4,30 +4,39 @@
 #include "location/room/Room.h"
 #include "core/ZOOrkEngine.h"
 
-
 int main() {
-    // std::shared_ptr<Room> start = std::make_shared<Room>("start-room",
-    //                        "You are standing in an open field west of a white house, with a boarded front door.\n");
+    auto outside = std::make_shared<Room>("outside", "The outside world.", 18, 3, 18, 3);
+    auto inside  = std::make_shared<Room>("inside",  "Inside the house.",  4,  2,  4,  2);
 
-    // std::shared_ptr<Room> south_of_house = std::make_shared<Room>("south-of-house",
-    //                                 "You are facing the south side of a white house.  There is no door here, and all the windows are barred.\n");
+    // Build outside grid
+    for (int y = 0; y < 3; y++)
+        for (int x = 0; x < 18; x++)
+            outside->setCell(x, y, CellType::Empty, 'x', "You are in the garden.", "garden", true);
 
-    // std::shared_ptr<Room> behind_house = std::make_shared<Room>("behind-house",
-    //                               "You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.\n");
-
-    // Passage::createBasicPassage(start.get(), south_of_house.get(), "south", true);
-    // Passage::createBasicPassage(south_of_house.get(), behind_house.get(), "east", true);
-
-    auto world = std::make_shared<Room>("world", "The world.", 18, 3);
     for (int y = 1; y <= 2; y++)
         for (int x = 8; x <= 11; x++)
-            world->setCell(x, y, CellType::Floor, 'h', "You are inside the house.", "house", true);
+            outside->setCell(x, y, CellType::Floor, 'h', "You are inside the house.", "house", true);
 
-    world->setCell(11, 2, CellType::Door, 'd', "You are at the door.", "door", true);
+    outside->setCell(11, 2, CellType::Door, 'd', "You are at the door.", "door", true);
 
-    ZOOrkEngine zoork(world, 12, 2);
+    // Build inside grid — now correctly 8x4
+    for (int y = 0; y < 2; y++)
+        for (int x = 0; x < 4; x++)
+            inside->setCell(x, y, CellType::Floor, 'h', "You are inside.", "house", true);
 
+    inside->setCell(3, 1, CellType::Door, 'd', "You are at the door.", "door", true);
+
+    Passage::createBasicPassage(
+        outside.get(), inside.get(),
+        "west",
+        11, 2,
+        3, 1,
+        12, 2,
+        2, 1,
+        true    
+    );
+
+    ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();
-
     return 0;
 }
