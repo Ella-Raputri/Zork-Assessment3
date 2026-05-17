@@ -44,9 +44,10 @@ int main() {
         "key",
         "A small silver key lying on the floor.",
         std::make_shared<NullCommand>(),
-        1
+        2,
+        ItemType::Key
     );
-    inside->getCell(1, 0).addItem(key);
+    inside->getCell(2, 0).addItem(key);
 
     ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();

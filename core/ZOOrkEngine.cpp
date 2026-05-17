@@ -180,15 +180,23 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
     }
     auto item = player->getItem(arguments[0]);
 
-    if (item) {
-        item->use();
-
-        if (item->isDepleted()) {
-            player->removeItem(arguments[0]);
-            std::cout << "The " << item->getName() << " is depleted and can not be used anymore." << std::endl;
-        }
-    }else{
+    if (!item) {
         std::cout << "No " << arguments[0] << " found in the inventory." << std::endl;
+        return;        
+    }
+
+    if (item->getType() == ItemType::Key) {
+        if (!isNearDoor()) {
+            std::cout << "There is no door nearby to use the key on." << std::endl;
+            return;
+        }
+        std::cout << "You use the key on the door." << std::endl;
+    }
+
+    item->use();
+    if (item->isDepleted()) {
+        player->removeItem(arguments[0]);
+        std::cout << "The " << item->getName() << " is depleted and can not be used anymore." << std::endl;
     }
 }
 
@@ -218,6 +226,29 @@ std::vector<std::string> ZOOrkEngine::tokenizeString(const std::string &input) {
 std::string ZOOrkEngine::makeLowercase(std::string input) {
     std::string output = std::move(input);
     std::transform(output.begin(), output.end(), output.begin(), ::tolower);
-
     return output;
+}
+
+bool ZOOrkEngine::isNearDoor() {
+    Room* room = player->getCurrentRoom();
+
+    int x = player->getX();
+    int y = player->getY();
+
+    const int dx[] = {0, 0, 1, -1};
+    const int dy[] = {-1, 1, 0, 0};
+
+    for (int i = 0; i < 4; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+
+        if (nx >= 0 && nx < room->getWidth() &&
+            ny >= 0 && ny < room->getHeight()) {
+
+            if (room->getCell(nx, ny).getType() == CellType::Door) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
