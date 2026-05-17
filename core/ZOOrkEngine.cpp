@@ -89,7 +89,7 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
         return;
     }
 
-    if (currentRoom->getCell(newX, newY).getType() == CellType::Door) {
+    if (currentRoom->getCell(newX, newY)->getType() == CellType::Door) {
         auto passage = currentRoom->getPassage(direction);
         if (passage->getName() == "null") {
             passage = currentRoom->getPassageByPosition(newX, newY);
@@ -102,7 +102,7 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
         }
     } else {
         player->setPosition(newX, newY);
-        std::cout << currentRoom->getCell(newX, newY).getDescription() << "\n";
+        std::cout << currentRoom->getCell(newX, newY)->getDescription() << "\n";
     }
 
     player->getCurrentRoom()->render(player->getX(), player->getY(),
@@ -118,11 +118,11 @@ void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
     Room* currentRoom = player->getCurrentRoom();
     int currX = player->getX();
     int currY = player->getY();
-    Cell& cell = currentRoom->getCell(currX, currY);
+    auto cell = currentRoom->getCell(currX, currY);
 
-    if (cell.hasItems()) {
+    if (cell->hasItems()) {
         std::cout << "You see: " << std::endl;
-        for (const auto& item : cell.getItems()) {
+        for (const auto& item : cell->getItems()) {
             std::cout << "- " << item->getName()
                       << ": " << item->getDescription() << std::endl;
         }
@@ -137,8 +137,8 @@ void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
     Room* currentRoom = player->getCurrentRoom();
     int currX = player->getX(), currY = player->getY();
 
-    Cell& cell = currentRoom->getCell(currX, currY);
-    auto item = cell.retrieveItem(arguments[0]);
+    auto cell = currentRoom->getCell(currX, currY);
+    auto item = cell->retrieveItem(arguments[0]);
 
     if (item) {
         player->addItem(item);
@@ -157,11 +157,11 @@ void ZOOrkEngine::handleDropCommand(std::vector<std::string> arguments) {
     Room* currentRoom = player->getCurrentRoom();
     int currX = player->getX(), currY = player->getY();
 
-    Cell& cell = currentRoom->getCell(currX, currY);
+    auto cell = currentRoom->getCell(currX, currY);
     auto item = player->getItem(arguments[0]);
 
     if (item) {
-        cell.addItem(item);
+        cell->addItem(item);
         std::cout << "Dropped: " << item->getName() << "\n";
     }
     else {
@@ -186,11 +186,23 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
     }
 
     if (item->getType() == ItemType::Key) {
-        if (!isNearDoor()) {
-            std::cout << "There is no door nearby to use the key on." << std::endl;
+        auto door = getNearbyDoor();
+        if (!door) {
+            std::cout << "There is no door nearby." << std::endl;
             return;
         }
-        std::cout << "You use the key on the door." << std::endl;
+
+        if (door->canUnlockWith(item->getItemId())){
+            if(!door->isLocked()){
+                door->lock();
+                std::cout << "You locked the door." << std::endl;
+            }else{
+                door->unlock();
+                std::cout << "You unlocked the door." << std::endl;
+            }
+        }else{
+            std::cout << "The key does not fit." << std::endl;
+        }
     }
 
     item->use();
@@ -229,7 +241,7 @@ std::string ZOOrkEngine::makeLowercase(std::string input) {
     return output;
 }
 
-bool ZOOrkEngine::isNearDoor() {
+std::shared_ptr<DoorCell> ZOOrkEngine::getNearbyDoor() {
     Room* room = player->getCurrentRoom();
 
     int x = player->getX();
@@ -245,10 +257,12 @@ bool ZOOrkEngine::isNearDoor() {
         if (nx >= 0 && nx < room->getWidth() &&
             ny >= 0 && ny < room->getHeight()) {
 
-            if (room->getCell(nx, ny).getType() == CellType::Door) {
-                return true;
+            auto cell = room->getCell(nx, ny);
+            auto door = std::dynamic_pointer_cast<DoorCell>(cell);
+            if (door) {
+                return door;
             }
         }
     }
-    return false;
+    return nullptr;
 }

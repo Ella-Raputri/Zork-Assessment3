@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "../entity/Item.h"
-#include "../utils/Color.h"
+#include "../../entity/Item.h"
+#include "../../utils/Color.h"
 
 enum class CellType {
     Empty,   // 'x' - outside/garden
@@ -36,11 +36,13 @@ class Cell {
             const std::string& color
         );
 
+        virtual ~Cell() = default;
+
         CellType getType() const;
         char getSymbol() const;
-        std::string getDescription() const;
+        virtual std::string getDescription() const;
         std::string getRegionTag() const;
-        bool isPassable() const;
+        virtual bool isPassable() const;
         std::string getColor() const;
 
         void setType(CellType);

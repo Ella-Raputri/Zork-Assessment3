@@ -11,6 +11,8 @@ int main() {
     auto outside = std::make_shared<Room>("outside", "The outside world.", 18, 3, 18, 3);
     auto inside  = std::make_shared<Room>("inside",  "Inside the house.",  4,  2,  4,  2);
 
+    auto frontDoorState = std::make_shared<DoorState>(true);
+
     // Build outside grid
     for (int y = 0; y < 3; y++)
         for (int x = 0; x < 18; x++)
@@ -20,7 +22,7 @@ int main() {
         for (int x = 8; x <= 11; x++)
             outside->setCell(x, y, CellType::Floor, 'h', "You are inside the house.", "house", true, Color::WHITE);
 
-    outside->setCell(11, 2, CellType::Door, 'd', "You are at the door.", "door", true, Color::RED);
+    outside->setDoorCell(11, 2, frontDoorState, "silver_key");
     outside->setCell(14, 2, CellType::Impassable, 'w', "You are at the wall.", "wall", false, Color::CYAN);
 
     // Build inside grid — now correctly 8x4
@@ -28,7 +30,7 @@ int main() {
         for (int x = 0; x < 4; x++)
             inside->setCell(x, y, CellType::Floor, 'h', "You are inside.", "house", true, Color::WHITE);
 
-    inside->setCell(3, 1, CellType::Door, 'd', "You are at the door.", "door", true, Color::RED);
+    inside->setDoorCell(3, 1, frontDoorState, "silver_key");
 
     Passage::createBasicPassage(
         outside.get(), inside.get(),
@@ -44,10 +46,11 @@ int main() {
         "key",
         "A small silver key lying on the floor.",
         std::make_shared<NullCommand>(),
-        2,
+        "silver_key",
+        20,
         ItemType::Key
     );
-    inside->getCell(2, 0).addItem(key);
+    outside->getCell(13, 2)->addItem(key);
 
     ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();

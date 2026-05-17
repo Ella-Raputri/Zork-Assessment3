@@ -10,7 +10,8 @@
 #include "../../command/RoomDefaultEnterCommand.h"
 #include "../../entity/Item.h"
 #include "../Location.h"
-#include "../Cell.h"
+#include "../cell/Cell.h"
+#include "../cell/DoorCell.h"
 #include "../../utils/Color.h"
 #include <memory>
 #include <map>
@@ -26,9 +27,10 @@ public:
 //    void addCharacter(Character*);
 //    void removeCharacter(const std::string&);
 //    Character* getCharacter(const std::string&);
-    Cell& getCell(int x, int y);
+    std::shared_ptr<Cell> getCell(int x, int y);
     void setCell (int x, int y, CellType type, char symbol, const std::string &description, const std::string &regionTag,
                  bool passable, const std::string &color);
+    void setDoorCell(int x, int y, std::shared_ptr<DoorState> state, const std::string& keyId);
     
     std::string canMoveTo(int fromX, int fromY, int toX, int toY, const std::string &direction) const;
     void render(int playerX, int playerY, int viewW, int viewH) const;
@@ -47,7 +49,7 @@ protected:
 //    std::vector<Character*> characters;
     int width, height;
     int viewW, viewH;
-    std::vector<std::vector<Cell>> grid;  // grid[y][x]
+    std::vector<std::vector<std::shared_ptr<Cell>>> grid;  // grid[y][x]
     std::map<std::string, std::shared_ptr<Passage>> passageMap;
 };
 

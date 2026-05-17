@@ -7,11 +7,15 @@
 
 #include <utility>
 
-Item::Item(const std::string &n, const std::string &d, int uses, ItemType type) : GameObject(n, d),
-                                                         useCommand(std::make_shared<NullCommand>()), remainingUses(uses), type(type) {}
+Item::Item(const std::string &n, const std::string &d, const std::string &id,
+    int uses, ItemType type) : 
+    GameObject(n, d), useCommand(std::make_shared<NullCommand>()), 
+    remainingUses(uses), type(type), itemId(id) {}
 
-Item::Item(const std::string &n, const std::string &d, std::shared_ptr<Command> c, int uses, ItemType type) : GameObject(n, d),
-                                                                                     useCommand(std::move(c)),  remainingUses(uses), type(type) {}
+Item::Item(const std::string &n, const std::string &d, std::shared_ptr<Command> c, const std::string &id,
+    int uses, ItemType type) : 
+    GameObject(n, d), useCommand(std::move(c)), 
+    remainingUses(uses), type(type), itemId(id) {}
 
 void Item::use() {
     if (remainingUses == 0) {
@@ -43,4 +47,8 @@ void Item::setUseCommand(std::shared_ptr<Command> c) {
 
 ItemType Item::getType() const {
     return type;
+}
+
+std::string Item::getItemId() const {
+    return itemId;
 }

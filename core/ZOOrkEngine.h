@@ -9,6 +9,7 @@
 #include "../entity/Player.h"
 #include "../location/Location.h"
 #include "../location/passage/Passage.h"
+#include "../location/cell/DoorCell.h"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -37,7 +38,7 @@ private:
 
     static std::vector<std::string> tokenizeString(const std::string&);
     static std::string makeLowercase(std::string);
-    bool isNearDoor();
+    std::shared_ptr<DoorCell> getNearbyDoor();
 };
 
 

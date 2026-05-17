@@ -14,37 +14,50 @@
 Room::Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH)
         : Location(n, d), width(width), height(height), viewW(viewW), viewH(viewH) {
     enterCommand = std::make_shared<RoomDefaultEnterCommand>(this);
-    grid.resize(height, std::vector<Cell>(width));
+    grid.resize(height);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            grid[y].push_back(std::make_shared<Cell>());
+        }
+    }
 }
 
-Cell& Room::getCell(int x, int y){
+std::shared_ptr<Cell> Room::getCell(int x, int y){
     return grid[y][x];
 }
 
 void Room::setCell(int x, int y, CellType type, char symbol,
                    const std::string &description, const std::string &regionTag,
                    bool passable, const std::string &color) {
-    grid[y][x].setType(type);
-    grid[y][x].setSymbol(symbol);
-    grid[y][x].setDescription(description);
-    grid[y][x].setRegionTag(regionTag);
-    grid[y][x].setPassable(passable);
-    grid[y][x].setColor(color);
+    grid[y][x]->setType(type);
+    grid[y][x]->setSymbol(symbol);
+    grid[y][x]->setDescription(description);
+    grid[y][x]->setRegionTag(regionTag);
+    grid[y][x]->setPassable(passable);
+    grid[y][x]->setColor(color);
+}
+
+void Room::setDoorCell(int x, int y, std::shared_ptr<DoorState> state, const std::string& keyId){
+    grid[y][x] = std::make_shared<DoorCell>(state, keyId);
 }
 
 std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY, const std::string &direction) const {
     if(toX < 0 || toX >= width || toY < 0 || toY >= height){
         return "It is impossible to go " + direction + "!";
     }
-    const Cell& from = grid[fromY][fromX];
-    const Cell& to = grid[toY][toX];
+    auto from = grid[fromY][fromX];
+    auto to = grid[toY][toX];
 
-    if(!to.isPassable()) return "Something is blocking your way.";
+    if(!to->isPassable()){ 
+        if(to->getType() == CellType::Door) return "Door is locked.";
+        return "Something is blocking your way.";
+    };
 
-    if (from.getRegionTag() != to.getRegionTag()) {
-        if (to.getType() != CellType::Door && from.getType() != CellType::Door){
-            return "You can't go directly from the " + from.getRegionTag() +
-                   " to the " + to.getRegionTag() + ". You'll need to find a door.";
+    if (from->getRegionTag() != to->getRegionTag()) {
+        if (to->getType() != CellType::Door && from->getType() != CellType::Door){
+            return "You can't go directly from the " + from->getRegionTag() +
+                   " to the " + to->getRegionTag() + ". You'll need to find a door.";
         }  
     }
 
@@ -61,11 +74,11 @@ void Room::render(int playerX, int playerY, int viewW, int viewH) const {
                 std::cout << '@';
             }
             else if (x < width && y < height){
-                const Cell& cell = grid[y][x];
-                if (cell.hasItems()) {
+                auto cell = grid[y][x];
+                if (cell->hasItems()) {
                     std::cout << Color::YELLOW << '!' << Color::RESET;
                 }else{
-                    std::cout << cell.getColor() << cell.getSymbol() << Color::RESET;
+                    std::cout << cell->getColor() << cell->getSymbol() << Color::RESET;
                 }                
             }
             else{
