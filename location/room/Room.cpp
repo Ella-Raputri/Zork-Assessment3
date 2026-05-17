@@ -62,7 +62,11 @@ void Room::render(int playerX, int playerY, int viewW, int viewH) const {
             }
             else if (x < width && y < height){
                 const Cell& cell = grid[y][x];
-                std::cout << cell.getColor() << cell.getSymbol() << Color::RESET;
+                if (cell.hasItems()) {
+                    std::cout << Color::YELLOW << '!' << Color::RESET;
+                }else{
+                    std::cout << cell.getColor() << cell.getSymbol() << Color::RESET;
+                }                
             }
             else{
                 std::cout << ' ';
@@ -109,38 +113,4 @@ std::shared_ptr<Passage> Room::getPassageByPosition(int x, int y) {
             return passage;
     }
     return std::make_shared<NullPassage>(this);
-}
-
-void Room::addItem(std::shared_ptr<Item> item){
-    items.push_back(item);
-}
-
-void Room::removeItem(const std::string& itemName){
-    for(auto it = items.begin(); it != items.end(); it++){
-        if ((*it)->getName() == itemName) {
-            items.erase(it);
-            return;
-        }
-    }
-    std::cout << "No " << itemName << " found in this room." << std::endl;
-}
-
-std::shared_ptr<Item> Room::getItem(const std::string& itemName){
-    for (auto &item : items) {
-        if (item->getName() == itemName) {
-            return item;
-        }
-    }
-    return nullptr;
-}
-
-std::shared_ptr<Item> Room::retrieveItem(const std::string& itemName) {
-    for (auto it = items.begin(); it != items.end(); it++) {
-        if ((*it)->getName() == itemName) {
-            auto item = *it;
-            items.erase(it);
-            return item;
-        }
-    }
-    return nullptr;
 }

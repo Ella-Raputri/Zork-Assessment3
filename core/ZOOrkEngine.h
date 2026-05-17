@@ -31,6 +31,7 @@ private:
     void handleTakeCommand(std::vector<std::string>);
     void handleDropCommand(std::vector<std::string>);
     void handleUseCommand(std::vector<std::string>);
+    void handleInventoryCommand();
 
     void handleQuitCommand(std::vector<std::string>);
 

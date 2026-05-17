@@ -37,6 +37,8 @@ void ZOOrkEngine::run() {
             handleDropCommand(arguments);
         } else if (command == "use") {
             handleUseCommand(arguments);
+        } else if (command == "inventory") {
+            handleInventoryCommand();
         } else if (command == "quit" || command == "q") {
             handleQuitCommand(arguments);
         } else {
@@ -111,11 +113,20 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
 }
 
 void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
-    if(arguments.empty()){
-        std::cout << player->getCurrentRoom()->getDescription() << std::endl;
-        return;
+    std::cout << player->getCurrentRoom()->getDescription() << std::endl;
+
+    Room* currentRoom = player->getCurrentRoom();
+    int currX = player->getX();
+    int currY = player->getY();
+    Cell& cell = currentRoom->getCell(currX, currY);
+
+    if (cell.hasItems()) {
+        std::cout << "You see: " << std::endl;
+        for (const auto& item : cell.getItems()) {
+            std::cout << "- " << item->getName()
+                      << ": " << item->getDescription() << std::endl;
+        }
     }
-    std::cout << "Looking things" << std::endl;
 }
 
 void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
@@ -124,11 +135,14 @@ void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
         return;
     }
     Room* currentRoom = player->getCurrentRoom();
-    auto item = currentRoom->retrieveItem(arguments[0]);
+    int currX = player->getX(), currY = player->getY();
+
+    Cell& cell = currentRoom->getCell(currX, currY);
+    auto item = cell.retrieveItem(arguments[0]);
 
     if (item) {
         player->addItem(item);
-        std::cout << "Taken.\n";
+        std::cout << "Taken: " << item->getName() << "\n";
     }
     else {
         std::cout << "No such item.\n";
@@ -136,8 +150,27 @@ void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
 }
 
 void ZOOrkEngine::handleDropCommand(std::vector<std::string> arguments) {
-    // To be implemented
-    std::cout << "This functionality is not yet enabled.\n";
+    if(arguments.empty()){
+        std::cout << "Please specify what do you want to drop." << std::endl;
+        return;
+    }
+    Room* currentRoom = player->getCurrentRoom();
+    int currX = player->getX(), currY = player->getY();
+
+    Cell& cell = currentRoom->getCell(currX, currY);
+    auto item = player->getItem(arguments[0]);
+
+    if (item) {
+        cell.addItem(item);
+        std::cout << "Dropped: " << item->getName() << "\n";
+    }
+    else {
+        std::cout << "No such item in the inventory.\n";
+    }
+}
+
+void ZOOrkEngine::handleInventoryCommand() {
+    player->showInventory();
 }
 
 void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {

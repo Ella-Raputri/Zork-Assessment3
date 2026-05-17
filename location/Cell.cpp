@@ -69,3 +69,34 @@ void Cell::setPassable(bool p) {
 void Cell::setColor(const std::string& c){
     color = c;
 }
+
+void Cell::addItem(std::shared_ptr<Item> item) {
+    items.push_back(item);
+}
+
+std::shared_ptr<Item> Cell::getItem(const std::string& itemName) {
+    for (auto& item : items) {
+        if (item->getName() == itemName)
+            return item;
+    }
+    return nullptr;
+}
+
+std::shared_ptr<Item> Cell::retrieveItem(const std::string& itemName) {
+    for (auto it = items.begin(); it != items.end(); ++it) {
+        if ((*it)->getName() == itemName) {
+            auto item = *it;
+            items.erase(it);
+            return item;
+        }
+    }
+    return nullptr;
+}
+
+bool Cell::hasItems() const {
+    return !items.empty();
+}
+
+const std::vector<std::shared_ptr<Item>>& Cell::getItems() const {
+    return items;
+}

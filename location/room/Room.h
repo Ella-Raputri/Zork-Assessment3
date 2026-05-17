@@ -23,11 +23,6 @@ class Room : public Location {
 public:
     Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH);
 
-    void addItem(std::shared_ptr<Item> item);
-    void removeItem(const std::string& itemName);
-    std::shared_ptr<Item> getItem(const std::string& itemName);
-    std::shared_ptr<Item> retrieveItem(const std::string& itemName);
-
 //    void addCharacter(Character*);
 //    void removeCharacter(const std::string&);
 //    Character* getCharacter(const std::string&);
@@ -49,7 +44,6 @@ public:
     std::shared_ptr<Passage> getPassageByPosition(int x, int y);
 
 protected:
-    std::vector<std::shared_ptr<Item>> items;
 //    std::vector<Character*> characters;
     int width, height;
     int viewW, viewH;

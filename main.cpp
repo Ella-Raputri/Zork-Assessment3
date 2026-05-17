@@ -46,7 +46,7 @@ int main() {
         std::make_shared<NullCommand>(),
         1
     );
-    inside->addItem(key);
+    inside->getCell(1, 0).addItem(key);
 
     ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();
