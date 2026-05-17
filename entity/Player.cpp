@@ -27,3 +27,44 @@ int Player::getX() const {
 int Player::getY() const { 
     return posY; 
 }
+
+void Player::addItem(std::shared_ptr<Item> item){
+    inventory.push_back(item);
+}
+
+void Player::removeItem(const std::string& itemName){
+    for(auto it = inventory.begin(); it != inventory.end(); it++){
+        if ((*it)->getName() == itemName) {
+            inventory.erase(it);
+            return;
+        }
+    }
+    std::cout << "No " << itemName << " found in the inventory." << std::endl;
+}
+
+std::shared_ptr<Item> Player::getItem(const std::string& itemName){
+    for (auto &item : inventory) {
+        if (item->getName() == itemName) {
+            return item;
+        }
+    }
+    return nullptr;
+}
+
+void Player::showInventory() const {
+    if(inventory.empty()){
+        std::cout << "Inventory is empty." << std::endl;
+        return;
+    }
+
+    std::cout << "Inventory: " << std::endl;
+    for (const auto &item : inventory) {
+        std::cout << "- " << item->getName();
+        int uses = item->getRemainingUses();
+
+        if (uses > 0) {
+            std::cout << " (" << uses << " uses left)";
+        }
+        std::cout << "\n";
+    }
+}

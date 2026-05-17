@@ -32,9 +32,9 @@ void Room::setCell(int x, int y, CellType type, char symbol,
     grid[y][x].setColor(color);
 }
 
-std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY) const {
+std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY, const std::string &direction) const {
     if(toX < 0 || toX >= width || toY < 0 || toY >= height){
-        return "There's nothing there.";
+        return "It is impossible to go " + direction + "!";
     }
     const Cell& from = grid[fromY][fromX];
     const Cell& to = grid[toY][toX];
@@ -99,7 +99,6 @@ std::shared_ptr<Passage> Room::getPassage(const std::string &direction) {
     if (passageMap.contains(direction)) {
         return passageMap[direction];
     } else {
-        std::cout << "It is impossible to go " << direction << "!\n";
         return std::make_shared<NullPassage>(this);
     }
 }
@@ -110,4 +109,38 @@ std::shared_ptr<Passage> Room::getPassageByPosition(int x, int y) {
             return passage;
     }
     return std::make_shared<NullPassage>(this);
+}
+
+void Room::addItem(std::shared_ptr<Item> item){
+    items.push_back(item);
+}
+
+void Room::removeItem(const std::string& itemName){
+    for(auto it = items.begin(); it != items.end(); it++){
+        if ((*it)->getName() == itemName) {
+            items.erase(it);
+            return;
+        }
+    }
+    std::cout << "No " << itemName << " found in this room." << std::endl;
+}
+
+std::shared_ptr<Item> Room::getItem(const std::string& itemName){
+    for (auto &item : items) {
+        if (item->getName() == itemName) {
+            return item;
+        }
+    }
+    return nullptr;
+}
+
+std::shared_ptr<Item> Room::retrieveItem(const std::string& itemName) {
+    for (auto it = items.begin(); it != items.end(); it++) {
+        if ((*it)->getName() == itemName) {
+            auto item = *it;
+            items.erase(it);
+            return item;
+        }
+    }
+    return nullptr;
 }

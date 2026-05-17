@@ -13,16 +13,19 @@
 
 class Item : public GameObject {
 public:
-    Item(const std::string &, const std::string &);
+    Item(const std::string &n, const std::string &d, int uses = -1);
 
-    Item(const std::string &, const std::string &, std::shared_ptr<Command>);
+    Item(const std::string &n, const std::string &d, std::shared_ptr<Command> c, int uses = -1);
 
     virtual void use();
 
     void setUseCommand(std::shared_ptr<Command>);
+    bool isDepleted() const;
+    int getRemainingUses() const;
 
 protected:
     std::shared_ptr<Command> useCommand;
+    int remainingUses;
 };
 
 #endif //ZOORK_ITEM_H

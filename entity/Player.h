@@ -6,9 +6,13 @@
 #ifndef ZOORK_PLAYER_H
 #define ZOORK_PLAYER_H
 
+#include "Item.h"
 #include "Character.h"
 #include "../location/Location.h"
 #include "../location/room/NullRoom.h"
+#include <vector>
+#include <memory>
+#include <iostream>
 
 class Player : public Character {
 public:
@@ -27,6 +31,11 @@ public:
     int getX() const ;
     int getY() const ;
 
+    void addItem(std::shared_ptr<Item> item);
+    void removeItem(const std::string& itemName);
+    std::shared_ptr<Item> getItem(const std::string& itemName);
+    void showInventory() const;
+
     Player(const Player &) = delete;
     Player &operator=(const Player &) = delete;
 
@@ -34,6 +43,7 @@ private:
     static Player *playerInstance;
     Room* currentRoom;
     int posX, posY;
+    std::vector<std::shared_ptr<Item>> inventory;
 
     Player() : Character("You", "You are a person, alike in dignity to any other, but uniquely you."),
                currentRoom(new NullRoom()), posX(0), posY(0) {}

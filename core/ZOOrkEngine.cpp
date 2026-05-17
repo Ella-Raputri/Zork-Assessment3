@@ -35,6 +35,8 @@ void ZOOrkEngine::run() {
             handleTakeCommand(arguments);
         } else if (command == "drop") {
             handleDropCommand(arguments);
+        } else if (command == "use") {
+            handleUseCommand(arguments);
         } else if (command == "quit" || command == "q") {
             handleQuitCommand(arguments);
         } else {
@@ -44,6 +46,10 @@ void ZOOrkEngine::run() {
 }
 
 void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
+    if(arguments.empty()){
+        std::cout << "Please specify a direction!" << std::endl;
+        return;
+    }
     std::string direction;
     if (arguments[0] == "n" || arguments[0] == "north") {
         direction = "north";
@@ -74,7 +80,7 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     int currX = player->getX(), currY = player->getY();
     int newX = currX + dx, newY = currY + dy;
 
-    std::string reason = currentRoom->canMoveTo(currX, currY, newX, newY);
+    std::string reason = currentRoom->canMoveTo(currX, currY, newX, newY, direction);
 
     if (!reason.empty()) {
         std::cout << reason << std::endl;
@@ -105,18 +111,52 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
 }
 
 void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
-    // To be implemented
-    std::cout << "This functionality is not yet enabled.\n";
+    if(arguments.empty()){
+        std::cout << player->getCurrentRoom()->getDescription() << std::endl;
+        return;
+    }
+    std::cout << "Looking things" << std::endl;
 }
 
 void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
-    // To be implemented
-    std::cout << "This functionality is not yet enabled.\n";
+    if(arguments.empty()){
+        std::cout << "Please specify what do you want to take." << std::endl;
+        return;
+    }
+    Room* currentRoom = player->getCurrentRoom();
+    auto item = currentRoom->retrieveItem(arguments[0]);
+
+    if (item) {
+        player->addItem(item);
+        std::cout << "Taken.\n";
+    }
+    else {
+        std::cout << "No such item.\n";
+    }
 }
 
 void ZOOrkEngine::handleDropCommand(std::vector<std::string> arguments) {
     // To be implemented
     std::cout << "This functionality is not yet enabled.\n";
+}
+
+void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
+    if(arguments.empty()){
+        std::cout << "Please specify what do you want to use." << std::endl;
+        return;
+    }
+    auto item = player->getItem(arguments[0]);
+
+    if (item) {
+        item->use();
+
+        if (item->isDepleted()) {
+            player->removeItem(arguments[0]);
+            std::cout << "The " << item->getName() << " is depleted and can not be used anymore." << std::endl;
+        }
+    }else{
+        std::cout << "No " << arguments[0] << " found in the inventory." << std::endl;
+    }
 }
 
 void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {

@@ -1,6 +1,8 @@
 #include "command/RoomDefaultEnterCommand.h"
 #include "location/passage/Passage.h"
 #include "entity/Player.h"
+#include "entity/Item.h"
+#include "command/NullCommand.h"
 #include "location/room/Room.h"
 #include "core/ZOOrkEngine.h"
 #include "utils/Color.h"
@@ -37,6 +39,14 @@ int main() {
         2, 1,
         true    
     );
+
+    auto key = std::make_shared<Item>(
+        "key",
+        "A small silver key lying on the floor.",
+        std::make_shared<NullCommand>(),
+        1
+    );
+    inside->addItem(key);
 
     ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();

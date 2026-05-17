@@ -23,10 +23,11 @@ class Room : public Location {
 public:
     Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH);
 
-//    void addItem(Item*);
-//    void removeItem(const std::string&);
-//    Item* getItem(const std::string&);
-//    Item* retrieveItem(const std::string&);
+    void addItem(std::shared_ptr<Item> item);
+    void removeItem(const std::string& itemName);
+    std::shared_ptr<Item> getItem(const std::string& itemName);
+    std::shared_ptr<Item> retrieveItem(const std::string& itemName);
+
 //    void addCharacter(Character*);
 //    void removeCharacter(const std::string&);
 //    Character* getCharacter(const std::string&);
@@ -34,7 +35,7 @@ public:
     void setCell (int x, int y, CellType type, char symbol, const std::string &description, const std::string &regionTag,
                  bool passable, const std::string &color);
     
-    std::string canMoveTo(int fromX, int fromY, int toX, int toY) const;
+    std::string canMoveTo(int fromX, int fromY, int toX, int toY, const std::string &direction) const;
     void render(int playerX, int playerY, int viewW, int viewH) const;
 
     int getWidth() const;
@@ -48,7 +49,7 @@ public:
     std::shared_ptr<Passage> getPassageByPosition(int x, int y);
 
 protected:
-//    std::vector<Item*> items;
+    std::vector<std::shared_ptr<Item>> items;
 //    std::vector<Character*> characters;
     int width, height;
     int viewW, viewH;
