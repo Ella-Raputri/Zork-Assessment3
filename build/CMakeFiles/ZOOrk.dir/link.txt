@@ -1,3 +1,0 @@
-C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\cmake.exe -E rm -f CMakeFiles\ZOOrk.dir/objects.a
-C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\ar.exe qc CMakeFiles\ZOOrk.dir/objects.a @CMakeFiles\ZOOrk.dir\objects1.rsp
-C:\Users\Asus\Downloads\winlibs-x86_64-posix-seh-gcc-13.1.0-llvm-16.0.5-mingw-w64ucrt-11.0.0-r5\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\ZOOrk.dir/objects.a -Wl,--no-whole-archive -o ZOOrk.exe -Wl,--out-implib,libZOOrk.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ZOOrk.dir\linkLibs.rsp
