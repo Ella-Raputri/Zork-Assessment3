@@ -4,6 +4,7 @@ project(ZOOrk)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(ZOOrk
+    utils/Color.h
     entity/GameObject.cpp
     entity/GameObject.h
 

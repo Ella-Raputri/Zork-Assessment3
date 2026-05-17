@@ -54,10 +54,6 @@ Passage::Passage(const std::string &n, const std::string &d,
     setEnterCommand(std::make_shared<PassageDefaultEnterCommand>(this));
 }
 
-// Passage::Passage(const std::string &n, const std::string &d, std::shared_ptr<Command> c, Room* from,
-//                  Room* to)
-//         : Location(n, d, std::move(c)), fromRoom(from), toRoom(to) {}
-
 void Passage::setFrom(Room* r) {
     fromRoom = r;
 }

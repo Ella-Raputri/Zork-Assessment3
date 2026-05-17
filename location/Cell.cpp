@@ -12,13 +12,15 @@ Cell::Cell(
     char symbol,
     const std::string& description,
     const std::string& regionTag,
-    bool passable
+    bool passable,
+    const std::string& color
 )
     : type(type),
       symbol(symbol),
       description(description),
       regionTag(regionTag),
-      passable(passable) {}
+      passable(passable),
+      color(color) {}
 
 CellType Cell::getType() const {
     return type;
@@ -40,6 +42,10 @@ bool Cell::isPassable() const {
     return passable;
 }
 
+std::string Cell::getColor() const {
+    return color;
+}
+
 void Cell::setType(CellType t) {
     type = t;
 }
@@ -58,4 +64,8 @@ void Cell::setRegionTag(const std::string& r) {
 
 void Cell::setPassable(bool p) {
     passable = p;
+}
+
+void Cell::setColor(const std::string& c){
+    color = c;
 }

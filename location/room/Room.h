@@ -11,6 +11,7 @@
 #include "../../entity/Item.h"
 #include "../Location.h"
 #include "../Cell.h"
+#include "../../utils/Color.h"
 #include <memory>
 #include <map>
 #include <vector>
@@ -22,8 +23,6 @@ class Room : public Location {
 public:
     Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH);
 
-    // Room(const std::string &n, const std::string &d, std::shared_ptr<Command>);
-
 //    void addItem(Item*);
 //    void removeItem(const std::string&);
 //    Item* getItem(const std::string&);
@@ -33,7 +32,7 @@ public:
 //    Character* getCharacter(const std::string&);
     Cell& getCell(int x, int y);
     void setCell (int x, int y, CellType type, char symbol, const std::string &description, const std::string &regionTag,
-                 bool passable);
+                 bool passable, const std::string &color);
     
     std::string canMoveTo(int fromX, int fromY, int toX, int toY) const;
     void render(int playerX, int playerY, int viewW, int viewH) const;

@@ -23,12 +23,13 @@ Cell& Room::getCell(int x, int y){
 
 void Room::setCell(int x, int y, CellType type, char symbol,
                    const std::string &description, const std::string &regionTag,
-                   bool passable) {
+                   bool passable, const std::string &color) {
     grid[y][x].setType(type);
     grid[y][x].setSymbol(symbol);
     grid[y][x].setDescription(description);
     grid[y][x].setRegionTag(regionTag);
     grid[y][x].setPassable(passable);
+    grid[y][x].setColor(color);
 }
 
 std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY) const {
@@ -56,12 +57,16 @@ void Room::render(int playerX, int playerY, int viewW, int viewH) const {
 
     for (int y = startY; y < startY + viewH; y++) {
         for (int x = startX; x < startX + viewW; x++) {
-            if (x == playerX && y == playerY)
+            if (x == playerX && y == playerY){
                 std::cout << '@';
-            else if (x < width && y < height)
-                std::cout << grid[y][x].getSymbol();
-            else
+            }
+            else if (x < width && y < height){
+                const Cell& cell = grid[y][x];
+                std::cout << cell.getColor() << cell.getSymbol() << Color::RESET;
+            }
+            else{
                 std::cout << ' ';
+            }
         }
         std::cout << '\n';
     }
@@ -79,8 +84,6 @@ int Room::getViewW() const {
 int Room::getViewH() const { 
     return viewH; 
 }
-
-// Room::Room(const std::string &n, const std::string &d, std::shared_ptr<Command> c) : Location(n, d, std::move(c)) {}
 
 void Room::addPassage(const std::string &direction, std::shared_ptr<Passage> p) {
     passageMap[direction] = std::move(p);

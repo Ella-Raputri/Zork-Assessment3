@@ -25,8 +25,6 @@ public:
         int doorX,   int doorY,
         int arriveX, int arriveY);
 
-    // Passage(const std::string &, const std::string &, std::shared_ptr<Command>, Room*, Room*);
-
     void setFrom(Room*);
     Room* getFrom() const;
     void setTo(Room*);
