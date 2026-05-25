@@ -6,10 +6,10 @@
 #ifndef ZOORK_PLAYER_H
 #define ZOORK_PLAYER_H
 
-#include "Item.h"
+#include "../Item.h"
 #include "Character.h"
-#include "../location/Location.h"
-#include "../location/room/NullRoom.h"
+#include "../../location/Location.h"
+#include "../../location/room/NullRoom.h"
 #include <vector>
 #include <memory>
 #include <iostream>

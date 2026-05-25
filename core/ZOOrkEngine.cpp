@@ -37,6 +37,8 @@ void ZOOrkEngine::run() {
             handleDropCommand(arguments);
         } else if (command == "use") {
             handleUseCommand(arguments);
+        } else if (command == "talk" || command == "speak") {
+            handleTalkCommand(arguments);
         } else if (command == "inventory") {
             handleInventoryCommand();
         } else if (command == "quit" || command == "q") {
@@ -210,6 +212,31 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
         player->removeItem(arguments[0]);
         std::cout << "The " << item->getName() << " is depleted and can not be used anymore." << std::endl;
     }
+}
+
+void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
+    if(arguments.empty()){
+        std::cout << "Who do you want to talk to?" << std::endl;
+        return;
+    }
+
+    std::string npcName = arguments[arguments.size()-1];
+    Room* room = player->getCurrentRoom();
+
+    int px = player->getX();
+    int py = player->getY();
+
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx++) {
+            auto npc = room->getNPCAt(px + dx, py + dy);
+
+            if (npc && makeLowercase(npc->getName()) == npcName) {
+                npc->talk();
+                return;
+            }
+        }
+    }
+    std::cout << "Nobody by that name is nearby." << std::endl;
 }
 
 void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {

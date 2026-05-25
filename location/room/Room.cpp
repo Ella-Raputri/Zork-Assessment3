@@ -23,6 +23,34 @@ Room::Room(const std::string &n, const std::string &d, int width, int height, in
     }
 }
 
+
+void Room::addNPC(std::shared_ptr<NPC> npc){
+    npcs.push_back(npc);
+}
+
+std::shared_ptr<NPC> Room::getNPC(const std::string& name){
+    for (auto& npc: npcs){
+        if(npc->getName() == name) return npc;
+    }
+    return nullptr;
+}
+
+std::shared_ptr<NPC> Room::getNPCAt(int x, int y) const{
+    for (auto& npc: npcs){
+        if(npc->getX() == x && npc->getY() == y) return npc;
+    }
+    return nullptr;
+}
+
+bool Room::hasNPCAt(int x, int y) const {
+    for (const auto& npc : npcs) {
+        if (npc->getX() == x && npc->getY() == y) {
+            return true;
+        }
+    }
+    return false;
+}
+
 std::shared_ptr<Cell> Room::getCell(int x, int y){
     return grid[y][x];
 }
@@ -46,6 +74,11 @@ std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY, const std::s
     if(toX < 0 || toX >= width || toY < 0 || toY >= height){
         return "It is impossible to go " + direction + "!";
     }
+
+    if (hasNPCAt(toX, toY)) {
+        return "Someone is blocking your way.";
+    }
+
     auto from = grid[fromY][fromX];
     auto to = grid[toY][toX];
 
@@ -75,7 +108,12 @@ void Room::render(int playerX, int playerY, int viewW, int viewH) const {
             }
             else if (x < width && y < height){
                 auto cell = grid[y][x];
-                if (cell->hasItems()) {
+
+                auto npc = getNPCAt(x, y);
+                if (npc) {
+                    std::cout << Color::YELLOW << 'N' << Color::RESET;
+                }
+                else if (cell->hasItems()) {
                     std::cout << Color::YELLOW << '!' << Color::RESET;
                 }else{
                     std::cout << cell->getColor() << cell->getSymbol() << Color::RESET;

@@ -6,7 +6,7 @@
 #ifndef ZOORK_ROOM_H
 #define ZOORK_ROOM_H
 
-#include "../../entity/Character.h"
+#include "../../entity/character/NPC.h"
 #include "../../command/RoomDefaultEnterCommand.h"
 #include "../../entity/Item.h"
 #include "../Location.h"
@@ -24,9 +24,12 @@ class Room : public Location {
 public:
     Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH);
 
-//    void addCharacter(Character*);
-//    void removeCharacter(const std::string&);
-//    Character* getCharacter(const std::string&);
+    void addNPC(std::shared_ptr<NPC> npc);
+    // void removeCharacter(const std::string&);
+    std::shared_ptr<NPC> getNPC(const std::string& name);
+    std::shared_ptr<NPC> getNPCAt(int x, int y) const;
+    bool hasNPCAt(int x, int y) const;
+
     std::shared_ptr<Cell> getCell(int x, int y);
     void setCell (int x, int y, CellType type, char symbol, const std::string &description, const std::string &regionTag,
                  bool passable, const std::string &color);
@@ -46,7 +49,7 @@ public:
     std::shared_ptr<Passage> getPassageByPosition(int x, int y);
 
 protected:
-//    std::vector<Character*> characters;
+    std::vector<std::shared_ptr<NPC>> npcs;
     int width, height;
     int viewW, viewH;
     std::vector<std::vector<std::shared_ptr<Cell>>> grid;  // grid[y][x]

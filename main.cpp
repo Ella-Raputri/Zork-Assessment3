@@ -1,6 +1,7 @@
 #include "command/RoomDefaultEnterCommand.h"
 #include "location/passage/Passage.h"
-#include "entity/Player.h"
+#include "entity/character/Player.h"
+#include "entity/character/NPC.h"
 #include "entity/Item.h"
 #include "command/NullCommand.h"
 #include "location/room/Room.h"
@@ -51,6 +52,19 @@ int main() {
         ItemType::Key
     );
     outside->getCell(13, 2)->addItem(key);
+
+    auto merchant = std::make_shared<NPC>(
+        "merchant",
+        "A suspicious trader.",
+        std::vector<std::string>{
+            "Welcome traveler.",
+            "I sell useful things.",
+            "Bring me a golden key."
+        }
+    );
+
+    merchant->setPosition(1, 1);
+    inside->addNPC(merchant);
 
     ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();

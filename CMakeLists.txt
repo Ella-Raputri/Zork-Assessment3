@@ -37,10 +37,12 @@ add_executable(ZOOrk
     command/PassageDefaultEnterCommand.cpp
     command/PassageDefaultEnterCommand.h
 
-    entity/Character.cpp
-    entity/Character.h
-    entity/Player.cpp
-    entity/Player.h
+    entity/character/Character.cpp
+    entity/character/Character.h
+    entity/character/Player.cpp
+    entity/character/Player.h
+    entity/character/NPC.cpp
+    entity/character/NPC.h
 
     core/ZOOrkEngine.cpp
     core/ZOOrkEngine.h

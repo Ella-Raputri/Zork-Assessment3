@@ -6,7 +6,7 @@
 #ifndef ZOORK_ZOORKENGINE_H
 #define ZOORK_ZOORKENGINE_H
 
-#include "../entity/Player.h"
+#include "../entity/character/Player.h"
 #include "../location/Location.h"
 #include "../location/passage/Passage.h"
 #include "../location/cell/DoorCell.h"
@@ -32,6 +32,7 @@ private:
     void handleTakeCommand(std::vector<std::string>);
     void handleDropCommand(std::vector<std::string>);
     void handleUseCommand(std::vector<std::string>);
+    void handleTalkCommand(std::vector<std::string>);
     void handleInventoryCommand();
 
     void handleQuitCommand(std::vector<std::string>);
