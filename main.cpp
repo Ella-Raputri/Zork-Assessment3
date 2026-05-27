@@ -5,6 +5,7 @@
 #include "entity/item/Item.h"
 #include "entity/item/UsableItem.h"
 #include "entity/item/EquippableItem.h"
+#include "entity/item/ClueItem.h"
 #include "command/NullCommand.h"
 #include "location/room/Room.h"
 #include "core/ZOOrkEngine.h"
@@ -54,7 +55,7 @@ int main() {
         "silver_key",
         std::make_shared<NullCommand>(),
         ItemType::Key,
-        20
+        -1
     );
     outside->getCell(13, 2)->addItem(key);
 
@@ -78,6 +79,13 @@ int main() {
         "underwater"
     );
     outside->getCell(13, 1)->addItem(divingSuit);
+
+    auto mirrorShards = std::make_shared<ClueItem>(
+        "mirror_shards",
+        "Some remaining of a mirror.",
+        "mirror_shards"
+    );
+    outside->getCell(0, 1)->addItem(mirrorShards);
 
     ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();

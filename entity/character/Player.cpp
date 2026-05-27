@@ -77,9 +77,15 @@ void Player::showInventory() const {
             int uses = usable->getRemainingUses();
             if (uses > 0) {
                 std::cout << " (" << uses << " uses left)";
+            }else{
+                std::cout << " (unlimited uses)";
             }
-        }else{
-            std::cout << " (Need to be equipped)";
+        }
+        else if(item->getType() == ItemType::Clue) {
+            std::cout << " (cant be used or equipped. Description: " << item->getDescription() << ")";
+        }
+        else{
+            std::cout << " (need to be equipped)";
         }
         std::cout << "\n";
     }

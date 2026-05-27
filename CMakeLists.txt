@@ -15,6 +15,8 @@ add_executable(ZOOrk
     entity/item/UsableItem.cpp
     entity/item/EquippableItem.h
     entity/item/EquippableItem.cpp
+    entity/item/ClueItem.h
+    entity/item/ClueItem.cpp
 
     location/Location.cpp
     location/Location.h

@@ -12,7 +12,8 @@
 enum class ItemType {
     Generic,
     Key,
-    Equippable
+    Equippable,
+    Clue
 };
 
 class Item : public GameObject {
