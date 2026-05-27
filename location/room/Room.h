@@ -31,6 +31,7 @@ public:
     std::shared_ptr<NPC> getNPC(const std::string& name);
     std::shared_ptr<NPC> getNPCAt(int x, int y) const;
     bool hasNPCAt(int x, int y) const;
+    std::vector<std::shared_ptr<NPC>> getNPCList() const;
 
     std::shared_ptr<Cell> getCell(int x, int y);
     void setCell (int x, int y, CellType type, char symbol, const std::string &description, const std::string &regionTag,

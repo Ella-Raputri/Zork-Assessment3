@@ -34,9 +34,13 @@ private:
     void handleUseCommand(std::vector<std::string>);
     void handleTalkCommand(std::vector<std::string>);
     void handleInventoryCommand();
+
     void handleEquipCommand(std::vector<std::string>);
     void handleUnequipCommand();
-
+    void handleHelpCommand();
+    void handleMapCommand();
+    void handleTeleportCommand(std::vector<std::string>);
+    
     void handleQuitCommand(std::vector<std::string>);
 
     static std::vector<std::string> tokenizeString(const std::string&);

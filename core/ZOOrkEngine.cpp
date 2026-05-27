@@ -45,6 +45,12 @@ void ZOOrkEngine::run() {
             handleEquipCommand(arguments);
         } else if (command == "unequip") {
             handleUnequipCommand();
+        } else if (command == "help") {
+            handleHelpCommand();
+        } else if (command == "map") {
+            handleMapCommand();
+        } else if (command == "teleport") {
+            handleTeleportCommand(arguments);
         } else if (command == "quit" || command == "q") {
             handleQuitCommand(arguments);
         } else {
@@ -110,11 +116,7 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
         std::cout << currentRoom->getCell(newX, newY)->getDescription() << "\n";
     }
 
-    player->getCurrentRoom()->render(player->getX(), player->getY(),
-        player->getCurrentRoom()->getViewW(),
-        player->getCurrentRoom()->getViewH());
-
-    std::cout << "DEBUG arrived at: " << player->getX() << "," << player->getY() << "\n";
+    handleMapCommand();
     player->checkEquippedRegion();
 }
 
@@ -131,6 +133,15 @@ void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
         for (const auto& item : cell->getItems()) {
             std::cout << "- " << item->getName()
                       << ": " << item->getDescription() << std::endl;
+        }
+    }
+
+    const std::vector<std::shared_ptr<NPC>> npcList = currentRoom->getNPCList();
+    if(!npcList.empty()){
+        std::cout << "In this room, you see: " << std::endl;
+        for (const auto& npc : npcList) {
+            std::cout << "- " << npc->getName()
+                      << ": " << npc->getDescription() << std::endl;
         }
     }
 }
@@ -261,6 +272,87 @@ void ZOOrkEngine::handleUnequipCommand() {
     player->unequipItem();
 }
 
+void ZOOrkEngine::handleHelpCommand() {
+    std::cout << "\n========== COMMAND LIST ==========\n";
+
+    std::cout << "MOVEMENT:\n";
+    std::cout << "  go north   | go n   -> Move north\n";
+    std::cout << "  go south   | go s   -> Move south\n";
+    std::cout << "  go east    | go e   -> Move east\n";
+    std::cout << "  go west    | go w   -> Move west\n";
+    std::cout << "  teleport <x> <y>    -> Teleport to (x,y)\n";
+
+    std::cout << "\nLOOKING / INTERACTION:\n";
+    std::cout << "  look | inspect -> Inspect the current room\n";
+    std::cout << "  map            -> Show the room map again\n";
+    std::cout << "  talk <npc>     -> Talk to a nearby NPC\n";
+
+    std::cout << "\nITEM COMMANDS:\n";
+    std::cout << "  take <item> | get <item>  -> Pick up an item\n";
+    std::cout << "  drop <item>               -> Drop an item\n";
+    std::cout << "  use <item>                -> Use an item\n";
+    std::cout << "  equip <item>              -> Equip an item\n";
+    std::cout << "  unequip                   -> Unequip current item\n";
+    std::cout << "  inventory                 -> Show inventory\n";
+
+    std::cout << "\nGAME:\n";
+    std::cout << "  help        -> Show this command list\n";
+    std::cout << "  quit | q    -> Quit the game\n";
+
+    std::cout << "==================================\n";
+}
+
+void ZOOrkEngine::handleMapCommand(){
+    player->getCurrentRoom()->render(player->getX(), player->getY(),
+        player->getCurrentRoom()->getViewW(),
+        player->getCurrentRoom()->getViewH());
+    std::cout << "Player arrived at: x = " << player->getX() << ", y = " << player->getY() << "\n";
+}
+
+void ZOOrkEngine::handleTeleportCommand(std::vector<std::string> arguments) {
+    if (arguments.size() < 2) {
+        std::cout << "Please use: teleport <x> <y>\n";
+        return;
+    }
+
+    int x, y;
+    try {
+        x = std::stoi(arguments[0]);
+        y = std::stoi(arguments[1]);
+    }
+    catch (...) {
+        std::cout << "Invalid coordinates.\n";
+        return;
+    }
+
+    Room* room = player->getCurrentRoom();
+    if (x < 0 || x >= room->getWidth() ||  y < 0 || y >= room->getHeight()) {
+        std::cout << "That position is outside the map.\n";
+        return;
+    }
+
+    auto cell = room->getCell(x, y);
+    if (!cell->isPassable()) {
+        std::cout << "You cannot teleport there. It is not passable.\n";
+        return;
+    }
+    if (room->getNPCAt(x, y)) {
+        std::cout << "Someone is standing there.\n";
+        return;
+    }
+
+    auto currentCell = room->getCell(player->getX(), player->getY());
+    if (cell->getSymbol() != currentCell->getSymbol()) {
+        std::cout << "Cannot teleport from " << currentCell->getRegionTag() 
+            << " to " << cell->getRegionTag() << "\n";
+        return;
+    }
+
+    player->setPosition(x, y);
+    handleMapCommand();
+    player->checkEquippedRegion();
+}
+
 void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {
     std::string input;
     std::cout << "Are you sure you want to QUIT?\n> ";
@@ -270,7 +362,7 @@ void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {
     if (quitStr == "y" || quitStr == "yes") {
         gameOver = true;
     }else{
-        std::cout << "Enter your command!\n";
+        std::cout << "Enter your command to continue the game or type 'help'.\n";
     }
 }
 
