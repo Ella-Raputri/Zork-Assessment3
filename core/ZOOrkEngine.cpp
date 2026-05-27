@@ -84,7 +84,7 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     int currX = player->getX(), currY = player->getY();
     int newX = currX + dx, newY = currY + dy;
 
-    std::string reason = currentRoom->canMoveTo(currX, currY, newX, newY, direction);
+    std::string reason = currentRoom->canMoveTo(currX, currY, newX, newY, direction, player);
 
     if (!reason.empty()) {
         std::cout << reason << std::endl;
@@ -97,7 +97,6 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
             passage = currentRoom->getPassageByPosition(newX, newY);
         }
         if (passage->getName() != "null") {
-            std::cout<<"hehe"<< std::endl;
             passage->enter();
             player->setCurrentRoom(passage->getTo());
             player->setPosition(passage->getArriveX(), passage->getArriveY());

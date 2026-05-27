@@ -17,16 +17,19 @@ int main() {
     // Build outside grid
     for (int y = 0; y < 3; y++)
         for (int x = 0; x < 18; x++)
-            outside->setCell(x, y, CellType::Empty, 'x', "You are in the garden.", "garden", true, Color::GREEN);
+            outside->setCell(x, y, CellType::Floor, 'x', "You are in the garden.", "garden", true, Color::GREEN);
 
     for (int y = 1; y <= 2; y++)
         for (int x = 8; x <= 11; x++)
             outside->setCell(x, y, CellType::Floor, 'h', "You are inside the house.", "house", true, Color::WHITE);
+    
+    for (int y = 1; y <= 2; y++)
+        for (int x = 14; x <= 16; x++)
+            outside->setRestrictedCell(x, y, '~', "You are underwater.", "underwater", "diving_suit" , "Restricted area: need diving suit", Color::BLUE);
 
     outside->setDoorCell(11, 2, frontDoorState, "silver_key");
-    outside->setCell(14, 2, CellType::Impassable, 'w', "You are at the wall.", "wall", false, Color::CYAN);
+    // outside->setCell(14, 2, CellType::Impassable, 'w', "You are at the wall.", "wall", false, Color::CYAN);
 
-    // Build inside grid — now correctly 8x4
     for (int y = 0; y < 2; y++)
         for (int x = 0; x < 4; x++)
             inside->setCell(x, y, CellType::Floor, 'h', "You are inside.", "house", true, Color::WHITE);
@@ -65,6 +68,16 @@ int main() {
 
     merchant->setPosition(1, 1);
     inside->addNPC(merchant);
+    
+    auto divingSuit = std::make_shared<Item>(
+        "diving_suit",
+        "A heavy diving suit with an oxygen tank.",
+        std::make_shared<NullCommand>(),
+        "diving_suit",
+        100,
+        ItemType::Generic
+    );
+    outside->getCell(13, 1)->addItem(divingSuit);
 
     ZOOrkEngine zoork(outside, 12, 2);
     zoork.run();

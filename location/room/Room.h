@@ -7,11 +7,13 @@
 #define ZOORK_ROOM_H
 
 #include "../../entity/character/NPC.h"
+#include "../../entity/character/Player.h"
 #include "../../command/RoomDefaultEnterCommand.h"
 #include "../../entity/Item.h"
 #include "../Location.h"
 #include "../cell/Cell.h"
 #include "../cell/DoorCell.h"
+#include "../cell/RestrictedCell.h"
 #include "../../utils/Color.h"
 #include <memory>
 #include <map>
@@ -35,7 +37,18 @@ public:
                  bool passable, const std::string &color);
     void setDoorCell(int x, int y, std::shared_ptr<DoorState> state, const std::string& keyId);
     
-    std::string canMoveTo(int fromX, int fromY, int toX, int toY, const std::string &direction) const;
+    void setRestrictedCell(
+        int x,
+        int y,
+        char symbol,
+        const std::string& description,
+        const std::string& regionTag,
+        const std::string& requiredItemId,
+        const std::string& failMessage,
+        const std::string& color
+    );
+
+    std::string canMoveTo(int fromX, int fromY, int toX, int toY, const std::string &direction, Player* player) const;
     void render(int playerX, int playerY, int viewW, int viewH) const;
 
     int getWidth() const;

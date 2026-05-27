@@ -8,11 +8,11 @@
 
 #include "../Item.h"
 #include "Character.h"
-#include "../../location/Location.h"
-#include "../../location/room/NullRoom.h"
 #include <vector>
 #include <memory>
 #include <iostream>
+
+class Room;
 
 class Player : public Character {
 public:
@@ -45,8 +45,7 @@ private:
     int posX, posY;
     std::vector<std::shared_ptr<Item>> inventory;
 
-    Player() : Character("You", "You are a person, alike in dignity to any other, but uniquely you."),
-               currentRoom(new NullRoom()), posX(0), posY(0) {}
+    Player();
 };
 
 #endif //ZOORK_PLAYER_H

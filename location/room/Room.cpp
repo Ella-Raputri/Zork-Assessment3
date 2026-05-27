@@ -70,11 +70,32 @@ void Room::setDoorCell(int x, int y, std::shared_ptr<DoorState> state, const std
     grid[y][x] = std::make_shared<DoorCell>(state, keyId);
 }
 
-std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY, const std::string &direction) const {
+void Room::setRestrictedCell(
+    int x,
+    int y,
+    char symbol,
+    const std::string& description,
+    const std::string& regionTag,
+    const std::string& requiredItemId,
+    const std::string& failMessage,
+    const std::string& color
+) {
+    grid[y][x] = std::make_shared<RestrictedCell>(
+        symbol,
+        description,
+        regionTag,
+        requiredItemId,
+        failMessage,
+        color
+    );
+}
+
+std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY, 
+    const std::string &direction, Player* player) const {
+
     if(toX < 0 || toX >= width || toY < 0 || toY >= height){
         return "It is impossible to go " + direction + "!";
     }
-
     if (hasNPCAt(toX, toY)) {
         return "Someone is blocking your way.";
     }
@@ -86,6 +107,19 @@ std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY, const std::s
         if(to->getType() == CellType::Door) return "Door is locked.";
         return "Something is blocking your way.";
     };
+
+    auto fromRestricted = std::dynamic_pointer_cast<RestrictedCell>(from);
+    if(fromRestricted) return "";
+
+    auto toRestricted = std::dynamic_pointer_cast<RestrictedCell>(to);
+    if (toRestricted) {
+        auto requiredItem = player->getItem(toRestricted->getRequiredItemId());
+        if (requiredItem) {
+            return "";
+        }else{
+            return toRestricted->getFailMessage();
+        }
+    }
 
     if (from->getRegionTag() != to->getRegionTag()) {
         if (to->getType() != CellType::Door && from->getType() != CellType::Door){

@@ -8,10 +8,10 @@
 #include "../../utils/Color.h"
 
 enum class CellType {
-    Empty,   // 'x' - outside/garden
-    Floor,   // 'h' - interior
-    Door,    // 'd' - transition point
-    Impassable,    // '#' - impassable
+    Floor,  
+    Door,  
+    Impassable,
+    Restricted
 };
 
 class Cell {

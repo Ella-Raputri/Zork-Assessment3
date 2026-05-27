@@ -4,6 +4,17 @@
 //
 
 #include "Player.h"
+#include "../../location/room/NullRoom.h"
+
+Player::Player()
+    : Character(
+        "You",
+        "You are a person, alike in dignity to any other, but uniquely you."
+    ),
+    currentRoom(new NullRoom()),
+    posX(0),
+    posY(0)
+{}
 
 Player *Player::playerInstance = nullptr;
 

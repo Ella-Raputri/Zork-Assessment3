@@ -1,7 +1,7 @@
 #include "Cell.h"
 
 Cell::Cell()
-    : type(CellType::Empty),
+    : type(CellType::Floor),
       symbol('x'),
       description("You are in the garden."),
       regionTag("garden"),

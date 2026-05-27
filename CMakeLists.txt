@@ -19,6 +19,8 @@ add_executable(ZOOrk
     location/cell/DoorState.h
     location/cell/DoorCell.cpp
     location/cell/DoorCell.h
+    location/cell/RestrictedCell.cpp
+    location/cell/RestrictedCell.h
 
     location/room/Room.cpp
     location/room/Room.h
