@@ -2,7 +2,9 @@
 #include "location/passage/Passage.h"
 #include "entity/character/Player.h"
 #include "entity/character/NPC.h"
-#include "entity/Item.h"
+#include "entity/item/Item.h"
+#include "entity/item/UsableItem.h"
+#include "entity/item/EquippableItem.h"
 #include "command/NullCommand.h"
 #include "location/room/Room.h"
 #include "core/ZOOrkEngine.h"
@@ -46,13 +48,13 @@ int main() {
         true    
     );
 
-    auto key = std::make_shared<Item>(
+    auto key = std::make_shared<UsableItem>(
         "key",
         "A small silver key lying on the floor.",
-        std::make_shared<NullCommand>(),
         "silver_key",
-        20,
-        ItemType::Key
+        std::make_shared<NullCommand>(),
+        ItemType::Key,
+        20
     );
     outside->getCell(13, 2)->addItem(key);
 
@@ -69,13 +71,11 @@ int main() {
     merchant->setPosition(1, 1);
     inside->addNPC(merchant);
     
-    auto divingSuit = std::make_shared<Item>(
+    auto divingSuit = std::make_shared<EquippableItem>(
         "diving_suit",
         "A heavy diving suit with an oxygen tank.",
-        std::make_shared<NullCommand>(),
         "diving_suit",
-        100,
-        ItemType::Equippable
+        "underwater"
     );
     outside->getCell(13, 1)->addItem(divingSuit);
 

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "../../entity/Item.h"
+#include "../../entity/item/Item.h"
 #include "../../utils/Color.h"
 
 enum class CellType {

@@ -71,10 +71,15 @@ void Player::showInventory() const {
     std::cout << "Inventory: " << std::endl;
     for (const auto &item : inventory) {
         std::cout << "- " << item->getName();
-        int uses = item->getRemainingUses();
 
-        if (uses > 0) {
-            std::cout << " (" << uses << " uses left)";
+        auto usable = std::dynamic_pointer_cast<UsableItem>(item);
+        if (usable) {
+            int uses = usable->getRemainingUses();
+            if (uses > 0) {
+                std::cout << " (" << uses << " uses left)";
+            }
+        }else{
+            std::cout << " (Need to be equipped)";
         }
         std::cout << "\n";
     }
@@ -87,17 +92,21 @@ void Player::equipItem(const std::string& itemName){
         std::cout << "You don't have " << itemName << " in your inventory.\n";
         return;
     }
-    if (item->getType() != ItemType::Equippable) {
+
+    auto equippable = std::dynamic_pointer_cast<EquippableItem>(item);
+    if (!equippable) {
         std::cout << "You cannot equip this item.\n";
         return;
     }
+
     if (equippedItem) {
         unequipItem();
     }
 
-    equippedItem = item;
+    equippedItem = equippable;
+    equippedItem->equip();
     removeItem(itemName);
-    std::cout << "You equip " << item->getName() << ".\n";
+    std::cout << "You equip " << itemName << ".\n";
 }
 
 void Player::unequipItem(){
@@ -105,15 +114,39 @@ void Player::unequipItem(){
         std::cout << "Nothing is currently equipped.\n";
         return;
     }
+
+    auto cell = currentRoom->getCell(posX, posY);
+    if (cell->getRegionTag() == equippedItem->getRequiredRegion()){
+        std::cout << "You can not unequip your "  << equippedItem->getName() << " here.\n";
+        return;
+    }
+
+    equippedItem->unequip();
     std::cout << "You unequip " << equippedItem->getName() << ".\n";
+
     addItem(equippedItem);
     equippedItem = nullptr;
 }
 
-std::shared_ptr<Item> Player::getEquippedItem() const {
+std::shared_ptr<EquippableItem> Player::getEquippedItem() const {
     return equippedItem;
 }
 
 bool Player::hasEquipped(const std::string& itemId) const {
     return equippedItem && equippedItem->getItemId() == itemId;
+}
+
+void Player::checkEquippedRegion() {
+    if (!equippedItem) return;
+
+    auto cell = currentRoom->getCell(posX, posY);
+
+    if (cell->getRegionTag() != equippedItem->getRequiredRegion()) {
+        std::cout
+            << "You are no longer in "
+            << equippedItem->getRequiredRegion()
+            << ". Consider unequipping "
+            << equippedItem->getName()
+            << ".\n";
+    }
 }

@@ -18,7 +18,7 @@ ZOOrkEngine::ZOOrkEngine(std::shared_ptr<Room> start, int startX, int startY) {
 
 void ZOOrkEngine::run() {
     while (!gameOver) {
-        std::cout << "> ";
+        std::cout << "\n> ";
 
         std::string input;
         std::getline(std::cin, input);
@@ -113,8 +113,9 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     player->getCurrentRoom()->render(player->getX(), player->getY(),
         player->getCurrentRoom()->getViewW(),
         player->getCurrentRoom()->getViewH());
-    // in handleGoCommand after passage fires
+
     std::cout << "DEBUG arrived at: " << player->getX() << "," << player->getY() << "\n";
+    player->checkEquippedRegion();
 }
 
 void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
@@ -183,21 +184,27 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
         std::cout << "Please specify what do you want to use." << std::endl;
         return;
     }
-    auto item = player->getItem(arguments[0]);
 
+    auto item = player->getItem(arguments[0]);
     if (!item) {
         std::cout << "No " << arguments[0] << " found in the inventory." << std::endl;
         return;        
     }
 
-    if (item->getType() == ItemType::Key) {
+    auto usable = std::dynamic_pointer_cast<UsableItem>(item);
+    if (!usable) {
+        std::cout << "You cannot use this item. You can only equip it.\n";
+        return;
+    }
+
+    if (usable->getType() == ItemType::Key) {
         auto door = getNearbyDoor();
         if (!door) {
             std::cout << "There is no door nearby." << std::endl;
             return;
         }
 
-        if (door->canUnlockWith(item->getItemId())){
+        if (door->canUnlockWith(usable->getItemId())){
             if(!door->isLocked()){
                 door->lock();
                 std::cout << "You locked the door." << std::endl;
@@ -210,10 +217,10 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
         }
     }
 
-    item->use();
-    if (item->isDepleted()) {
+    usable->use();
+    if (usable->isDepleted()) {
         player->removeItem(arguments[0]);
-        std::cout << "The " << item->getName() << " is depleted and can not be used anymore." << std::endl;
+        std::cout << "The " << usable->getName() << " is depleted and can not be used anymore." << std::endl;
     }
 }
 
@@ -257,11 +264,13 @@ void ZOOrkEngine::handleUnequipCommand() {
 void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {
     std::string input;
     std::cout << "Are you sure you want to QUIT?\n> ";
-    std::cin >> input;
+    std::getline(std::cin, input);
     std::string quitStr = makeLowercase(input);
 
     if (quitStr == "y" || quitStr == "yes") {
         gameOver = true;
+    }else{
+        std::cout << "Enter your command!\n";
     }
 }
 

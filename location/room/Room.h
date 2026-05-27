@@ -9,7 +9,7 @@
 #include "../../entity/character/NPC.h"
 #include "../../entity/character/Player.h"
 #include "../../command/RoomDefaultEnterCommand.h"
-#include "../../entity/Item.h"
+#include "../../entity/item/Item.h"
 #include "../Location.h"
 #include "../cell/Cell.h"
 #include "../cell/DoorCell.h"

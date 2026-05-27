@@ -9,8 +9,12 @@ add_executable(ZOOrk
     entity/GameObject.h
 
     command/Command.h
-    entity/Item.h
-    entity/Item.cpp
+    entity/item/Item.h
+    entity/item/Item.cpp
+    entity/item/UsableItem.h
+    entity/item/UsableItem.cpp
+    entity/item/EquippableItem.h
+    entity/item/EquippableItem.cpp
 
     location/Location.cpp
     location/Location.h

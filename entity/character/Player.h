@@ -6,7 +6,9 @@
 #ifndef ZOORK_PLAYER_H
 #define ZOORK_PLAYER_H
 
-#include "../Item.h"
+#include "../item/Item.h"
+#include "../item/UsableItem.h"
+#include "../item/EquippableItem.h"
 #include "Character.h"
 #include <vector>
 #include <memory>
@@ -38,8 +40,9 @@ public:
 
     void equipItem(const std::string& itemName);
     void unequipItem();
-    std::shared_ptr<Item> getEquippedItem() const;
+    std::shared_ptr<EquippableItem> getEquippedItem() const;
     bool hasEquipped(const std::string& itemId) const;
+    void checkEquippedRegion();
 
     Player(const Player &) = delete;
     Player &operator=(const Player &) = delete;
@@ -49,7 +52,7 @@ private:
     Room* currentRoom;
     int posX, posY;
     std::vector<std::shared_ptr<Item>> inventory;
-    std::shared_ptr<Item> equippedItem;
+    std::shared_ptr<EquippableItem> equippedItem;
 
     Player();
 };

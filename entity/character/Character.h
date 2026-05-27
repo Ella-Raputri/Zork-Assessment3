@@ -7,7 +7,6 @@
 #define ZOORK_CHARACTER_H
 
 #include "../GameObject.h"
-#include "../Item.h"
 #include <vector>
 
 class Character : public GameObject {
