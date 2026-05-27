@@ -41,6 +41,10 @@ void ZOOrkEngine::run() {
             handleTalkCommand(arguments);
         } else if (command == "inventory") {
             handleInventoryCommand();
+        } else if (command == "equip") {
+            handleEquipCommand(arguments);
+        } else if (command == "unequip") {
+            handleUnequipCommand();
         } else if (command == "quit" || command == "q") {
             handleQuitCommand(arguments);
         } else {
@@ -236,6 +240,18 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
         }
     }
     std::cout << "Nobody by that name is nearby." << std::endl;
+}
+
+void ZOOrkEngine::handleEquipCommand(std::vector<std::string> arguments) {
+    if (arguments.empty()) {
+        std::cout << "Equip what?\n";
+        return;
+    }
+    player->equipItem(arguments[0]);
+}
+
+void ZOOrkEngine::handleUnequipCommand() {
+    player->unequipItem();
 }
 
 void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {

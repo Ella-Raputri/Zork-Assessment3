@@ -34,6 +34,8 @@ private:
     void handleUseCommand(std::vector<std::string>);
     void handleTalkCommand(std::vector<std::string>);
     void handleInventoryCommand();
+    void handleEquipCommand(std::vector<std::string>);
+    void handleUnequipCommand();
 
     void handleQuitCommand(std::vector<std::string>);
 

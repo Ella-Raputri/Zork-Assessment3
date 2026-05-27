@@ -113,8 +113,7 @@ std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY,
 
     auto toRestricted = std::dynamic_pointer_cast<RestrictedCell>(to);
     if (toRestricted) {
-        auto requiredItem = player->getItem(toRestricted->getRequiredItemId());
-        if (requiredItem) {
+        if (player->hasEquipped(toRestricted->getRequiredItemId())) {
             return "";
         }else{
             return toRestricted->getFailMessage();

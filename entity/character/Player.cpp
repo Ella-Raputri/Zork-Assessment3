@@ -79,3 +79,41 @@ void Player::showInventory() const {
         std::cout << "\n";
     }
 }
+
+void Player::equipItem(const std::string& itemName){
+    auto item = getItem(itemName);
+
+    if (!item) {
+        std::cout << "You don't have " << itemName << " in your inventory.\n";
+        return;
+    }
+    if (item->getType() != ItemType::Equippable) {
+        std::cout << "You cannot equip this item.\n";
+        return;
+    }
+    if (equippedItem) {
+        unequipItem();
+    }
+
+    equippedItem = item;
+    removeItem(itemName);
+    std::cout << "You equip " << item->getName() << ".\n";
+}
+
+void Player::unequipItem(){
+    if(!equippedItem){
+        std::cout << "Nothing is currently equipped.\n";
+        return;
+    }
+    std::cout << "You unequip " << equippedItem->getName() << ".\n";
+    addItem(equippedItem);
+    equippedItem = nullptr;
+}
+
+std::shared_ptr<Item> Player::getEquippedItem() const {
+    return equippedItem;
+}
+
+bool Player::hasEquipped(const std::string& itemId) const {
+    return equippedItem && equippedItem->getItemId() == itemId;
+}

@@ -36,6 +36,11 @@ public:
     std::shared_ptr<Item> getItem(const std::string& itemName);
     void showInventory() const;
 
+    void equipItem(const std::string& itemName);
+    void unequipItem();
+    std::shared_ptr<Item> getEquippedItem() const;
+    bool hasEquipped(const std::string& itemId) const;
+
     Player(const Player &) = delete;
     Player &operator=(const Player &) = delete;
 
@@ -44,6 +49,7 @@ private:
     Room* currentRoom;
     int posX, posY;
     std::vector<std::shared_ptr<Item>> inventory;
+    std::shared_ptr<Item> equippedItem;
 
     Player();
 };

@@ -75,7 +75,7 @@ int main() {
         std::make_shared<NullCommand>(),
         "diving_suit",
         100,
-        ItemType::Generic
+        ItemType::Equippable
     );
     outside->getCell(13, 1)->addItem(divingSuit);
 
