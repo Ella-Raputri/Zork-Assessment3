@@ -306,7 +306,7 @@ void ZOOrkEngine::handleMapCommand(){
     player->getCurrentRoom()->render(player->getX(), player->getY(),
         player->getCurrentRoom()->getViewW(),
         player->getCurrentRoom()->getViewH());
-    std::cout << "Player arrived at: x = " << player->getX() << ", y = " << player->getY() << "\n";
+    std::cout << "Player is now at: x = " << player->getX() << ", y = " << player->getY() << "\n";
 }
 
 void ZOOrkEngine::handleTeleportCommand(std::vector<std::string> arguments) {

@@ -51,6 +51,8 @@ add_executable(ZOOrk
     entity/character/Player.h
     entity/character/NPC.cpp
     entity/character/NPC.h
+    map/MapLoader.cpp
+    map/MapLoader.h
 
     core/ZOOrkEngine.cpp
     core/ZOOrkEngine.h
