@@ -29,6 +29,8 @@ struct MapRegion {
 
     bool isSeparateRoom;
     std::string requiredItem;
+    std::string keyId;
+    std::string doorDirection;
 };
 
 

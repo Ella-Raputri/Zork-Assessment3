@@ -204,7 +204,7 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
 
     auto usable = std::dynamic_pointer_cast<UsableItem>(item);
     if (!usable) {
-        std::cout << "You cannot use this item. You can only equip it.\n";
+        std::cout << "You cannot use this item.\n";
         return;
     }
 

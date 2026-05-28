@@ -1,18 +1,18 @@
-﻿name,startX,startY,endX,endY,symbol, color,cellType,doorX,doorY,isSeparateRoom,requiredItem
-Garden,0,0,42,22,#,BROWN,Floor,,,FALSE,
-North Forest,0,0,42,2,=,GREEN,Restricted,,,FALSE,lantern
-West Forest,0,3,2,22,-,GREEN,Restricted,,,FALSE,lantern
-Grand Hall,8,6,13,9,h,WHITE,Floor,10,6,TRUE,
-Lily Pond,7,10,14,13,~,BLUE,Restricted,,,FALSE,diving_suit
-Gazebo,4,17,6,19,g,CYAN,Floor,5,17,TRUE,
-Wall 1 Top,18,3,18,7,w,BRIGHT_BLACK,Impassable,,,FALSE,
-Wall 1 Bottom,18,10,18,21,w,BRIGHT_BLACK,Impassable,,,FALSE,
-Stone Wall,3,22,42,22,w,BRIGHT_BLACK,Impassable,,,FALSE,
-Lead Researcher Room,23,6,27,8,r,BRIGHT_RED,Floor,25,8,TRUE,
-Warehouse,29,6,32,7,o,BRIGHT_RED,Floor,30,7,TRUE,
-Researcher Lab,23,12,29,15,x,WHITE,Floor,26,15,TRUE,
-Wall 2 Top,36,3,36,7,w,BRIGHT_BLACK,Impassable,,,FALSE,
-Wall 2 Bottom,36,10,36,21,w,BRIGHT_BLACK,Impassable,,,FALSE,
-Pint Room,40,4,42,7,.,WHITE,Floor,40,6,TRUE,
-Chil Room,40,10,42,13,.,WHITE,Floor,40,12,TRUE,
-May Room,40,16,42,19,.,WHITE,Floor,40,18,TRUE,
+﻿name,startX,startY,endX,endY,symbol, color,cellType,doorX,doorY,isSeparateRoom,requiredItem,keyId,direction
+Garden,0,0,42,22,#,BROWN,Floor,,,FALSE,,,
+North Forest,0,0,42,2,=,GREEN,Restricted,,,FALSE,lantern,,
+West Forest,0,3,2,22,-,GREEN,Restricted,,,FALSE,lantern,,
+Grand Hall,8,6,13,9,h,WHITE,Floor,10,6,TRUE,,hall_key,south
+Lily Pond,7,10,14,13,~,BLUE,Restricted,,,FALSE,diving_suit,,
+Gazebo,4,17,6,19,g,CYAN,Floor,5,17,TRUE,,-,south
+Wall 1 Top,18,3,18,7,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
+Wall 1 Bottom,18,10,18,21,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
+Stone Wall,3,22,42,22,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
+Lead Researcher Room,23,6,27,8,r,BRIGHT_RED,Floor,25,8,TRUE,,gold_key,north
+Warehouse,29,6,32,7,o,BRIGHT_RED,Floor,30,7,TRUE,,master_key,north
+Researcher Lab,23,12,29,15,x,WHITE,Floor,26,15,TRUE,,master_key,north
+Wall 2 Top,36,3,36,7,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
+Wall 2 Bottom,36,10,36,21,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
+Pint Room,40,4,42,7,.,WHITE,Floor,40,6,TRUE,,silver_key,east
+Chil Room,40,10,42,13,.,WHITE,Floor,40,12,TRUE,,bronze_key,east
+May Room,40,16,42,19,.,WHITE,Floor,40,18,TRUE,,-,east

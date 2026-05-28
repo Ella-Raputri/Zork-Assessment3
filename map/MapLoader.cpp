@@ -53,7 +53,7 @@ std::vector<MapRegion> MapLoader::loadRegions(const std::string& filename) {
 
     while (std::getline(file, line)) {
         auto tokens = split(line, ',');
-        if (tokens.size() < 11) continue;
+        if (tokens.size() < 13) continue;
 
         MapRegion region;
         region.name = tokens[0];
@@ -72,6 +72,8 @@ std::vector<MapRegion> MapLoader::loadRegions(const std::string& filename) {
         region.isSeparateRoom = (tokens[10] == "TRUE");
 
         region.requiredItem = tokens.size() > 11 ? tokens[11] : "";
+        region.keyId = tokens.size() > 12 ? tokens[12] : "";
+        region.doorDirection = tokens.size() > 13 ? tokens[13] : "north";
         regions.push_back(region);
     }
     return regions;
@@ -162,29 +164,58 @@ void MapLoader::connectSeparateRooms(
         if (!region.isSeparateRoom) continue;
 
         auto inside = interiors[region.name];
-        auto doorState = std::make_shared<DoorState>(true);
+        bool locked = !region.keyId.empty() && region.keyId != "-";
+        auto doorState = std::make_shared<DoorState>(locked);
 
         outside->setDoorCell(
             region.doorX,
             region.doorY,
             doorState,
-            ""
+            region.keyId
         );
 
+        std::string dir = region.doorDirection;
         int insideDoorX = inside->getWidth() / 2;
-        int insideDoorY = inside->getHeight() - 1;
+        int insideDoorY;
+        int insideArriveY;
+        int insideArriveX = insideDoorX;
 
-        inside->setDoorCell(
-            insideDoorX,
-            insideDoorY,
-            doorState,
-            ""
-        );
+        if (dir == "north") {
+            insideDoorY  = inside->getHeight() - 1;  // bottom
+            insideArriveY = insideDoorY - 1;
+        } else if (dir == "south") {
+            insideDoorY  = 0;                         // top
+            insideArriveY = insideDoorY + 1;
+        } else if (dir == "east") {
+            insideDoorY  = inside->getHeight() / 2;
+            insideDoorX  = 0;                         // left wall
+            insideArriveX = insideDoorX + 1;
+            insideArriveY = insideDoorY;
+        } else if (dir == "west") {
+            insideDoorY  = inside->getHeight() / 2;
+            insideDoorX  = inside->getWidth() - 1;   // right wall
+            insideArriveX = insideDoorX - 1;
+            insideArriveY = insideDoorY;
+        } else {
+            insideDoorY  = inside->getHeight() - 1;
+            insideArriveY = insideDoorY - 1;
+        }
+
+        int outsideArriveX = region.doorX;
+        int outsideArriveY = region.doorY;
+        if (dir == "north") outsideArriveY += 1;
+        else if (dir == "south") outsideArriveY -= 1;
+        else if (dir == "east")  outsideArriveX -= 1;
+        else if (dir == "west")  outsideArriveX += 1;
+
+        inside->setDoorCell(insideDoorX, insideDoorY, doorState, region.keyId);
+        std::string uniqueDir = "door_" + std::to_string(region.doorX) 
+            + "_" + std::to_string(region.doorY);
 
         Passage::createBasicPassage(
             outside.get(),
             inside.get(),
-            "enter",
+            uniqueDir,
 
             region.doorX,
             region.doorY,
@@ -192,12 +223,11 @@ void MapLoader::connectSeparateRooms(
             insideDoorX,
             insideDoorY,
 
-            region.doorX,
-            region.doorY + 1,
+            outsideArriveX,
+            outsideArriveY,
 
-            insideDoorX,
-            insideDoorY - 1,
-
+            insideArriveX,
+            insideArriveY,
             true
         );
     }
