@@ -10,6 +10,12 @@
 #include "../location/Location.h"
 #include "../location/passage/Passage.h"
 #include "../location/cell/DoorCell.h"
+#include "../entity/character/NPC.h"
+#include "../entity/item/UsableItem.h"
+#include "../entity/item/EquippableItem.h"
+#include "../entity/item/ClueItem.h"
+#include "../map/MapLoader.h"
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -18,13 +24,14 @@
 
 class ZOOrkEngine {
 public:
-    ZOOrkEngine(std::shared_ptr<Room>, int startX, int startY);
-
+    ZOOrkEngine(int startX, int startY);
     void run();
 
 private:
     bool gameOver = false;
     Player *player;
+    std::shared_ptr<Room> world;
+    std::unordered_map<std::string, std::shared_ptr<Room>> interiors;
 
     void handleGoCommand(std::vector<std::string>);
     void handleLookCommand(std::vector<std::string>);
@@ -46,6 +53,7 @@ private:
     static std::vector<std::string> tokenizeString(const std::string&);
     static std::string makeLowercase(std::string);
     std::shared_ptr<DoorCell> getNearbyDoor();
+    std::shared_ptr<Room> initMap();
 };
 
 
