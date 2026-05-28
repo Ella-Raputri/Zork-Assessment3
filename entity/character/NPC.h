@@ -16,13 +16,16 @@ public:
     );
 
     void talk() const;
+    void setDialogueStage(int stage); 
+    void addDialogueStage(std::vector<std::string> lines);
 
     void setPosition(int x, int y);
     int getX() const;
     int getY() const;
 
 private:
-    std::vector<std::string> dialogueLines;
+    int currentStage = 0;
+    std::vector<std::vector<std::string>> dialogueStages;
     int posX, posY;
 };
 

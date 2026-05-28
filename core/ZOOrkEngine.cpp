@@ -256,6 +256,7 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
 
             if (npc && makeLowercase(npc->getName()) == npcName) {
                 npc->talk();
+                CheckpointManager::instance()->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
                 return;
             }
         }
@@ -475,5 +476,24 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
     );
     merchant->setPosition(21, 16);
     outside->addNPC(merchant);
+
+    std::unordered_map<std::string, std::shared_ptr<NPC>> npcRegistry = {
+        { "merchant", merchant }
+    };
+
+    std::unordered_map<std::string, std::shared_ptr<Item>> itemRegistry = {
+        { "golden_key", std::make_shared<UsableItem>(
+            "golden_key", "A golden key.", "golden_key",
+            std::make_shared<NullCommand>(), ItemType::Key, -1
+        )}
+    };
+
+    CheckpointManager::instance()->loadFromJSON(
+        "data/checkpoint.json",
+        outside,
+        interiors,
+        npcRegistry,
+        itemRegistry
+    );
     return outside;
 }

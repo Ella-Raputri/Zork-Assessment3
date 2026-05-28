@@ -15,6 +15,7 @@
 #include "../entity/item/EquippableItem.h"
 #include "../entity/item/ClueItem.h"
 #include "../map/MapLoader.h"
+#include "CheckpointManager.h"
 
 #include <iostream>
 #include <sstream>

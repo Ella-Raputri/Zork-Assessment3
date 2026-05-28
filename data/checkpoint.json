@@ -1,0 +1,53 @@
+{
+  "checkpoints": [
+    {
+      "id": "merchant_chapter2",
+      "requiredClueIds": ["silver_key"],
+      "requiredNPCName": "merchant",
+      "triggerX": 21,
+      "triggerY": 16,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "The merchant's eyes widen as he sees what you're carrying."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "merchant",
+          "stage": 1
+        },
+        {
+          "type": "move_npc",
+          "npc": "merchant",
+          "x": 30,
+          "y": 10
+        },
+        {
+          "type": "spawn_item",
+          "itemId": "golden_key",
+          "room": "outside",
+          "x": 30,
+          "y": 9
+        }
+      ]
+    },
+    {
+      "id": "merchant_chapter3",
+      "requiredClueIds": ["golden_key","mirror_shards"],
+      "requiredNPCName": "merchant",
+      "triggerX": 30,
+      "triggerY": 10,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "The merchant nods solemnly."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "merchant",
+          "stage": 2
+        }
+      ]
+    }
+  ]
+}

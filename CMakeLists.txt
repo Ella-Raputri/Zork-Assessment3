@@ -3,6 +3,15 @@ project(ZOOrk)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include(FetchContent)
+FetchContent_Declare(
+    nlohmann_json
+    URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.hpp
+    DOWNLOAD_NO_EXTRACT TRUE
+    SOURCE_DIR ${CMAKE_BINARY_DIR}/include/nlohmann
+)
+FetchContent_MakeAvailable(nlohmann_json)
+
 add_executable(ZOOrk
     utils/Color.h
     entity/GameObject.cpp
@@ -54,7 +63,12 @@ add_executable(ZOOrk
     map/MapLoader.cpp
     map/MapLoader.h
 
+    core/CheckpointManager.cpp
+    core/CheckpointManager.h
+
     core/ZOOrkEngine.cpp
     core/ZOOrkEngine.h
     main.cpp
 )
+
+target_include_directories(ZOOrk PRIVATE ${CMAKE_BINARY_DIR}/include)
