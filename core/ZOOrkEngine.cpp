@@ -10,8 +10,10 @@
 #include <iostream>
 
 ZOOrkEngine::ZOOrkEngine(int startX, int startY) {
-    world = initMap();
     player = Player::instance();
+    checkpointManager = CheckpointManager::instance();
+    world = initMap();
+
     player->setCurrentRoom(world.get());
     player->setPosition(startX, startY);
     player->getCurrentRoom()->render(startX, startY, player->getCurrentRoom()->getViewW(), player->getCurrentRoom()->getViewH());
@@ -33,7 +35,7 @@ void ZOOrkEngine::run() {
         if (command == "go") {
             handleGoCommand(arguments);
         } else if ((command == "look") || (command == "inspect")) {
-            handleLookCommand(arguments);
+            handleLookCommand();
         } else if ((command == "take") || (command == "get")) {
             handleTakeCommand(arguments);
         } else if (command == "drop") {
@@ -55,7 +57,7 @@ void ZOOrkEngine::run() {
         } else if (command == "teleport") {
             handleTeleportCommand(arguments);
         } else if (command == "quit" || command == "q") {
-            handleQuitCommand(arguments);
+            handleQuitCommand();
         } else {
             std::cout << "I don't understand that command.\n";
         }
@@ -79,12 +81,10 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     } 
     else if (arguments[0] == "w" || arguments[0] == "west") {
         direction = "west";
-    // } else if (arguments[0] == "u" || arguments[0] == "up") {
-    //     direction = "up";
-    // } else if (arguments[0] == "d" || arguments[0] == "down") {
-    //     direction = "down";
-    } else {
-        direction = arguments[0];
+    } 
+    else {
+        std::cout << "Invalid direction.\n";
+        return;
     }
 
     int dx = 0, dy = 0;
@@ -123,7 +123,7 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     player->checkEquippedRegion();
 }
 
-void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
+void ZOOrkEngine::handleLookCommand() {
     std::cout << player->getCurrentRoom()->getDescription() << std::endl;
 
     Room* currentRoom = player->getCurrentRoom();
@@ -173,11 +173,13 @@ void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
         std::cout << "Please specify what do you want to take." << std::endl;
         return;
     }
+    std::string itemName = combineArguments(arguments);
+
     Room* currentRoom = player->getCurrentRoom();
     int currX = player->getX(), currY = player->getY();
 
     auto cell = currentRoom->getCell(currX, currY);
-    auto item = cell->retrieveItem(arguments[0]);
+    auto item = cell->retrieveItem(itemName);
 
     if (item) {
         player->addItem(item);
@@ -193,14 +195,16 @@ void ZOOrkEngine::handleDropCommand(std::vector<std::string> arguments) {
         std::cout << "Please specify what do you want to drop." << std::endl;
         return;
     }
+    std::string itemName = combineArguments(arguments);
     Room* currentRoom = player->getCurrentRoom();
     int currX = player->getX(), currY = player->getY();
 
     auto cell = currentRoom->getCell(currX, currY);
-    auto item = player->getItem(arguments[0]);
+    auto item = player->getItemByName(itemName);
 
     if (item) {
         cell->addItem(item);
+        player->removeItem(item->getItemId(), itemName);
         std::cout << "Dropped: " << item->getName() << "\n";
     }
     else {
@@ -217,10 +221,10 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
         std::cout << "Please specify what do you want to use." << std::endl;
         return;
     }
-
-    auto item = player->getItem(arguments[0]);
+    std::string itemName = combineArguments(arguments);
+    auto item = player->getItemByName(itemName);
     if (!item) {
-        std::cout << "No " << arguments[0] << " found in the inventory." << std::endl;
+        std::cout << "No " << itemName << " found in the inventory." << std::endl;
         return;        
     }
 
@@ -252,7 +256,7 @@ void ZOOrkEngine::handleUseCommand(std::vector<std::string> arguments) {
 
     usable->use();
     if (usable->isDepleted()) {
-        player->removeItem(arguments[0]);
+        player->removeItem(usable->getItemId(), usable->getName());
         std::cout << "The " << usable->getName() << " is depleted and can not be used anymore." << std::endl;
     }
 }
@@ -263,7 +267,7 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
         return;
     }
 
-    std::string npcName = arguments[arguments.size()-1];
+    std::string npcName = combineArguments(arguments);
     Room* room = player->getCurrentRoom();
 
     int px = player->getX();
@@ -275,7 +279,7 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
 
             if (npc && makeLowercase(npc->getName()) == npcName) {
                 npc->talk();
-                CheckpointManager::instance()->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
+                checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
                 return;
             }
         }
@@ -288,7 +292,8 @@ void ZOOrkEngine::handleEquipCommand(std::vector<std::string> arguments) {
         std::cout << "Equip what?\n";
         return;
     }
-    player->equipItem(arguments[0]);
+    std::string itemName = combineArguments(arguments);
+    player->equipItem(itemName);
 }
 
 void ZOOrkEngine::handleUnequipCommand() {
@@ -376,7 +381,7 @@ void ZOOrkEngine::handleTeleportCommand(std::vector<std::string> arguments) {
     player->checkEquippedRegion();
 }
 
-void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {
+void ZOOrkEngine::handleQuitCommand() {
     std::string input;
     std::cout << "Are you sure you want to QUIT?\n> ";
     std::getline(std::cin, input);
@@ -387,6 +392,15 @@ void ZOOrkEngine::handleQuitCommand(std::vector<std::string> arguments) {
     }else{
         std::cout << "Enter your command to continue the game or type 'help'.\n";
     }
+}
+
+std::string ZOOrkEngine::combineArguments(const std::vector<std::string>& arguments){
+    std::string result;
+    for (size_t i = 0; i < arguments.size(); ++i) {
+        if (i > 0)  result += " ";
+        result += arguments[i];
+    }
+    return result;
 }
 
 std::vector<std::string> ZOOrkEngine::tokenizeString(const std::string &input) {
@@ -450,7 +464,7 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
     );
 
     auto key = std::make_shared<UsableItem>(
-        "silver_key",
+        "silver key",
         "A small silver key lying on the floor.",
         "silver_key",
         std::make_shared<NullCommand>(),
@@ -460,7 +474,7 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
     outside->getCell(20, 17)->addItem(key);
 
     auto master_key = std::make_shared<UsableItem>(
-        "master_key",
+        "master key",
         "A master key.",
         "master_key",
         std::make_shared<NullCommand>(),
@@ -470,7 +484,7 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
     outside->getCell(25, 16)->addItem(master_key);
 
     auto divingSuit = std::make_shared<EquippableItem>(
-        "diving_suit",
+        "diving suit",
         "A heavy diving suit with an oxygen tank.",
         "diving_suit",
         "Lily Pond"
@@ -478,7 +492,7 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
     outside->getCell(14, 14)->addItem(divingSuit);
 
     auto mirrorShards = std::make_shared<ClueItem>(
-        "mirror_shards",
+        "mirror shards",
         "Some remaining of a mirror.",
         "mirror_shards"
     );
@@ -507,7 +521,7 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
         )}
     };
 
-    CheckpointManager::instance()->loadFromJSON(
+    checkpointManager->loadFromJSON(
         "data/checkpoint.json",
         outside,
         interiors,

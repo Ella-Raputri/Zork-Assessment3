@@ -74,7 +74,15 @@ void Cell::addItem(std::shared_ptr<Item> item) {
     items.push_back(item);
 }
 
-std::shared_ptr<Item> Cell::getItem(const std::string& itemName) {
+std::shared_ptr<Item> Cell::getItemById(const std::string& itemId) {
+    for (auto& item : items) {
+        if (item->getItemId() == itemId)
+            return item;
+    }
+    return nullptr;
+}
+
+std::shared_ptr<Item> Cell::getItemByName(const std::string& itemName) {
     for (auto& item : items) {
         if (item->getName() == itemName)
             return item;

@@ -28,7 +28,7 @@ bool CheckpointManager::tryTrigger(const std::string& npcName, int x, int y, Pla
 
         bool hasAllClues = true;
         for (const auto& clueId : cp.requiredClueIds) {
-            if (!player->getItem(clueId)) {
+            if (!player->getItemById(clueId)) {
                 hasAllClues = false;
                 std::cout << "[You feel like you're missing something...]\n";
                 break;
@@ -136,7 +136,7 @@ std::function<void()> CheckpointManager::buildEffect(
 
         return [item, targetRoom, itemId, x, y]() {
             auto cell = targetRoom->getCell(x, y);
-            if (!cell->getItem(itemId)) {
+            if (!cell->getItemById(itemId)) {
                 cell->addItem(item);
             }
         };

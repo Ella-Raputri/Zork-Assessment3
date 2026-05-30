@@ -36,11 +36,13 @@ public:
                       std::unordered_map<std::string, std::shared_ptr<NPC>>& npcRegistry,
                       std::unordered_map<std::string, std::shared_ptr<Item>>& itemRegistry);
 
-    void registerCheckpoint(CheckpointData cp);
     bool tryTrigger(const std::string& npcName, int x, int y, Player* player);
+
+    //havent used these yet
+    void registerCheckpoint(CheckpointData cp);
     bool isTriggered(const std::string& id) const;
 
-    // For save/load
+    // For save/load, havent used this yet
     std::unordered_map<std::string, bool> getFlags() const;
     void loadFlags(const std::unordered_map<std::string, bool>& flags);
 

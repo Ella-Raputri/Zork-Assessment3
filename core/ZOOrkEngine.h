@@ -32,11 +32,13 @@ public:
 private:
     bool gameOver = false;
     Player *player;
+    CheckpointManager* checkpointManager;
+    
     std::shared_ptr<Room> world;
     std::unordered_map<std::string, std::shared_ptr<Room>> interiors;
 
     void handleGoCommand(std::vector<std::string>);
-    void handleLookCommand(std::vector<std::string>);
+    void handleLookCommand();
 
     void handleTakeCommand(std::vector<std::string>);
     void handleDropCommand(std::vector<std::string>);
@@ -50,10 +52,12 @@ private:
     void handleMapCommand();
     void handleTeleportCommand(std::vector<std::string>);
     
-    void handleQuitCommand(std::vector<std::string>);
+    void handleQuitCommand();
 
+    static std::string combineArguments(const std::vector<std::string>&);
     static std::vector<std::string> tokenizeString(const std::string&);
     static std::string makeLowercase(std::string);
+
     std::shared_ptr<DoorCell> getNearbyDoor();
     std::shared_ptr<Room> initMap();
 };

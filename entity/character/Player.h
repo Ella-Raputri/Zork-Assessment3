@@ -34,8 +34,9 @@ public:
     int getY() const ;
 
     void addItem(std::shared_ptr<Item> item);
-    void removeItem(const std::string& itemName);
-    std::shared_ptr<Item> getItem(const std::string& itemName);
+    void removeItem(const std::string& itemId, const std::string& itemName);
+    std::shared_ptr<Item> getItemByName(const std::string& itemName);
+    std::shared_ptr<Item> getItemById(const std::string& itemId);
     void showInventory() const;
 
     void equipItem(const std::string& itemName);

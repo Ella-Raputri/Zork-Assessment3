@@ -53,7 +53,8 @@ class Cell {
         void setColor(const std::string&);
 
         void addItem(std::shared_ptr<Item> item);
-        std::shared_ptr<Item> getItem(const std::string& itemName);
+        std::shared_ptr<Item> getItemById(const std::string& itemId);
+        std::shared_ptr<Item> getItemByName(const std::string& itemName);
         std::shared_ptr<Item> retrieveItem(const std::string& itemName);
         bool hasItems() const;
         const std::vector<std::shared_ptr<Item>>& getItems() const;

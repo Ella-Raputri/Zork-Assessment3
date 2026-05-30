@@ -43,9 +43,9 @@ void Player::addItem(std::shared_ptr<Item> item){
     inventory.push_back(item);
 }
 
-void Player::removeItem(const std::string& itemName){
+void Player::removeItem(const std::string& itemId, const std::string& itemName){
     for(auto it = inventory.begin(); it != inventory.end(); it++){
-        if ((*it)->getName() == itemName) {
+        if ((*it)->getItemId() == itemId) {
             inventory.erase(it);
             return;
         }
@@ -53,9 +53,18 @@ void Player::removeItem(const std::string& itemName){
     std::cout << "No " << itemName << " found in the inventory." << std::endl;
 }
 
-std::shared_ptr<Item> Player::getItem(const std::string& itemName){
+std::shared_ptr<Item> Player::getItemByName(const std::string& itemName){
     for (auto &item : inventory) {
         if (item->getName() == itemName) {
+            return item;
+        }
+    }
+    return nullptr;
+}
+
+std::shared_ptr<Item> Player::getItemById(const std::string& itemId){
+    for (auto &item : inventory) {
+        if (item->getItemId() == itemId) {
             return item;
         }
     }
@@ -92,7 +101,7 @@ void Player::showInventory() const {
 }
 
 void Player::equipItem(const std::string& itemName){
-    auto item = getItem(itemName);
+    auto item = getItemByName(itemName);
 
     if (!item) {
         std::cout << "You don't have " << itemName << " in your inventory.\n";
@@ -111,7 +120,7 @@ void Player::equipItem(const std::string& itemName){
 
     equippedItem = equippable;
     equippedItem->equip();
-    removeItem(itemName);
+    removeItem(item->getItemId(), itemName);
     std::cout << "You equip " << itemName << ".\n";
 }
 
