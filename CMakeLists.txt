@@ -62,6 +62,8 @@ add_executable(ZOOrk
     entity/character/NPC.h
     map/MapLoader.cpp
     map/MapLoader.h
+    map/ItemLoader.cpp
+    map/ItemLoader.h
 
     core/CheckpointManager.cpp
     core/CheckpointManager.h

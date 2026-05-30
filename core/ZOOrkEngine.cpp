@@ -16,7 +16,7 @@ ZOOrkEngine::ZOOrkEngine(int startX, int startY) {
 
     player->setCurrentRoom(world.get());
     player->setPosition(startX, startY);
-    player->getCurrentRoom()->render(startX, startY, player->getCurrentRoom()->getViewW(), player->getCurrentRoom()->getViewH());
+    handleMapCommand();
 }
 
 void ZOOrkEngine::run() {
@@ -463,48 +463,18 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
         interiors
     );
 
-    auto key = std::make_shared<UsableItem>(
-        "silver key",
-        "A small silver key lying on the floor.",
-        "silver_key",
-        std::make_shared<NullCommand>(),
-        ItemType::Key,
-        -1
+    auto itemRegistry = ItemLoader::loadItems(
+        "data/item.json",
+        outside,
+        interiors
     );
-    outside->getCell(20, 17)->addItem(key);
-
-    auto master_key = std::make_shared<UsableItem>(
-        "master key",
-        "A master key.",
-        "master_key",
-        std::make_shared<NullCommand>(),
-        ItemType::Key,
-        -1
-    );
-    outside->getCell(25, 16)->addItem(master_key);
-
-    auto divingSuit = std::make_shared<EquippableItem>(
-        "diving suit",
-        "A heavy diving suit with an oxygen tank.",
-        "diving_suit",
-        "Lily Pond"
-    );
-    outside->getCell(14, 14)->addItem(divingSuit);
-
-    auto mirrorShards = std::make_shared<ClueItem>(
-        "mirror shards",
-        "Some remaining of a mirror.",
-        "mirror_shards"
-    );
-    outside->getCell(13, 12)->addItem(mirrorShards);
 
     auto merchant = std::make_shared<NPC>(
         "merchant",
         "A suspicious trader.",
         std::vector<std::string>{
             "Welcome traveler.",
-            "I sell useful things.",
-            "Bring me a golden key."
+            "I sell useful things."
         }
     );
     merchant->setPosition(21, 16);
@@ -512,13 +482,6 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
 
     std::unordered_map<std::string, std::shared_ptr<NPC>> npcRegistry = {
         { "merchant", merchant }
-    };
-
-    std::unordered_map<std::string, std::shared_ptr<Item>> itemRegistry = {
-        { "golden_key", std::make_shared<UsableItem>(
-            "golden_key", "A golden key.", "golden_key",
-            std::make_shared<NullCommand>(), ItemType::Key, -1
-        )}
     };
 
     checkpointManager->loadFromJSON(

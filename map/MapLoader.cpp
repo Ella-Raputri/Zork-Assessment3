@@ -87,6 +87,9 @@ void MapLoader::applyRegions(
         for (int y = region.startY; y <= region.endY; y++) {
             for (int x = region.startX; x <= region.endX; x++) {
 
+                std::string itemName = region.requiredItem;
+                std::replace(itemName.begin(), itemName.end(), '_', ' ');
+
                 if (region.cellType == CellType::Restricted) {
                     room->setRestrictedCell(
                         x,
@@ -95,7 +98,7 @@ void MapLoader::applyRegions(
                         "You are in " + region.name,
                         region.name,
                         region.requiredItem,
-                        "Restricted area: Need " + region.requiredItem,
+                        "Restricted area: need " + itemName,
                         region.color
                     );
                 }

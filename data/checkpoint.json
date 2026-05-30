@@ -24,7 +24,7 @@
         },
         {
           "type": "spawn_item",
-          "itemId": "golden_key",
+          "itemId": "gold",
           "room": "outside",
           "x": 30,
           "y": 9
@@ -33,7 +33,7 @@
     },
     {
       "id": "merchant_chapter3",
-      "requiredClueIds": ["golden_key","mirror_shards"],
+      "requiredClueIds": ["gold","mirror_shards"],
       "requiredNPCName": "merchant",
       "triggerX": 30,
       "triggerY": 10,

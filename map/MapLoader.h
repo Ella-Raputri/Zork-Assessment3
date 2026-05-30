@@ -4,7 +4,8 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <unordered_map>  
+#include <unordered_map>
+#include <algorithm>  
 
 #include "../utils/Color.h"
 #include "../location/cell/Cell.h"

@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "id": "silver_key",
+      "type": "key",
+      "name": "silver key",
+      "description": "A small silver key lying on the floor.",
+      "spawn": true,
+      "room": "outside",
+      "x": 20,
+      "y": 17,
+      "use": -1
+    },
+
+    {
+      "id": "master_key",
+      "type": "key",
+      "name": "master key",
+      "description": "A master key.",
+      "spawn": true,
+      "room": "outside",
+      "x": 25,
+      "y": 16,
+      "use": -1
+    },
+
+    {
+      "id": "diving_suit",
+      "type": "equippable",
+      "name": "diving suit",
+      "description": "A heavy diving suit with an oxygen tank.",
+      "requiredRegion": "Lily Pond",
+      "spawn": true,
+      "room": "outside",
+      "x": 14,
+      "y": 14
+    },
+
+    {
+      "id": "mirror_shards",
+      "type": "clue",
+      "name": "mirror shards",
+      "description": "Some remaining of a mirror.",
+      "spawn": true,
+      "room": "outside",
+      "x": 13,
+      "y": 12
+    },
+
+    {
+      "id": "gold",
+      "type": "generic",
+      "name": "gold",
+      "description": "A gold.",
+      "spawn": false,
+      "use": 1
+    }
+  ]
+}
