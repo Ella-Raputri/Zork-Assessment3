@@ -131,20 +131,39 @@ void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
     int currY = player->getY();
     auto cell = currentRoom->getCell(currX, currY);
 
-    if (cell->hasItems()) {
-        std::cout << "You see: " << std::endl;
-        for (const auto& item : cell->getItems()) {
-            std::cout << "- " << item->getName()
-                      << ": " << item->getDescription() << std::endl;
+    std::unordered_set<std::string> objects;
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx++) {
+            int neighborX = currX + dx, neighborY = currY + dy;
+
+            auto npc = currentRoom->getNPCAt(neighborX, neighborY);
+            if (npc) {
+                objects.insert(npc->getName());
+            }
+
+            auto neighborCell = currentRoom->getCell(neighborX, neighborY); 
+            if(neighborCell->getSymbol() != cell->getSymbol()){
+                objects.insert(neighborCell->getRegionTag());
+            }
         }
     }
 
-    const std::vector<std::shared_ptr<NPC>> npcList = currentRoom->getNPCList();
-    if(!npcList.empty()){
-        std::cout << "In this room, you see: " << std::endl;
-        for (const auto& npc : npcList) {
-            std::cout << "- " << npc->getName()
-                      << ": " << npc->getDescription() << std::endl;
+    if(!objects.empty()){
+        std::cout << "You see ";
+        for (auto it = objects.begin(); it != objects.end(); ++it) {
+            std::cout << *it;
+            if (std::next(it) != objects.end()) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << " nearby.\n";
+    }
+
+    if (cell->hasItems()) {
+        std::cout << "You see some items in the ground: " << std::endl;
+        for (const auto& item : cell->getItems()) {
+            std::cout << "- " << item->getName()
+                      << ": " << item->getDescription() << "\n";
         }
     }
 }

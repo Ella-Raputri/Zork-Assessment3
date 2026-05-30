@@ -51,10 +51,6 @@ bool Room::hasNPCAt(int x, int y) const {
     return false;
 }
 
-std::vector<std::shared_ptr<NPC>> Room::getNPCList() const{
-    return npcs;
-};
-
 std::shared_ptr<Cell> Room::getCell(int x, int y){
     return grid[y][x];
 }

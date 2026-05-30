@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <unordered_set>
 
 class ZOOrkEngine {
 public:
