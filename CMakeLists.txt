@@ -64,6 +64,8 @@ add_executable(ZOOrk
     map/MapLoader.h
     map/ItemLoader.cpp
     map/ItemLoader.h
+    map/NPCLoader.cpp
+    map/NPCLoader.h
 
     core/CheckpointManager.cpp
     core/CheckpointManager.h

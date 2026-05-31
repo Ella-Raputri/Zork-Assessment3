@@ -16,6 +16,7 @@
 #include "../entity/item/ClueItem.h"
 #include "../map/MapLoader.h"
 #include "../map/ItemLoader.h"
+#include "../map/NPCLoader.h"
 #include "CheckpointManager.h"
 
 #include <iostream>

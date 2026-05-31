@@ -1,0 +1,42 @@
+{
+  "npcs": [
+    {
+      "name": "merchant",
+      "description": "A suspicious trader.",
+
+      "room": "outside",
+      "x": 21,
+      "y": 16,
+
+      "dialogueStages": [
+        [
+          "Welcome traveler.",
+          "I sell useful things."
+        ],
+
+        [
+          "You found the key.",
+          "Perhaps we can do business now."
+        ],
+
+        [
+          "Thank you for your help."
+        ]
+      ]
+    },
+
+    {
+      "name": "researcher",
+      "description": "A nervous scientist.",
+
+      "room": "Researcher Lab",
+      "x": 3,
+      "y": 1,
+
+      "dialogueStages": [
+        ["Please leave me alone.",
+        "The experiment is not ready."]
+      ]
+    }
+  ]
+}

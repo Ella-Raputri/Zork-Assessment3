@@ -469,20 +469,11 @@ std::shared_ptr<Room> ZOOrkEngine::initMap(){
         interiors
     );
 
-    auto merchant = std::make_shared<NPC>(
-        "merchant",
-        "A suspicious trader.",
-        std::vector<std::string>{
-            "Welcome traveler.",
-            "I sell useful things."
-        }
+    auto npcRegistry = NPCLoader::loadNPCs(
+        "data/npc.json",
+        outside,
+        interiors
     );
-    merchant->setPosition(21, 16);
-    outside->addNPC(merchant);
-
-    std::unordered_map<std::string, std::shared_ptr<NPC>> npcRegistry = {
-        { "merchant", merchant }
-    };
 
     checkpointManager->loadFromJSON(
         "data/checkpoint.json",
