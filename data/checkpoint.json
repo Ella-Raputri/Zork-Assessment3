@@ -12,6 +12,11 @@
           "message": "The merchant's eyes widen as he sees what you're carrying."
         },
         {
+          "type": "ask_password",
+          "question": "What is the secret password?",
+          "answer": "moonlight"
+        },
+        {
           "type": "set_dialogue_stage",
           "npc": "merchant",
           "stage": 1

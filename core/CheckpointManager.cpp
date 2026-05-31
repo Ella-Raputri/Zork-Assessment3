@@ -14,7 +14,7 @@ void CheckpointManager::registerCheckpoint(CheckpointData cp) {
     checkpoints.push_back(std::move(cp));
 }
 
-bool CheckpointManager::tryTrigger(const std::string& npcName, int x, int y, Player* player) {
+CheckpointResult CheckpointManager::tryTrigger(const std::string& npcName, int x, int y, Player* player) {
     for (auto& cp : checkpoints) {
         if (cp.triggered){
             continue;
@@ -38,12 +38,14 @@ bool CheckpointManager::tryTrigger(const std::string& npcName, int x, int y, Pla
             continue;
         }
 
+        for (auto& effect : cp.onTrigger) {
+            if (!effect()) return CheckpointResult::Failed;
+        }
         cp.triggered = true;
         std::cout << "[Checkpoint reached: " << cp.id << "]\n";
-        for (auto& effect : cp.onTrigger) effect();
-        return true;
+        return CheckpointResult::Success;
     }
-    return false;
+    return CheckpointResult::NotMatched;
 }
 
 bool CheckpointManager::isTriggered(const std::string& id) const {
@@ -74,7 +76,7 @@ void CheckpointManager::loadFlags(const std::unordered_map<std::string, bool>& f
 
 // -------------------------------------------------------
 
-std::function<void()> CheckpointManager::buildEffect(
+std::function<bool()> CheckpointManager::buildEffect(
     const json& effect,
     std::shared_ptr<Room> outside,
     std::unordered_map<std::string, std::shared_ptr<Room>>& interiors,
@@ -83,17 +85,38 @@ std::function<void()> CheckpointManager::buildEffect(
 ) {
     std::string type = effect["type"];
 
+    if (type == "ask_password") {
+        std::string question = effect["question"];
+        std::string answer = effect["answer"];
+
+        return [question, answer]() -> bool {
+            std::cout << question << "\n> ";
+
+            std::string input;
+            std::getline(std::cin, input);
+
+            if (input == answer) {
+                std::cout << "Correct.\n";
+                return true;
+            }
+
+            std::cout << "Wrong password.\n";
+            return false;
+        };
+    }
+
     if (type == "move_npc") {
         std::string npcName = effect["npc"];
         int x = effect["x"], y = effect["y"];
 
         auto npcIt = npcRegistry.find(npcName);
-        if (npcIt == npcRegistry.end()) return [](){};
+        if (npcIt == npcRegistry.end()) []() -> bool { return false; };
         auto npc = npcIt->second;
 
-        return [npc, x, y, npcName]() {
+        return [npc, x, y, npcName]() -> bool {
             npc->setPosition(x, y);
             std::cout << npcName << " has moved.\n";
+            return true;
         };
     }
 
@@ -102,11 +125,12 @@ std::function<void()> CheckpointManager::buildEffect(
         int stage = effect["stage"];
 
         auto npcIt = npcRegistry.find(npcName);
-        if (npcIt == npcRegistry.end()) return [](){};
+        if (npcIt == npcRegistry.end()) []() -> bool { return false; };
         auto npc = npcIt->second;
 
-        return [npc, stage]() {
+        return [npc, stage]() -> bool {
             npc->setDialogueStage(stage);
+            return true;
         };
     }
 
@@ -118,7 +142,7 @@ std::function<void()> CheckpointManager::buildEffect(
         auto itemIt = itemRegistry.find(itemId);
         if (itemIt == itemRegistry.end()) {
             std::cerr << "spawn_item: unknown item " << itemId << "\n";
-            return [](){};
+            return []() -> bool { return false; };
         }
         auto item = itemIt->second;
 
@@ -129,29 +153,31 @@ std::function<void()> CheckpointManager::buildEffect(
             auto roomIt = interiors.find(roomName);
             if (roomIt == interiors.end()) {
                 std::cerr << "spawn_item: unknown room " << roomName << "\n";
-                return [](){};
+                return []() -> bool { return false; };
             }
             targetRoom = roomIt->second;
         }
 
-        return [item, targetRoom, itemId, x, y]() {
+        return [item, targetRoom, itemId, x, y]() -> bool {
             auto cell = targetRoom->getCell(x, y);
             if (!cell->getItemById(itemId)) {
                 cell->addItem(item);
                 std::cout << "A new item: " << item->getName() << " has spawned.\n";
             }
+            return true;
         };
     }
 
     if (type == "print_message") {
         std::string message = effect["message"];
-        return [message]() {
+        return [message]() -> bool {
             std::cout << "[Story] " << message << "\n";
+            return true;
         };
     }
 
     std::cerr << "Unknown effect type: " << type << "\n";
-    return [](){};
+    return []() -> bool { return false; };
 }
 
 // -------------------------------------------------------

@@ -23,9 +23,14 @@ struct CheckpointData {
     std::string requiredNPCName;
     int triggerX, triggerY;
 
-    std::vector<std::function<void()>> onTrigger;
+    std::vector<std::function<bool()>> onTrigger;
 };
 
+enum class CheckpointResult {
+    NotMatched,
+    Success,
+    Failed
+};
 
 class CheckpointManager {
 public:
@@ -36,7 +41,7 @@ public:
                       std::unordered_map<std::string, std::shared_ptr<NPC>>& npcRegistry,
                       std::unordered_map<std::string, std::shared_ptr<Item>>& itemRegistry);
 
-    bool tryTrigger(const std::string& npcName, int x, int y, Player* player);
+    CheckpointResult tryTrigger(const std::string& npcName, int x, int y, Player* player);
 
     //havent used these yet
     void registerCheckpoint(CheckpointData cp);
@@ -51,7 +56,7 @@ private:
     static CheckpointManager* _instance;
     std::vector<CheckpointData> checkpoints;
 
-    std::function<void()> buildEffect(
+    std::function<bool()> buildEffect(
         const json& effect,
         std::shared_ptr<Room> outside,
         std::unordered_map<std::string, std::shared_ptr<Room>>& interiors,
