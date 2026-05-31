@@ -1,8 +1,8 @@
 {
   "npcs": [
     {
-      "name": "merchant",
-      "description": "A suspicious trader.",
+      "name": "Chil",
+      "description": "A fellow reseacher.",
 
       "room": "outside",
       "x": 21,
@@ -10,32 +10,65 @@
 
       "dialogueStages": [
         [
-          "Welcome traveler.",
-          "I sell useful things."
+          "Seems like you just woke up as well, Pint. Last night's situation is total chaos.",
+          "We were both chatting in front of your room until we heard the guard screaming in the direction of the Grand Hall.",
+          "We then ran there together, but suddenly an earthquake happened.",
+          "...",
+          "I wonder what happened. Oh look! It's Mr. Guard.",
+          "He seems to have just woken up as well. Let's talk to him."
         ],
 
         [
-          "You found the key.",
-          "Perhaps we can do business now."
+          "Let's hear what the guard wants to say."
         ],
 
         [
-          "Thank you for your help."
+          "I didn't see my sister anywhere here. Based on the guard's words, we should investigate the pond.",
+          "He is already in the center of the pond. I can not go there because I'm allergic to lilies."
+        ],
+
+        [
+          "Sis…Sis May…why…why…? (hugs May's cold body)."
+        ],
+
+        [
+          "..."
         ]
       ]
     },
 
     {
-      "name": "researcher",
-      "description": "A nervous scientist.",
+      "name": "Guard",
+      "description": "The only guard in this complex.",
 
-      "room": "Researcher Lab",
-      "x": 3,
-      "y": 1,
+      "room": "outside",
+      "x": 20,
+      "y": 8,
 
       "dialogueStages": [
-        ["Please leave me alone.",
-        "The experiment is not ready."]
+        [
+          "...(The guard half consciously staring at you)."
+        ],
+
+        [
+          "May,May...I saw she... leapt into the pond just like that."
+        ],
+
+        [
+          "I...found May at the bottom of the pool.", 
+          "Would you help me gather some of May's belongings? I will take her to Chil's place."
+        ],
+
+        [
+          "I suspected that our lead researcher, Dr. Seegy, is involved in this matter.",
+          "I saw May hit him with a brick last night, and when I chased May from the warehouse and waited for her in front of her room, I did not find her.",
+          "Then, when I went back, Dr. Seegy was gone. I assumed that he got up and went to his room, as I heard he locked his room.",
+          "I then went back to guard the main Researcher Lab door as usual until I heard that...(sigh)"
+        ],
+
+        [
+          "..."
+        ]
       ]
     }
   ]

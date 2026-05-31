@@ -1,27 +1,36 @@
 {
   "items": [
     {
-      "id": "silver_key",
-      "type": "key",
-      "name": "silver key",
-      "description": "A small silver key lying on the floor.",
+      "id": "pint_card",
+      "type": "clue",
+      "name": "pint's card",
+      "description": "Pint's card with its full name written: Pint A.R. (Pint Astra Roosevelt).",
       "spawn": true,
       "room": "outside",
       "x": 20,
-      "y": 17,
-      "use": -1,
-      "message": "The door knob is creaking when you open the door."
+      "y": 17
     },
 
     {
-      "id": "master_key",
-      "type": "key",
-      "name": "master key",
-      "description": "A master key.",
+      "id": "chil_card",
+      "type": "clue",
+      "name": "chil's card",
+      "description": "Chil's card with its full name written: Chil L.L. (Chil Luft Lambert).",
       "spawn": true,
       "room": "outside",
-      "x": 25,
-      "y": 16,
+      "x": 21,
+      "y": 17
+    },
+
+    {
+      "id": "hall_key",
+      "type": "key",
+      "name": "hall key",
+      "description": "The key to open the access to the grand hall rooftop.",
+      "spawn": true,
+      "room": "outside",
+      "x": 11,
+      "y": 4,
       "use": -1,
       "message": "The door is easily opened."
     },
@@ -34,28 +43,97 @@
       "requiredRegion": "Lily Pond",
       "spawn": true,
       "room": "outside",
-      "x": 14,
-      "y": 14
+      "x": 13,
+      "y": 15
     },
 
     {
-      "id": "mirror_shards",
+      "id": "large_mark_photo",
       "type": "clue",
-      "name": "mirror shards",
-      "description": "Some remaining of a mirror.",
+      "name": "large mark photo",
+      "description": "A large mark, seems like a big item has been placed here before. You can take large mark photo to save it to inventory.",
       "spawn": true,
       "room": "outside",
-      "x": 13,
-      "y": 12
+      "x": 15,
+      "y": 15
     },
 
     {
-      "id": "gold",
+      "id": "footsteps_photo",
+      "type": "clue",
+      "name": "footsteps photo",
+      "description": "Some footsteps, surprisingly it is the same size as yours although you do not remember setting your foot here. You can take footsteps photo to save it to inventory.",
+      "spawn": true,
+      "room": "outside",
+      "x": 5,
+      "y": 15
+    },
+
+    {
+      "id": "ash",
+      "type": "clue",
+      "name": "ash",
+      "description": "A pile of ash. Looks like something is burnt here before.",
+      "spawn": true,
+      "room": "outside",
+      "x": 16,
+      "y": 19
+    },
+
+    {
+      "id": "cigarette",
       "type": "generic",
-      "name": "gold",
-      "description": "A gold.",
+      "name": "cigarette",
+      "description": "Cigarette. You wonder why May brings it with her.",
       "spawn": false,
-      "use": 1
+      "use": 3,
+      "message": "Nothing happens. The wet cigarette can't be lighted."
+    },
+
+    {
+      "id": "rope",
+      "type": "clue",
+      "name": "rope",
+      "description": "A rope with a burnt end.",
+      "spawn": true,
+      "room": "Grand Hall Rooftop",
+      "x": 5,
+      "y": 0
+    },
+
+    {
+      "id": "chair",
+      "type": "clue",
+      "name": "chair",
+      "description": "A chair with some cigarette butts on the chair arms.",
+      "spawn": true,
+      "room": "Grand Hall Rooftop",
+      "x": 2,
+      "y": 3
+    },
+
+    {
+      "id": "spotlight",
+      "type": "generic",
+      "name": "spotlight",
+      "description": "A spotlight that is as bright as sunlight. But, now it continuously flickers due to low power.",
+      "spawn": true,
+      "room": "Gazebo",
+      "use": 10,
+      "message": "Nothing happens. The lamp's battery seems running low.",
+      "x": 2,
+      "y": 0
+    },
+
+    {
+      "id": "mirror",
+      "type": "clue",
+      "name": "mirror",
+      "description": "A broken mirror with intact mirror frame.",
+      "spawn": true,
+      "room": "outside",
+      "x": 1,
+      "y": 11
     }
   ]
 }

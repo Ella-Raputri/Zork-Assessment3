@@ -55,6 +55,7 @@ public:
     int getHeight() const;
     int getViewW() const;
     int getViewH() const;
+    bool isValidPos(int x, int y) const;
 
     void addPassage(const std::string & direction, std::shared_ptr<Passage> p);
     void removePassage(const std::string & direction);

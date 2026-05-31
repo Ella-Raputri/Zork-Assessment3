@@ -102,7 +102,7 @@ void Room::setRestrictedCell(
 std::string Room::canMoveTo(int fromX, int fromY, int toX, int toY, 
     const std::string &direction, Player* player) const {
 
-    if(toX < 0 || toX >= width || toY < 0 || toY >= height){
+    if(!isValidPos(toX, toY)){
         return "It is impossible to go " + direction + "!";
     }
     if (hasNPCAt(toX, toY)) {
@@ -180,6 +180,10 @@ int Room::getViewW() const {
 }
 int Room::getViewH() const { 
     return viewH; 
+}
+
+bool Room::isValidPos(int x, int y) const{
+    return x >= 0 && x < width && y >= 0 && y < height;
 }
 
 void Room::addPassage(const std::string &direction, std::shared_ptr<Passage> p) {

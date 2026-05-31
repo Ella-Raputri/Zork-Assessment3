@@ -2,7 +2,7 @@
 Garden,0,0,42,22,#,BROWN,Floor,,,FALSE,,,
 North Forest,0,0,42,2,=,GREEN,Restricted,,,FALSE,lantern,,
 West Forest,0,3,2,22,-,GREEN,Restricted,,,FALSE,lantern,,
-Grand Hall,8,6,13,9,h,WHITE,Floor,10,6,TRUE,,hall_key,south
+Grand Hall Rooftop,8,6,13,9,h,WHITE,Floor,10,6,TRUE,,hall_key,south
 Lily Pond,7,10,14,13,~,BLUE,Restricted,,,FALSE,diving_suit,,
 Gazebo,4,17,6,19,g,CYAN,Floor,5,17,TRUE,,-,south
 Wall 1 Top,18,3,18,7,w,BRIGHT_BLACK,Impassable,,,FALSE,,,

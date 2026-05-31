@@ -1,4 +1,3 @@
-// CheckpointManager.cpp
 #include "CheckpointManager.h"
 #include <fstream>
 #include <iostream>
@@ -8,10 +7,6 @@ CheckpointManager* CheckpointManager::_instance = nullptr;
 CheckpointManager* CheckpointManager::instance() {
     if (!_instance) _instance = new CheckpointManager();
     return _instance;
-}
-
-void CheckpointManager::registerCheckpoint(CheckpointData cp) {
-    checkpoints.push_back(std::move(cp));
 }
 
 CheckpointResult CheckpointManager::tryTrigger(const std::string& npcName, int x, int y, Player* player) {
@@ -25,6 +20,16 @@ CheckpointResult CheckpointManager::tryTrigger(const std::string& npcName, int x
         if (cp.triggerX != x || cp.triggerY != y){
             continue;
         } 
+        if (!cp.requiredCheckpointId.empty()) {
+            bool prereqMet = false;
+            for (const auto& other : checkpoints) {
+                if (other.id == cp.requiredCheckpointId && other.triggered) {
+                    prereqMet = true;
+                    break;
+                }
+            }
+            if (!prereqMet) continue;
+        }
 
         bool hasAllClues = true;
         for (const auto& clueId : cp.requiredClueIds) {
@@ -47,34 +52,6 @@ CheckpointResult CheckpointManager::tryTrigger(const std::string& npcName, int x
     }
     return CheckpointResult::NotMatched;
 }
-
-bool CheckpointManager::isTriggered(const std::string& id) const {
-    for (const auto& cp : checkpoints) {
-        if (cp.id == id) return cp.triggered;
-    }
-    return false;
-}
-
-std::unordered_map<std::string, bool> CheckpointManager::getFlags() const {
-    std::unordered_map<std::string, bool> flags;
-    for (const auto& cp : checkpoints) {
-        flags[cp.id] = cp.triggered;
-    }
-    return flags;
-}
-
-void CheckpointManager::loadFlags(const std::unordered_map<std::string, bool>& flags) {
-    for (auto& cp : checkpoints) {
-        auto it = flags.find(cp.id);
-        if (it != flags.end() && it->second) {
-            cp.triggered = true;
-            // Re-apply effects so world state matches saved state
-            for (auto& effect : cp.onTrigger) effect();
-        }
-    }
-}
-
-// -------------------------------------------------------
 
 std::function<bool()> CheckpointManager::buildEffect(
     const json& effect,
@@ -203,8 +180,6 @@ std::function<bool()> CheckpointManager::buildEffect(
     return []() -> bool { return false; };
 }
 
-// -------------------------------------------------------
-
 void CheckpointManager::loadFromJSON(
     const std::string& filepath,
     std::shared_ptr<Room> outside,
@@ -238,7 +213,6 @@ void CheckpointManager::loadFromJSON(
         cp.id = entry["id"];
         cp.triggered = false;
 
-        // Multiple required clues
         for (const auto& clueId : entry["requiredClueIds"]) {
             cp.requiredClueIds.push_back(clueId.get<std::string>());
         }
@@ -247,13 +221,12 @@ void CheckpointManager::loadFromJSON(
         cp.triggerX = entry["triggerX"];
         cp.triggerY = entry["triggerY"];
 
-        // Build effect lambdas from JSON
         for (const auto& effect : entry["effects"]) {
             cp.onTrigger.push_back(
                 buildEffect(effect, outside, interiors, npcRegistry, itemRegistry)
             );
         }
-
+        cp.requiredCheckpointId = entry.value("requiredCheckpointId", "");
         checkpoints.push_back(std::move(cp));
     }
 

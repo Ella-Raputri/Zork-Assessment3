@@ -1,57 +1,136 @@
 {
   "checkpoints": [
     {
-      "id": "merchant_chapter2",
-      "requiredClueIds": ["silver_key"],
-      "requiredNPCName": "merchant",
+      "id": "0",
+      "requiredClueIds": [],
+      "requiredNPCName": "Chil",
       "triggerX": 21,
       "triggerY": 16,
       "effects": [
         {
-          "type": "print_message",
-          "message": "The merchant's eyes widen as he sees what you're carrying."
-        },
-        {
-          "type": "ask_password",
-          "question": "What is the secret password?",
-          "answer": "moonlight"
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 1
         },
         {
           "type": "set_dialogue_stage",
-          "npc": "merchant",
+          "npc": "Guard",
           "stage": 1
         },
         {
           "type": "move_npc",
-          "npc": "merchant",
-          "room": "Gazebo",
-          "x": 0,
-          "y": 0
-        },
-        {
-          "type": "spawn_item",
-          "itemId": "gold",
-          "room": "outside",
-          "x": 30,
+          "npc": "Chil",
+          "x": 21,
           "y": 9
         }
       ]
     },
     {
-      "id": "merchant_chapter3",
-      "requiredClueIds": ["gold"],
-      "requiredNPCName": "merchant",
-      "triggerX": 0,
-      "triggerY": 0,
+      "id": "1",
+      "requiredClueIds": [],
+      "requiredCheckpointId": "0",
+      "requiredNPCName": "Guard",
+      "triggerX": 20,
+      "triggerY": 8,
       "effects": [
         {
           "type": "print_message",
-          "message": "The merchant nods solemnly."
+          "message": "You and Chil are shocked to hear the news. The three of you then decided to rush to the Lily Pond in front of the Grand Hall to check the situation."
         },
         {
           "type": "set_dialogue_stage",
-          "npc": "merchant",
+          "npc": "Chil",
           "stage": 2
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Guard",
+          "stage": 2
+        },
+        {
+          "type": "move_npc",
+          "npc": "Chil",
+          "x": 12,
+          "y": 15
+        },
+        {
+          "type": "move_npc",
+          "npc": "Guard",
+          "x": 11,
+          "y": 11
+        },
+        {
+          "type": "spawn_item",
+          "itemId": "cigarette",
+          "room": "outside",
+          "x": 10,
+          "y": 11
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "requiredClueIds": [],
+      "requiredNPCName": "Guard",
+      "requiredCheckpointId": "1",
+      "triggerX": 11,
+      "triggerY": 11,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "The guard swiftly lifts May out of the pond."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 3
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Guard",
+          "stage": 3
+        },
+        {
+          "type": "move_npc",
+          "npc": "Guard",
+          "x": 11,
+          "y": 15
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "requiredClueIds": ["cigarette"],
+      "requiredNPCName": "Guard",
+      "requiredCheckpointId": "2",
+      "triggerX": 11,
+      "triggerY": 15,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "The guard and Chil decided to confront Dr. Seegy, while you want to explore the surroundings first."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 4
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Guard",
+          "stage": 4
+        },
+        {
+          "type": "move_npc",
+          "npc": "Guard",
+          "x": 25,
+          "y": 9
+        },
+        {
+          "type": "move_npc",
+          "npc": "Chil",
+          "x": 26,
+          "y": 9
         }
       ]
     }

@@ -17,6 +17,8 @@ ZOOrkEngine::ZOOrkEngine(int startX, int startY) {
     player->setCurrentRoom(world.get());
     player->setPosition(startX, startY);
     handleMapCommand();
+    std::cout << player->getDescription() << "\n";
+    std::cout << "Type 'help' to know what are the available commands." << '\n';
 }
 
 void ZOOrkEngine::run() {
@@ -136,13 +138,20 @@ void ZOOrkEngine::handleLookCommand() {
         for (int dx = -1; dx <= 1; dx++) {
             int neighborX = currX + dx, neighborY = currY + dy;
 
+            if (!currentRoom->isValidPos(neighborX, neighborY)) {
+                continue;
+            }
+
             auto npc = currentRoom->getNPCAt(neighborX, neighborY);
             if (npc) {
                 objects.insert(npc->getName());
             }
 
-            auto neighborCell = currentRoom->getCell(neighborX, neighborY); 
-            if(neighborCell->getSymbol() != cell->getSymbol()){
+            auto neighborCell = currentRoom->getCell(neighborX, neighborY);
+            if (neighborCell &&
+                neighborCell->getSymbol() != cell->getSymbol() &&
+                neighborCell->getSymbol() != 'd')
+            {
                 objects.insert(neighborCell->getRegionTag());
             }
         }
@@ -278,8 +287,8 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
             auto npc = room->getNPCAt(px + dx, py + dy);
 
             if (npc && makeLowercase(npc->getName()) == npcName) {
+                npc->talk();
                 CheckpointResult triggered = checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
-                if(triggered == CheckpointResult::NotMatched) npc->talk();
                 return;
             }
         }
@@ -354,7 +363,7 @@ void ZOOrkEngine::handleTeleportCommand(std::vector<std::string> arguments) {
     }
 
     Room* room = player->getCurrentRoom();
-    if (x < 0 || x >= room->getWidth() ||  y < 0 || y >= room->getHeight()) {
+    if (!room->isValidPos(x,y)) {
         std::cout << "That position is outside the map.\n";
         return;
     }
@@ -434,9 +443,7 @@ std::shared_ptr<DoorCell> ZOOrkEngine::getNearbyDoor() {
         int nx = x + dx[i];
         int ny = y + dy[i];
 
-        if (nx >= 0 && nx < room->getWidth() &&
-            ny >= 0 && ny < room->getHeight()) {
-
+        if (room->isValidPos(nx, ny)) {
             auto cell = room->getCell(nx, ny);
             auto door = std::dynamic_pointer_cast<DoorCell>(cell);
             if (door) {
