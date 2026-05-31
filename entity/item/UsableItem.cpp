@@ -4,10 +4,10 @@ UsableItem::UsableItem(
     const std::string& n,
     const std::string& d,
     const std::string& id,
-    std::shared_ptr<Command> cmd,
+    std::string msg,
     ItemType type,
     int uses
-): Item(n, d, id, type), useCommand(cmd), remainingUses(uses) {}
+): Item(n, d, id, type), executeMessage(msg), remainingUses(uses) {}
 
 void UsableItem::use() {
     if (remainingUses == 0) {
@@ -15,8 +15,8 @@ void UsableItem::use() {
         return;
     }
 
-    if (useCommand) {
-        useCommand->execute();
+    if (!executeMessage.empty()) {
+        std::cout << executeMessage << '\n';
     }
     if (remainingUses > 0) {
         remainingUses--;
@@ -32,8 +32,4 @@ bool UsableItem::isDepleted() const {
 
 int UsableItem::getRemainingUses() const {
     return remainingUses;
-}
-
-void UsableItem::setUseCommand(std::shared_ptr<Command> cmd) {
-    useCommand = cmd;
 }

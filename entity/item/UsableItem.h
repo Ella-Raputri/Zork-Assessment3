@@ -7,7 +7,7 @@
 
 class UsableItem : public Item {
 private:
-    std::shared_ptr<Command> useCommand;
+    std::string executeMessage;
     int remainingUses;
 
 public:
@@ -15,7 +15,7 @@ public:
         const std::string& n,
         const std::string& d,
         const std::string& id,
-        std::shared_ptr<Command> cmd,
+        std::string msg = "",
         ItemType type = ItemType::Generic,
         int uses = -1
     );
@@ -24,8 +24,6 @@ public:
 
     bool isDepleted() const;
     int getRemainingUses() const;
-
-    void setUseCommand(std::shared_ptr<Command> cmd);
 };
 
 #endif

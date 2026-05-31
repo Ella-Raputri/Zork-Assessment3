@@ -33,11 +33,13 @@ ItemLoader::loadItems(
         if (type == "key" || type == "generic") {
             int uses = entry.value("use", -1);
             ItemType itemType = type == "key"? ItemType::Key : ItemType::Generic;
+            std::string message = entry.value("message", "");
+
             item = std::make_shared<UsableItem>(
                 name,
                 desc,
                 id,
-                std::make_shared<NullCommand>(),
+                message,
                 itemType,
                 uses
             );

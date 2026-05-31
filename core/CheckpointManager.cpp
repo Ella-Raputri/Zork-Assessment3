@@ -138,6 +138,7 @@ std::function<void()> CheckpointManager::buildEffect(
             auto cell = targetRoom->getCell(x, y);
             if (!cell->getItemById(itemId)) {
                 cell->addItem(item);
+                std::cout << "A new item: " << item->getName() << " has spawned.\n";
             }
         };
     }
@@ -145,7 +146,7 @@ std::function<void()> CheckpointManager::buildEffect(
     if (type == "print_message") {
         std::string message = effect["message"];
         return [message]() {
-            std::cout << "\n[Story] " << message << "\n";
+            std::cout << "[Story] " << message << "\n";
         };
     }
 

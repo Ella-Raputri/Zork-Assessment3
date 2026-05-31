@@ -278,8 +278,8 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
             auto npc = room->getNPCAt(px + dx, py + dy);
 
             if (npc && makeLowercase(npc->getName()) == npcName) {
-                npc->talk();
-                checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
+                bool triggered = checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
+                if(!triggered) npc->talk();
                 return;
             }
         }

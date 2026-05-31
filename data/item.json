@@ -9,7 +9,8 @@
       "room": "outside",
       "x": 20,
       "y": 17,
-      "use": -1
+      "use": -1,
+      "message": "The door knob is creaking when you open the door."
     },
 
     {
@@ -21,7 +22,8 @@
       "room": "outside",
       "x": 25,
       "y": 16,
-      "use": -1
+      "use": -1,
+      "message": "The door is easily opened."
     },
 
     {
