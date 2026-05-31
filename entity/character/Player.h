@@ -29,10 +29,6 @@ public:
     void setCurrentRoom(Room*);
     Room* getCurrentRoom() const;
 
-    void setPosition(int newX, int newY); 
-    int getX() const ;
-    int getY() const ;
-
     void addItem(std::shared_ptr<Item> item);
     void removeItem(const std::string& itemId, const std::string& itemName);
     std::shared_ptr<Item> getItemByName(const std::string& itemName);
@@ -51,7 +47,6 @@ public:
 private:
     static Player *playerInstance;
     Room* currentRoom;
-    int posX, posY;
     std::vector<std::shared_ptr<Item>> inventory;
     std::shared_ptr<EquippableItem> equippedItem;
 

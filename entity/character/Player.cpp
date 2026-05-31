@@ -11,9 +11,7 @@ Player::Player()
         "You",
         "You are a person, alike in dignity to any other, but uniquely you."
     ),
-    currentRoom(new NullRoom()),
-    posX(0),
-    posY(0)
+    currentRoom(new NullRoom())
 {}
 
 Player *Player::playerInstance = nullptr;
@@ -24,19 +22,6 @@ void Player::setCurrentRoom(Room* room) {
 
 Room* Player::getCurrentRoom() const {
     return currentRoom;
-}
-
-void Player::setPosition(int newX, int newY) {
-    posX = newX;
-    posY = newY;
-}
-
-int Player::getX() const { 
-    return posX; 
-}
-
-int Player::getY() const { 
-    return posY; 
 }
 
 void Player::addItem(std::shared_ptr<Item> item){

@@ -12,8 +12,12 @@
 class Character : public GameObject {
 public:
     Character(const std::string &, const std::string &);
+    void setPosition(int newX, int newY); 
+    int getX() const ;
+    int getY() const ;
 
 protected:
+    int posX, posY;
 //    std::vector<Item*> inventory;
 //    std::vector<std::string> tags;
 //    int health;
