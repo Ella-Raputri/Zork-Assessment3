@@ -4,25 +4,16 @@
 //
 
 #include "Player.h"
-#include "../../location/room/NullRoom.h"
+#include "../../location/room/Room.h"
 
 Player::Player()
     : Character(
         "You",
         "You are a person, alike in dignity to any other, but uniquely you."
-    ),
-    currentRoom(new NullRoom())
+    )
 {}
 
 Player *Player::playerInstance = nullptr;
-
-void Player::setCurrentRoom(Room* room) {
-    currentRoom = room;
-}
-
-Room* Player::getCurrentRoom() const {
-    return currentRoom;
-}
 
 void Player::addItem(std::shared_ptr<Item> item){
     inventory.push_back(item);

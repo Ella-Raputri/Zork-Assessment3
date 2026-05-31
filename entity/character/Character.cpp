@@ -4,11 +4,14 @@
 //
 
 #include "Character.h"
+#include "../../location/room/Room.h"
+#include "../../location/room/NullRoom.h"
 
 Character::Character(const std::string &n, const std::string &d) : 
     GameObject(n, d),
     posX(0),
-    posY(0) {}
+    posY(0), 
+    currentRoom(new NullRoom()) {}
 
 void Character::setPosition(int newX, int newY) {
     posX = newX;
@@ -21,4 +24,12 @@ int Character::getX() const {
 
 int Character::getY() const { 
     return posY; 
+}
+
+void Character::setCurrentRoom(Room* room) {
+    currentRoom = room;
+}
+
+Room* Character::getCurrentRoom() const {
+    return currentRoom;
 }

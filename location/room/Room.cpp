@@ -23,9 +23,18 @@ Room::Room(const std::string &n, const std::string &d, int width, int height, in
     }
 }
 
-
 void Room::addNPC(std::shared_ptr<NPC> npc){
     npcs.push_back(npc);
+}
+
+void Room::removeNPC(const std::string& name) {
+    npcs.erase(
+        std::remove_if(npcs.begin(), npcs.end(),
+            [&name](const std::shared_ptr<NPC>& npc) {
+                return npc->getName() == name;
+            }),
+        npcs.end()
+    );
 }
 
 std::shared_ptr<NPC> Room::getNPC(const std::string& name){

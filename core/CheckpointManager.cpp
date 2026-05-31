@@ -108,12 +108,35 @@ std::function<bool()> CheckpointManager::buildEffect(
     if (type == "move_npc") {
         std::string npcName = effect["npc"];
         int x = effect["x"], y = effect["y"];
+        std::string targetRoomName = effect.value("room", "");
 
         auto npcIt = npcRegistry.find(npcName);
         if (npcIt == npcRegistry.end()) []() -> bool { return false; };
         auto npc = npcIt->second;
 
-        return [npc, x, y, npcName]() -> bool {
+        std::shared_ptr<Room> targetRoom = nullptr;
+        if (!targetRoomName.empty()) {
+            if (targetRoomName == "outside") {
+                targetRoom = outside;
+            } else {
+                auto roomIt = interiors.find(targetRoomName);
+                if (roomIt != interiors.end()) {
+                    targetRoom = roomIt->second;
+                } else {
+                    std::cerr << "move_npc: unknown room " << targetRoomName << "\n";
+                }
+            }
+        }
+
+        return [npc, x, y, npcName, targetRoom]() -> bool {
+            if (targetRoom) {
+                Room* current = npc->getCurrentRoom();
+                if (current && current != targetRoom.get()) {
+                    current->removeNPC(npcName);
+                    targetRoom->addNPC(npc);
+                    npc->setCurrentRoom(targetRoom.get());
+                }
+            }
             npc->setPosition(x, y);
             std::cout << npcName << " has moved.\n";
             return true;

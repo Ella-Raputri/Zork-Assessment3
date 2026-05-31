@@ -27,7 +27,7 @@ public:
     Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH);
 
     void addNPC(std::shared_ptr<NPC> npc);
-    // void removeCharacter(const std::string&);
+    void removeNPC(const std::string& name);
     std::shared_ptr<NPC> getNPC(const std::string& name);
     std::shared_ptr<NPC> getNPCAt(int x, int y) const;
     bool hasNPCAt(int x, int y) const;

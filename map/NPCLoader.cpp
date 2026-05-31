@@ -43,10 +43,6 @@ std::unordered_map<std::string, std::shared_ptr<NPC>> NPCLoader::loadNPCs(
             dialogueStages
         );
 
-        int x = entry["x"];
-        int y = entry["y"];
-        npc->setPosition(x, y);
-
         std::string roomName =  entry.value("room", "outside");
         std::shared_ptr<Room> targetRoom;
 
@@ -63,6 +59,11 @@ std::unordered_map<std::string, std::shared_ptr<NPC>> NPCLoader::loadNPCs(
         }
 
         targetRoom->addNPC(npc);
+        npc->setCurrentRoom(targetRoom.get());
+
+        int x = entry["x"];
+        int y = entry["y"];
+        npc->setPosition(x, y);
         registry[name] = npc;
     }
 

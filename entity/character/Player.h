@@ -14,8 +14,6 @@
 #include <memory>
 #include <iostream>
 
-class Room;
-
 class Player : public Character {
 public:
     static Player *instance() { 
@@ -25,9 +23,6 @@ public:
         } 
         return Player::playerInstance; 
     }
-
-    void setCurrentRoom(Room*);
-    Room* getCurrentRoom() const;
 
     void addItem(std::shared_ptr<Item> item);
     void removeItem(const std::string& itemId, const std::string& itemName);
@@ -46,7 +41,6 @@ public:
 
 private:
     static Player *playerInstance;
-    Room* currentRoom;
     std::vector<std::shared_ptr<Item>> inventory;
     std::shared_ptr<EquippableItem> equippedItem;
 

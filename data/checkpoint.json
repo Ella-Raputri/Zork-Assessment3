@@ -24,8 +24,9 @@
         {
           "type": "move_npc",
           "npc": "merchant",
-          "x": 30,
-          "y": 10
+          "room": "Gazebo",
+          "x": 0,
+          "y": 0
         },
         {
           "type": "spawn_item",
@@ -38,10 +39,10 @@
     },
     {
       "id": "merchant_chapter3",
-      "requiredClueIds": ["gold","mirror_shards"],
+      "requiredClueIds": ["gold"],
       "requiredNPCName": "merchant",
-      "triggerX": 30,
-      "triggerY": 10,
+      "triggerX": 0,
+      "triggerY": 0,
       "effects": [
         {
           "type": "print_message",

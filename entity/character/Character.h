@@ -9,6 +9,7 @@
 #include "../GameObject.h"
 #include <vector>
 
+class Room;
 class Character : public GameObject {
 public:
     Character(const std::string &, const std::string &);
@@ -16,8 +17,12 @@ public:
     int getX() const ;
     int getY() const ;
 
+    void setCurrentRoom(Room*);
+    Room* getCurrentRoom() const;
+
 protected:
     int posX, posY;
+    Room* currentRoom;
 //    std::vector<Item*> inventory;
 //    std::vector<std::string> tags;
 //    int health;
