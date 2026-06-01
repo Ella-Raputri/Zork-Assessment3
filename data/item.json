@@ -129,11 +129,168 @@
       "id": "mirror",
       "type": "clue",
       "name": "mirror",
-      "description": "A broken mirror with intact mirror frame.",
+      "description": "A broken concave mirror with intact mirror frame.",
       "spawn": true,
       "room": "outside",
       "x": 1,
       "y": 11
+    },
+
+    {
+      "id": "fall_photo",
+      "type": "clue",
+      "name": "fall photo",
+      "description": "Some marks indicating that a person hugging a big item falls here. You can take fall photo to save it to inventory.",
+      "spawn": true,
+      "room": "outside",
+      "x": 27,
+      "y": 1
+    },
+
+    {
+      "id": "footsteps_photo2",
+      "type": "clue",
+      "name": "footsteps photo 2",
+      "description": "Some other running footsteps, surprisingly it is the same size as yours although you do not remember setting your foot here. You can take footsteps photo 2 to save it to inventory.",
+      "spawn": true,
+      "room": "outside",
+      "x": 25,
+      "y": 4
+    },
+
+    {
+      "id": "mist_spray",
+      "type": "generic",
+      "name": "mist spray",
+      "description": "A spray bottle contains some stimulant fine mist.",
+      "spawn": false,
+      "room": "Lead Researcher Room",
+      "use": 15,
+      "message": "With a foul smell, the fine mist sprayed from the bottle successfully makes you more conscious."
+    },
+
+    {
+      "id": "gold_key",
+      "type": "key",
+      "name": "gold key",
+      "description": "A small gold key lying on the floor. You believe that's the key to Dr. Seegy's room.",
+      "spawn": false,
+      "room": "Warehouse",
+      "use": -1,
+      "message": "The door creaked when you touch it."
+    },
+
+    {
+      "id": "mirror_stand",
+      "type": "clue",
+      "name": "mirror stand",
+      "description": "This is the place where a large mirror should be placed.",
+      "spawn": true,
+      "room": "Warehouse",
+      "x": 3,
+      "y": 1
+    },
+
+    {
+      "id": "warehouse_key",
+      "type": "key",
+      "name": "warehouse key",
+      "description": "The key to access the warehouse. It is found on top of Dr. Seegy's table.",
+      "spawn": true,
+      "room": "Researcher Lab",
+      "x": 0,
+      "y": 0,
+      "use": -1
+    },
+
+    {
+      "id": "scrambled_paper",
+      "type": "clue",
+      "name": "scrambled paper",
+      "description": "A scrambled paper with Dr.Seegy's handwriting: mirror-mirror_oh_iseegy#has^succeed. Probably a password of such.",
+      "spawn": true,
+      "room": "Researcher Lab",
+      "x": 0,
+      "y": 1
+    },
+
+    {
+      "id": "chicken_soup",
+      "type": "generic",
+      "name": "chicken soup",
+      "description": "A large bowl of stale chicken soup. The paper besides it suggests that the soup is cooked by you last night for everyone's supper.",
+      "spawn": true,
+      "room": "Researcher Lab",
+      "x": 3,
+      "y": 1,
+      "use": 7,
+      "message": "The aroma of the soup makes you nauseous, so you decided to just take a little taste. You immediately regret it."
+    },
+
+    {
+      "id": "may_paper",
+      "type": "clue",
+      "name": "may's paper",
+      "description": "A paper about optical reflection research. The research won a prestigious award.",
+      "spawn": true,
+      "room": "Researcher Lab",
+      "x": 6,
+      "y": 0
+    },
+
+    {
+      "id": "chil_paper",
+      "type": "clue",
+      "name": "chil's paper",
+      "description": "A paper about optical reflection research. You notice that is very similar to May's groundbreaking research.",
+      "spawn": true,
+      "room": "Researcher Lab",
+      "x": 6,
+      "y": 3
+    },
+
+    {
+      "id": "pint_draft",
+      "type": "clue",
+      "name": "pint's draft",
+      "description": "A draft about mirror materials. The research is still a work in progress.",
+      "spawn": true,
+      "room": "Researcher Lab",
+      "x": 0,
+      "y": 3
+    },
+
+    {
+      "id": "lab_key",
+      "type": "key",
+      "name": "lab key",
+      "description": "The key to access the lab. Due to the estate's remote location, no one is afraid of lost keys although the key is placed in front of the lab.",
+      "spawn": false,
+      "room": "outside",
+      "use": -1
+    },
+
+    {
+      "id": "lantern",
+      "type": "equippable",
+      "name": "lantern",
+      "description": "A small light lantern. Maybe you can go to the dark west forest with this lantern.",
+      "requiredRegion": "West Forest",
+      "spawn": true,
+      "room": "outside",
+      "x": 30,
+      "y": 13
+    },
+
+    {
+      "id": "stone",
+      "type": "clue",
+      "name": "stone",
+      "description": "Two piles of stone. Strangely, the stones suggest that there were 2 earthquakes last night.",
+      "spawn": true,
+      "room": "outside",
+      "x": 26,
+      "y": 21
     }
   ]
 }

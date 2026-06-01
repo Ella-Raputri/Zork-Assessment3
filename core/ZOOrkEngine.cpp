@@ -29,7 +29,7 @@ void ZOOrkEngine::run() {
         std::getline(std::cin, input);
 
         std::vector<std::string> words = tokenizeString(input);
-        if(words[0].empty()) continue;
+        if(words.empty()) continue;
 
         std::string command = words[0];
         std::vector<std::string> arguments(words.begin() + 1, words.end());

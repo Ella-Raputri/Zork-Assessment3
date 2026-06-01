@@ -1,6 +1,6 @@
 ﻿name,startX,startY,endX,endY,symbol, color,cellType,doorX,doorY,isSeparateRoom,requiredItem,keyId,direction
 Garden,0,0,42,22,#,BROWN,Floor,,,FALSE,,,
-North Forest,0,0,42,2,=,GREEN,Restricted,,,FALSE,lantern,,
+North Forest,0,0,42,2,=,GREEN,Floor,,,FALSE,,,
 West Forest,0,3,2,22,-,GREEN,Restricted,,,FALSE,lantern,,
 Grand Hall Rooftop,8,6,13,9,h,WHITE,Floor,10,6,TRUE,,hall_key,south
 Lily Pond,7,10,14,13,~,BLUE,Restricted,,,FALSE,diving_suit,,
@@ -9,8 +9,8 @@ Wall 1 Top,18,3,18,7,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
 Wall 1 Bottom,18,10,18,21,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
 Stone Wall,3,22,42,22,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
 Lead Researcher Room,23,6,27,8,r,BRIGHT_RED,Floor,25,8,TRUE,,gold_key,north
-Warehouse,29,6,32,7,o,BRIGHT_RED,Floor,30,7,TRUE,,master_key,north
-Researcher Lab,23,12,29,15,x,WHITE,Floor,26,15,TRUE,,master_key,north
+Warehouse,29,6,32,7,o,BRIGHT_RED,Floor,30,7,TRUE,,warehouse_key,north
+Researcher Lab,23,12,29,15,x,WHITE,Floor,26,15,TRUE,,lab_key,north
 Wall 2 Top,36,3,36,7,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
 Wall 2 Bottom,36,10,36,21,w,BRIGHT_BLACK,Impassable,,,FALSE,,,
 Pint Room,40,4,42,7,.,WHITE,Floor,40,6,TRUE,,silver_key,east

@@ -77,10 +77,6 @@
       "triggerY": 11,
       "effects": [
         {
-          "type": "print_message",
-          "message": "The guard swiftly lifts May out of the pond."
-        },
-        {
           "type": "set_dialogue_stage",
           "npc": "Chil",
           "stage": 3
@@ -95,6 +91,10 @@
           "npc": "Guard",
           "x": 11,
           "y": 15
+        },
+        {
+          "type": "print_message",
+          "message": "The guard swiftly lifts May out of the pond."
         }
       ]
     },
@@ -131,6 +131,199 @@
           "npc": "Chil",
           "x": 26,
           "y": 9
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "requiredClueIds": [],
+      "requiredNPCName": "Chil",
+      "requiredCheckpointId": "3",
+      "triggerX": 26,
+      "triggerY": 9,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "As the favorite student of Dr. Seegy, you remember that there is a gold key in the warehouse that can open Dr. Seegy's room, but you have to find the warehouse key first. \n\nMaybe you can try going to the Lab. The lab key is usually placed in front of the door."
+        },
+        {
+          "type": "spawn_item",
+          "itemId": "lab_key",
+          "room": "outside",
+          "x": 26,
+          "y": 16
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "requiredClueIds": ["scrambled_paper"],
+      "requiredNPCName": "Safe Box",
+      "requiredCheckpointId": "4",
+      "triggerX": 0,
+      "triggerY": 0,
+      "effects": [
+        {
+          "type": "ask_password",
+          "question": "What is the secret password?",
+          "answer": "mirror-mirror_oh_iseegy#has^succeed"
+        },
+        {
+          "type": "print_message",
+          "message": "You saw Chil walking towards the warehouse. He is confused by your behaviour."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 5
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Safe Box",
+          "stage": 1
+        },
+        {
+          "type": "move_npc",
+          "npc": "Chil",
+	        "room": "outside",
+          "x": 30,
+          "y": 9
+        },
+        {
+          "type": "spawn_item",
+          "itemId": "gold_key",
+          "room": "Warehouse",
+          "x": 3,
+          "y": 0
+        }
+
+      ]
+    },
+    {
+      "id": "6",
+      "requiredClueIds": ["gold_key"],
+      "requiredNPCName": "Chil",
+      "requiredCheckpointId": "5",
+      "triggerX": 30,
+      "triggerY": 9,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "You tell Chil you have found the key to Dr Seegy's room. Both of you then quickly rushed to the front of his room. The three of you decided to let you go in first because you are his favourite student; maybe he will tell you everything."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 6
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Guard",
+          "stage": 5
+        },
+        {
+          "type": "move_npc",
+          "npc": "Chil",
+	        "room": "outside",
+          "x": 26,
+          "y": 9
+        },
+        {
+          "type": "move_npc",
+          "npc": "Guard",
+	        "room": "outside",
+          "x": 24,
+          "y": 9
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "requiredClueIds": [],
+      "requiredNPCName": "Seegy",
+      "requiredCheckpointId": "6",
+      "triggerX": 0,
+      "triggerY": 0,
+      "effects": [
+        {
+          "type": "spawn_item",
+          "itemId": "mist_spray",
+          "room": "Lead Researcher Room",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "type": "print_message",
+          "message": "Maybe you need to take some item and talk to him to wake him up."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "requiredClueIds": ["mist_spray"],
+      "requiredNPCName": "Seegy",
+      "requiredCheckpointId": "7",
+      "triggerX": 0,
+      "triggerY": 0,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "You tried the spray, and it is successful. He slowly regains his consciousness."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Seegy",
+          "stage": 1
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "requiredClueIds": [],
+      "requiredNPCName": "Seegy",
+      "requiredCheckpointId": "8",
+      "triggerX": 0,
+      "triggerY": 0,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "You are confused because you don't know what experiments he said, while he leisurely goes out of his room."
+        },
+        {
+          "type": "move_npc",
+          "npc": "Seegy",
+	        "room": "outside",
+          "x": 26,
+          "y": 9
+        },
+        {
+          "type": "move_npc",
+          "npc": "Chil",
+	        "room": "outside",
+          "x": 27,
+          "y": 9
+        },
+        {
+          "type": "move_npc",
+          "npc": "Guard",
+	        "room": "outside",
+          "x": 26,
+          "y": 10
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Seegy",
+          "stage": 2
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 7
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Guard",
+          "stage": 6
         }
       ]
     }

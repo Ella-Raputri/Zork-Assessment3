@@ -28,7 +28,21 @@
         ],
 
         [
-          "Sis…Sis May…why…why…? (hugs May's cold body)."
+          "Sis...Sis May, why...why...? (hugs May's cold body)."
+        ],
+
+        [
+          "While you were investigating the Grand Hall surroundings, the guard and I have properly placed Sis May in the autopsy bed inside the Researcher Lab.",
+          "The worst thing is that we are totally isolated now because of last night's earthquake. We can not communicate with others.",
+          "But we decided to confront Dr. Seegy first. Do you remember any other ways to open this room?"
+        ],
+
+        [
+          "Hey Pint, what are you doing inside the warehouse?"
+        ],
+
+        [
+          "Call us whenever you need any help."
         ],
 
         [
@@ -56,7 +70,8 @@
 
         [
           "I...found May at the bottom of the pool.", 
-          "Would you help me gather some of May's belongings? I will take her to Chil's place."
+          "Would you help me gather some of May's belongings? I will take her to Chil's place.",
+          "I think it's some cigarettes."
         ],
 
         [
@@ -66,6 +81,71 @@
           "I then went back to guard the main Researcher Lab door as usual until I heard that...(sigh)"
         ],
 
+        [
+          "(banging on the door)"
+        ],
+
+        [
+          "Stay safe."
+        ],
+
+        [
+          "..."
+        ]
+      ]
+    },
+
+    {
+      "name": "May",
+      "description": "Chil's sister, a fellow friend and researcher.",
+
+      "room": "Researcher Lab",
+      "x": 5,
+      "y": 1,
+
+      "dialogueStages": [
+        [
+          "...(Deceased: Mayningg A.L.L (Mayningg Arla Luft Lambert))",
+          "(Based on your forensic knowledge, you are certain that May's death is caused by drowning)."
+        ]
+      ]
+    },
+
+    {
+      "name": "Safe Box",
+      "description": "A safe box to store valuable things.",
+
+      "room": "Warehouse",
+      "x": 0,
+      "y": 0,
+
+      "dialogueStages": [
+        [
+          "Hello."
+        ],
+        [
+          "The safe box is already opened."
+        ]
+      ]
+    },
+
+    {
+      "name": "Seegy",
+      "description": "The lead researcher in this complex. He is also the teacher of all of you.",
+
+      "room": "Lead Researcher Room",
+      "x": 0,
+      "y": 0,
+
+      "dialogueStages": [
+        [
+          "...(Dr. Seegy sleeps soundlessly inside his room)"
+        ],
+        [
+          "Hey Pint, what's up? Hmm... what do you say? Where is May?",
+          "I thought I had told you that I would do some experiments with May last night after supper.",
+          "But accidents happen... I guess. Yeah, you know she is reluctant to do the mirror experiment like you."
+        ],
         [
           "..."
         ]

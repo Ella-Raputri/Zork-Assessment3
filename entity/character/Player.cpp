@@ -9,7 +9,7 @@
 Player::Player()
     : Character(
         "You",
-        "\nYou are Pint, a researcher in this laboratory complex. The only thing you remember before being unconscious is a violent earthquake that struck the facility, knocking everyone down at once. Most of your memories from last night are blurry.\nYou saw your colleague and friend, Chil, beside you. He seems to have also just regained consciousness.\n\nTalk to Chil to learn more about last night's situation."
+        "\nYou are Pint, a researcher in this remote laboratory complex in the 18th eras. The only thing you remember before being unconscious is a violent earthquake that struck the facility, knocking everyone down at once. Most of your memories from last night are blurry.\nYou saw your colleague and friend, Chil, beside you. He seems to have also just regained consciousness.\n\nTalk to Chil to learn more about last night's situation."
     )
 {}
 

@@ -47,7 +47,7 @@ CheckpointResult CheckpointManager::tryTrigger(const std::string& npcName, int x
             if (!effect()) return CheckpointResult::Failed;
         }
         cp.triggered = true;
-        std::cout << "[Checkpoint reached: " << cp.id << "]\n";
+        std::cout << "\n[Checkpoint reached: " << cp.id << "]\n";
         return CheckpointResult::Success;
     }
     return CheckpointResult::NotMatched;
@@ -77,7 +77,7 @@ std::function<bool()> CheckpointManager::buildEffect(
                 return true;
             }
 
-            std::cout << "Wrong password.\n";
+            std::cout << "Wrong answer.\n";
             return false;
         };
     }
@@ -171,7 +171,7 @@ std::function<bool()> CheckpointManager::buildEffect(
     if (type == "print_message") {
         std::string message = effect["message"];
         return [message]() -> bool {
-            std::cout << "[Story] " << message << "\n";
+            std::cout << "\n[Story] " << message << "\n";
             return true;
         };
     }
