@@ -46,7 +46,17 @@
         ],
 
         [
-          "..."
+          "I demand your explanation, Dr.Seegy."
+        ],
+        [
+          "Personally, I don't think it's a suicide. A proud person like Sis May would not do that.",
+          "You said that you found some burnt rope and a spotlight near the Grand Hall.",
+          "I suspected that the murderer used some kind of trick to burn the rope.",
+          "Hmm? You want to borrow my lantern to check on the forests because there are your footsteps?",
+          "Go ahead, just take my key from that table and get my lantern in my room before going to the forests. "
+        ],
+        [
+          "...(Chil is busy tidying up May's belongings)"
         ]
       ]
     },
@@ -90,6 +100,9 @@
         ],
 
         [
+          "I saw May attacked you last night, did you do it for revenge?"
+        ],
+        [
           "..."
         ]
       ]
@@ -106,7 +119,8 @@
       "dialogueStages": [
         [
           "...(Deceased: Mayningg A.L.L (Mayningg Arla Luft Lambert))",
-          "(Based on your forensic knowledge, you are certain that May's death is caused by drowning)."
+          "(Based on your forensic knowledge, you are certain that May's death is caused by drowning).",
+          "(Some lily pollens fell from May's body, as if they are mourning for her)."
         ]
       ]
     },
@@ -144,7 +158,64 @@
         [
           "Hey Pint, what's up? Hmm... what do you say? Where is May?",
           "I thought I had told you that I would do some experiments with May last night after supper.",
-          "But accidents happen... I guess. Yeah, you know she is reluctant to do the mirror experiment like you."
+          "But accidents happen... I guess. Yeah, you know she is reluctant to do the mirror experiment like you.",
+          "By the way, you seems to be taller, Pint"
+        ],
+        [
+          "Hmm, explanation? Revenge? I did not do anything of that kind.",
+          "I am also startled to hear this news. Although I already have a feeling that her life is not long.",
+          "That is why you guys gathered here in this early morning heh.",
+          "Oh my pitiful student, May…May your soul rest in peace."
+        ]
+      ]
+    },
+
+    {
+      "name": "Shadow",
+      "description": "An unknown shadow in the forest.",
+
+      "room": "outside",
+      "x": 0,
+      "y": 11,
+
+      "dialogueStages": [
+        [
+          "...(Maybe the shadow will speak if you take the mirror)."
+        ],
+        [
+          "Do y*u re***ber who I **?",
+          "I ** t*e o*ly witness. May *** not commit sui*cid*.",
+          "Take **** mir*or **** **u *** go home."
+        ]
+      ]
+    },
+
+    {
+      "name": "'Pint'",
+      "description": "Another you.",
+
+      "room": "Pint Room",
+      "x": 2,
+      "y": 0,
+
+      "dialogueStages": [
+        [
+          "Ahh it's so good to be home. After all, I have made this room to be more stable for us.",
+          "Oh what do I mean? Sorry...I'm too excited to see you after all, my shadow. Or maybe I'm the shadow? Hehe",
+          "You noticed it, right, Pint? Those footsteps and fall marks are all mine."
+        ],
+        [
+          "Ahh you are right. Our situation right now is a product of the mirror experiment.",
+          "I only told May about this, and she does not want it.",
+          "I actually have to add sedatives to everyone's soup, except Dr. Seegy and mine.",
+          "But, I betrayed him. I cooperated with May. I want to run away from here through the West Forest, while May wants to get the lead researcher position.",
+          "So, I added only to his bowl. I don't care about anything here, except you and me."
+        ],
+        [
+          "Then, when I woke up, the mirror was gone. I'm afraid that you will disappear, so I quickly looked for you.",
+          "Then, I found the mirror beside the Lily Pond and May is struggling by holding on the Grand Hall roof.",
+          "I realized it and moved the mirror, but it's too late. She fell. I saw the guard coming my way.",
+          "I quickly ran to the forest, and yeah, I think you know what happened next."
         ],
         [
           "..."

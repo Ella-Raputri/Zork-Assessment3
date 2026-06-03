@@ -94,7 +94,7 @@
         },
         {
           "type": "print_message",
-          "message": "The guard swiftly lifts May out of the pond."
+          "message": "The guard swiftly lifts May out of the pond. Talk to him after you take May's cigarettes."
         }
       ]
     },
@@ -108,7 +108,7 @@
       "effects": [
         {
           "type": "print_message",
-          "message": "The guard and Chil decided to confront Dr. Seegy, while you want to explore the surroundings first."
+          "message": "The guard and Chil decided to confront Dr. Seegy, while you want to explore the surroundings first. Talk to them if you have done exploring."
         },
         {
           "type": "set_dialogue_stage",
@@ -144,7 +144,7 @@
       "effects": [
         {
           "type": "print_message",
-          "message": "As the favorite student of Dr. Seegy, you remember that there is a gold key in the warehouse that can open Dr. Seegy's room, but you have to find the warehouse key first. \n\nMaybe you can try going to the Lab. The lab key is usually placed in front of the door."
+          "message": "As the favorite student of Dr. Seegy, you remember that there is a gold key in the warehouse that can open Dr. Seegy's room, but you have to find the warehouse key first. \n\nMaybe you can try going to the Lab. The lab key is usually placed in front of the door. Find the key to Dr. Seegy's room."
         },
         {
           "type": "spawn_item",
@@ -170,7 +170,7 @@
         },
         {
           "type": "print_message",
-          "message": "You saw Chil walking towards the warehouse. He is confused by your behaviour."
+          "message": "You saw Chil walking towards the warehouse. He is confused by your behaviour. Talk with him to decide what to do next."
         },
         {
           "type": "set_dialogue_stage",
@@ -209,7 +209,7 @@
       "effects": [
         {
           "type": "print_message",
-          "message": "You tell Chil you have found the key to Dr Seegy's room. Both of you then quickly rushed to the front of his room. The three of you decided to let you go in first because you are his favourite student; maybe he will tell you everything."
+          "message": "You tell Chil you have found the key to Dr Seegy's room. Both of you then quickly rushed to the front of his room. The three of you decided to let you go in first because you are his favourite student; maybe he will tell you everything. Go talk to Dr.Seegy."
         },
         {
           "type": "set_dialogue_stage",
@@ -268,7 +268,7 @@
       "effects": [
         {
           "type": "print_message",
-          "message": "You tried the spray, and it is successful. He slowly regains his consciousness."
+          "message": "You tried the spray, and it is successful. He slowly regains his consciousness. Go talk to Dr.Seegy."
         },
         {
           "type": "set_dialogue_stage",
@@ -287,7 +287,7 @@
       "effects": [
         {
           "type": "print_message",
-          "message": "You are confused because you don't know what experiments he said, while he leisurely goes out of his room."
+          "message": "You are confused because you don't know what experiments he said, while he leisurely goes out of his room. Chase and talk to him."
         },
         {
           "type": "move_npc",
@@ -324,6 +324,177 @@
           "type": "set_dialogue_stage",
           "npc": "Guard",
           "stage": 6
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "requiredClueIds": [],
+      "requiredNPCName": "Seegy",
+      "requiredCheckpointId": "9",
+      "triggerX": 26,
+      "triggerY": 9,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "Dr. Seegy also did not admit that he is the murderer. But, for safety reasons, the guard will guard Seegy, while Chil went to May's room to prepare May's funeral. \n\nYou feel that this case is not as simple as a suicide or murder. Try to investigate further. Go talk to Chil, maybe he has some ideas."
+        },
+        {
+          "type": "move_npc",
+          "npc": "Seegy",
+	        "room": "Lead Researcher Room",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "move_npc",
+          "npc": "Chil",
+	        "room": "May Room",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "type": "move_npc",
+          "npc": "Guard",
+	        "room": "outside",
+          "x": 25,
+          "y": 9
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 8
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Guard",
+          "stage": 7
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "requiredClueIds": ["rope","spotlight","footsteps_photo"],
+      "requiredNPCName": "Chil",
+      "requiredCheckpointId": "10",
+      "triggerX": 2,
+      "triggerY": 0,
+      "effects": [
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 9
+        },
+        {
+          "type": "spawn_item",
+          "itemId": "chil_key",
+          "room": "May Room",
+          "x": 2,
+          "y": 2
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "requiredClueIds": ["mirror"],
+      "requiredNPCName": "Shadow",
+      "requiredCheckpointId": "11",
+      "triggerX": 0,
+      "triggerY": 11,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "When you take the mirror, a white shadow appears and repeatedly tells you this same thing. It seems like only a fragment of a real person. It gives you your lost key and urges you to go home. \n\nFor players that wants to solve this mystery, please collect all the items, and you can try to guess what happens before the finale."
+        },
+        {
+          "type": "spawn_item",
+          "itemId": "silver_key",
+          "room": "outside",
+          "x": 1,
+          "y": 9
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Shadow",
+          "stage": 1
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "requiredClueIds": ["mirror", "footsteps_photo", "footsteps_photo2", "fall_photo"],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "12",
+      "triggerX": 2,
+      "triggerY": 0,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "You asked the other 'Pint' to stop talking for a second. You finally figured it out. The earthquakes are caused by Pint's actions. \n\nJust like what Chil said, the murderer is highly likely to use this concave mirror. You decided to start thinking from the mirror experiment. Talk to 'Pint' for more."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 1
+        },
+        {
+          "type": "move_npc",
+          "npc": "'Pint'",
+	        "room": "Pint Room",
+          "x": 2,
+          "y": 2
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "requiredClueIds": ["mirror", "chicken_soup", "footsteps_photo2", "fall_photo"],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "13",
+      "triggerX": 2,
+      "triggerY": 2,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "Then, Pint said that she ran to North Forest, but the mirror became unstable and caused a small earthquake, knocking her out. \n\nYour blurry memory becomes clearer; it seems like at this time, Pint was divided into two. Talk to 'Pint' for more."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 2
+        },
+        {
+          "type": "move_npc",
+          "npc": "'Pint'",
+	        "room": "Pint Room",
+          "x": 0,
+          "y": 3
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "requiredClueIds": ["mirror", "footsteps_photo", "large_mark_photo"],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "14",
+      "triggerX": 0,
+      "triggerY": 3,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "You pondered for some time. The other Pint smiled and asked you whether May was murdered or not. Talk to 'Pint' for more."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 3
+        },
+        {
+          "type": "move_npc",
+          "npc": "'Pint'",
+	        "room": "Pint Room",
+          "x": 0,
+          "y": 1
         }
       ]
     }

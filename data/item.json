@@ -40,7 +40,7 @@
       "type": "equippable",
       "name": "diving suit",
       "description": "A heavy diving suit with an oxygen tank.",
-      "requiredRegion": "Lily Pond",
+      "requiredRegion": ["Lily Pond"],
       "spawn": true,
       "room": "outside",
       "x": 13,
@@ -129,7 +129,7 @@
       "id": "mirror",
       "type": "clue",
       "name": "mirror",
-      "description": "A broken concave mirror with intact mirror frame.",
+      "description": "A broken concave mirror with intact mirror frame. This seems to be an epicenter for a bigger earthquake.",
       "spawn": true,
       "room": "outside",
       "x": 1,
@@ -140,7 +140,7 @@
       "id": "fall_photo",
       "type": "clue",
       "name": "fall photo",
-      "description": "Some marks indicating that a person hugging a big item falls here. You can take fall photo to save it to inventory.",
+      "description": "Some marks indicating that a person hugging a big item falls here. This seems to be an epicenter for a small earthquake. You can take fall photo to save it to inventory.",
       "spawn": true,
       "room": "outside",
       "x": 27,
@@ -167,6 +167,17 @@
       "room": "Lead Researcher Room",
       "use": 15,
       "message": "With a foul smell, the fine mist sprayed from the bottle successfully makes you more conscious."
+    },
+
+    {
+      "id": "seegy_card",
+      "type": "clue",
+      "name": "seegy's card",
+      "description": "Seegy's card with its full name written: Seegy I.L.A. (Seegy Isra Luke Ansterdon).",
+      "spawn": true,
+      "room": "Lead Researcher Room",
+      "x": 4,
+      "y": 0
     },
 
     {
@@ -275,11 +286,11 @@
       "type": "equippable",
       "name": "lantern",
       "description": "A small light lantern. Maybe you can go to the dark west forest with this lantern.",
-      "requiredRegion": "West Forest",
+      "requiredRegion": ["West Forest", "North Forest"],
       "spawn": true,
-      "room": "outside",
-      "x": 30,
-      "y": 13
+      "room": "Chil Room",
+      "x": 0,
+      "y": 3
     },
 
     {
@@ -291,6 +302,62 @@
       "room": "outside",
       "x": 26,
       "y": 21
+    },
+
+    {
+      "id": "terrace_chair",
+      "type": "clue",
+      "name": "terrace chair",
+      "description": "Two terrace chairs with a table in front of your house. You and Chil having a nice time chatting here last night with two cups of coffee.",
+      "spawn": true,
+      "room": "outside",
+      "x": 39,
+      "y": 7
+    },
+
+    {
+      "id": "teaset",
+      "type": "generic",
+      "name": "teaset",
+      "description": "A teaset with two cups. There is some rosella tea remaining inside the cups.",
+      "spawn": true,
+      "room": "Chil Room",
+      "x": 2,
+      "y": 1,
+      "use": 10,
+      "message": "The tea is already cold. You take a gulp and it's very fragrant. You did not like the aroma."
+    },
+
+    {
+      "id": "chil_key",
+      "type": "key",
+      "name": "chil key",
+      "description": "The key to access Chil's room.",
+      "spawn": false,
+      "room": "May Room",
+      "use": -1,
+      "message": "The door gives a flower fragrant when you touch it."
+    },
+
+    {
+      "id": "may_letter",
+      "type": "clue",
+      "name": "may's letter",
+      "description": "An old letter from May to her friends with some jumbled words written on it: \nI ziaplregai his works.",
+      "spawn": true,
+      "room": "May Room",
+      "x": 2,
+      "y": 3
+    },
+
+    {
+      "id": "silver_key",
+      "type": "key",
+      "name": "silver key",
+      "description": "The key to access your own room.",
+      "spawn": false,
+      "room": "outside",
+      "use": -1
     }
   ]
 }
