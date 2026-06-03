@@ -2,25 +2,28 @@
 #define ZOORK_EQUIPPABLEITEM_H
 
 #include "Item.h"
+#include <vector>
+#include <algorithm>
 
 class EquippableItem : public Item {
 private:
     bool equipped;
-    std::string requiredRegion;
+    std::vector<std::string> requiredRegion;
 
 public:
     EquippableItem(
         const std::string& n,
         const std::string& d,
         const std::string& id,
-        const std::string& requiredRegion = ""
+        const std::vector<std::string>& requiredRegion = {}
     );
 
     void equip();
     void unequip();
 
     bool isEquipped() const;
-    std::string getRequiredRegion() const;
+    const std::vector<std::string>& getRequiredRegion();
+    bool isRequiredRegion(const std::string& region) const;
 
     void use() override; 
 };

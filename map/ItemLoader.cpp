@@ -52,12 +52,16 @@ ItemLoader::loadItems(
             );
         }
         else if (type == "equippable") {
-            std::string region = entry.value("requiredRegion", "");
+            std::vector<std::string> regions;
+            if (entry.contains("requiredRegion")) {
+                regions = entry["requiredRegion"].get<std::vector<std::string>>();
+            }
+
             item = std::make_shared<EquippableItem>(
                 name,
                 desc,
                 id,
-                region
+                regions
             );
         }
 

@@ -107,7 +107,7 @@ void Player::unequipItem(){
     }
 
     auto cell = currentRoom->getCell(posX, posY);
-    if (cell->getRegionTag() == equippedItem->getRequiredRegion()){
+    if (equippedItem->isRequiredRegion(cell->getRegionTag())){
         std::cout << "You can not unequip your "  << equippedItem->getName() << " here.\n";
         return;
     }
@@ -132,10 +132,10 @@ void Player::checkEquippedRegion() {
 
     auto cell = currentRoom->getCell(posX, posY);
 
-    if (cell->getRegionTag() != equippedItem->getRequiredRegion()) {
+    if (!equippedItem->isRequiredRegion(cell->getRegionTag())) {
         std::cout
-            << "You are no longer in "
-            << equippedItem->getRequiredRegion()
+            << "You are no longer in a region requiring "
+            << equippedItem->getName()
             << ". Consider unequipping "
             << equippedItem->getName()
             << ".\n";
