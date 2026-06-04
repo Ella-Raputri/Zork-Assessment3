@@ -343,7 +343,7 @@
       "id": "may_letter",
       "type": "clue",
       "name": "may's letter",
-      "description": "An old letter from May to her friends with some jumbled words written on it: \nI ziaplregai his works.",
+      "description": "An old letter from May to her friends with some jumbled words written on it: \nI ziaplregai all of my brother's works.",
       "spawn": true,
       "room": "May Room",
       "x": 2,

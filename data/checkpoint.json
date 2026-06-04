@@ -497,6 +497,241 @@
           "y": 1
         }
       ]
+    },
+    {
+      "id": "16",
+      "requiredClueIds": ["chair", "rope", "cigarette"],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "15",
+      "triggerX": 0,
+      "triggerY": 1,
+      "effects": [
+        {
+          "type": "ask_password",
+          "question": "So, Pint, after seeing the burnt rope near the rooftop, do you still think May jumped willingly? (yes or no)",
+          "answer": "no"
+        },
+        {
+          "type": "ask_password",
+          "question": "If May truly wanted to die, why would she prepare a rope first? The rope was meant to keep her safe. Someone wanted her to believe she could not fall. You agree right? (yes or no)",
+          "answer": "yes"
+        },
+        {
+          "type": "ask_password",
+          "question": "Other things are she prepared a chair and cigarettes, as if she waited for someone to see her 'becomes crazy'. If it's a suicide, why would she still have the mood to do that, right? (yes or no)",
+          "answer": "yes"
+        },
+        {
+          "type": "move_npc",
+          "npc": "'Pint'",
+	        "room": "Pint Room",
+          "x": 1,
+          "y": 3
+        },
+        {
+          "type": "print_message",
+          "message": "Now the question is no longer whether May was murdered. The question is who benefited from her death?"
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "requiredClueIds": ["may_letter", "teaset", "ash"],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "16",
+      "triggerX": 1,
+      "triggerY": 3,
+      "effects": [
+        {
+          "type": "ask_password",
+          "question": "First, what are the unjumbled version of jumbled words in May's letter: 'I ziaplregai all of my brother's works'",
+          "answer": "plagiarize"
+        },
+        {
+          "type": "ask_password",
+          "question": "You found lily pollen in May's body right? (yes or no)",
+          "answer": "yes"
+        },
+        {
+          "type": "ask_password",
+          "question": "Chil says that he is allergic to lilies, but after hugging May, is he all right? (yes or no)",
+          "answer": "yes"
+        },
+        {
+          "type": "ask_password",
+          "question": "A tea set for two, but last night you and Chil chatted in front of YOUR house, not HIS? (yes or no)",
+          "answer": "yes"
+        },
+        {
+          "type": "print_message",
+          "message": "You are certain that Chil is the murderer now. After May runs from the guard, he lets May go into his house to hide, then he asks May to pretend to be crazy in the rooftop to frame Dr. Seegy that she is poisoned by him.\n\nHe may also instruct May to be wilder to attract attention with a rope that guarantees her safety. Unknowingly to May, he has already set up a mirror that is taken from 'me' to burn the rope. \n\nAt first, he wants to destroy the mirror with some mechanisms before the mechanism self-destructs, but it was gone. That's why he needs to ensure that the mirror is really gone before others realize it. Hence, he lies about his allergy.\n\nTalk to 'Pint' for the next actions."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 4
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "requiredClueIds": [],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "17",
+      "triggerX": 1,
+      "triggerY": 3,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "HAHAHAHA... Before the other Pint says something to you, you hear Dr. Seegy's loud laughing noise from the Lily Pond. You two immediately decided to go there."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 5
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 10
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Guard",
+          "stage": 8
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Seegy",
+          "stage": 3
+        },
+        {
+          "type": "move_npc",
+          "npc": "Chil",
+	        "room": "outside",
+          "x": 15,
+          "y": 11
+        },
+        {
+          "type": "move_npc",
+          "npc": "'Pint'",
+	        "room": "outside",
+          "x": 6,
+          "y": 13
+        },
+        {
+          "type": "move_npc",
+          "npc": "Seegy",
+	        "room": "outside",
+          "x": 6,
+          "y": 11
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "requiredClueIds": [],
+      "requiredNPCName": "Seegy",
+      "requiredCheckpointId": "18",
+      "triggerX": 6,
+      "triggerY": 11,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "The Lily Pond starts shining. The mirror and reality world starts to merge. Chil becomes unconscious. The other Pint have some words to talk to you. Dr. Seegy went to the Grand Hall Rooftop."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 6
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Chil",
+          "stage": 11
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Seegy",
+          "stage": 4
+        },
+        {
+          "type": "move_npc",
+          "npc": "Seegy",
+	        "room": "Grand Hall Rooftop",
+          "x": 3,
+          "y": 3
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "requiredClueIds": [],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "19",
+      "triggerX": 6,
+      "triggerY": 13,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "You know that this is your time to shine. You rushed to go to the Grand Hall Rooftop."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 7
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "requiredClueIds": [],
+      "requiredNPCName": "Seegy",
+      "requiredCheckpointId": "20",
+      "triggerX": 3,
+      "triggerY": 3,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "For some reason, you can not touch him, but he can. When you are about to face a catastrophic disaster, you see Pint."
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 8
+        },
+        {
+          "type": "move_npc",
+          "npc": "'Pint'",
+	        "room": "Grand Hall Rooftop",
+          "x": 1,
+          "y": 3
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "requiredClueIds": [],
+      "requiredNPCName": "'Pint'",
+      "requiredCheckpointId": "21",
+      "triggerX": 1,
+      "triggerY": 3,
+      "effects": [
+        {
+          "type": "print_message",
+          "message": "You are shocked by Pint's statement. Before you realize it, both Pint and Dr. Seegy are petrified into glass. The experiment stopped. You collapsed to the floor, shocked by everything that happened in an instant. \n\nNow, once in a while, when you see the reflection in the mirror, you will not see Pint anymore, but you are Pint and Pint is you.\n\n[THE END]"
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "'Pint'",
+          "stage": 9
+        },
+        {
+          "type": "set_dialogue_stage",
+          "npc": "Seegy",
+          "stage": 5
+        }
+      ]
     }
   ]
 }
