@@ -5,12 +5,6 @@
 #include "Room.h"
 #include "../passage/NullPassage.h"
 
-#include <utility>
-#include <memory>
-#include <iostream>
-#include <algorithm>
-
-
 Room::Room(const std::string &n, const std::string &d, int width, int height, int viewW, int viewH)
         : Location(n, d), width(width), height(height), viewW(viewW), viewH(viewH) {
     enterCommand = std::make_shared<RoomDefaultEnterCommand>(this);

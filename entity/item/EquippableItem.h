@@ -4,6 +4,7 @@
 #include "Item.h"
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 class EquippableItem : public Item {
 private:

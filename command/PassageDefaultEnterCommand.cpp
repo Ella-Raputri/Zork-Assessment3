@@ -7,7 +7,6 @@
 
 void PassageDefaultEnterCommand::execute() {
     auto* room = static_cast<Passage*>(gameObject)->getTo();
-    std::cout << "Enter room: " << room->getName() << "\n"; // debug
-    // std::cout << "Description: " << room->getDescription() << "\n"; // debug
+    std::cout << "Enter room: " << room->getName() << "\n";
     room->enter();
 }

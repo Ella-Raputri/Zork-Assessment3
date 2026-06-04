@@ -19,7 +19,7 @@ class Cell {
         CellType type;
         char symbol;
         std::string description;
-        std::string regionTag;  // e.g. "house", "garden"
+        std::string regionTag;  
         bool passable;
         std::string color;
         std::vector<std::shared_ptr<Item>> items;

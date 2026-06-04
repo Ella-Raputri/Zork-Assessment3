@@ -1,6 +1,4 @@
 #include "CheckpointManager.h"
-#include <fstream>
-#include <iostream>
 
 CheckpointManager* CheckpointManager::_instance = nullptr;
 
@@ -206,8 +204,6 @@ void CheckpointManager::loadFromJSON(
         return;
     }
 
-    std::cout << "JSON parsed OK, found " << root["checkpoints"].size() << " entries\n";
-
     for (const auto& entry : root["checkpoints"]) {
         CheckpointData cp;
         cp.id = entry["id"];
@@ -229,6 +225,4 @@ void CheckpointManager::loadFromJSON(
         cp.requiredCheckpointId = entry.value("requiredCheckpointId", "");
         checkpoints.push_back(std::move(cp));
     }
-
-    std::cout << "Loaded " << checkpoints.size() << " checkpoints.\n";
 }

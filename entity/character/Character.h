@@ -23,12 +23,6 @@ public:
 protected:
     int posX, posY;
     Room* currentRoom;
-//    std::vector<Item*> inventory;
-//    std::vector<std::string> tags;
-//    int health;
-//    int attack;
-//    int move;
-//    int initiative;
 };
 
 #endif //ZOORK_CHARACTER_H

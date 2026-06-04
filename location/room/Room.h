@@ -19,6 +19,9 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <utility>
+#include <iostream>
+#include <algorithm>
 
 class Passage;
 

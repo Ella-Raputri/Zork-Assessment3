@@ -8,6 +8,7 @@
 
 #include "../GameObject.h"
 #include <memory>
+#include <iostream>
 
 enum class ItemType {
     Generic,
@@ -22,7 +23,7 @@ public:
 
     virtual ~Item() = default;
 
-    virtual void use(); // default: do nothing or print message
+    virtual void use(); 
 
     ItemType getType() const;
     std::string getItemId() const;

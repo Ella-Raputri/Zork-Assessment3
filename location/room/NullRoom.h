@@ -7,6 +7,7 @@
 #define ZOORK_NULLROOM_H
 
 #include "Room.h"
+#include <memory>
 
 class NullRoom : public Room {
 public:

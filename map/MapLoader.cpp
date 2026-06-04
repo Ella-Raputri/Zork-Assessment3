@@ -1,10 +1,6 @@
 // MapLoader.cpp
 #include "MapLoader.h"
 
-#include <fstream>
-#include <sstream>
-#include <iostream>
-
 std::vector<std::string> MapLoader::split(
     const std::string& line,
     char delimiter

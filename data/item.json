@@ -285,7 +285,7 @@
       "id": "lantern",
       "type": "equippable",
       "name": "lantern",
-      "description": "A small light lantern. Maybe you can go to the dark west forest with this lantern.",
+      "description": "A small light lantern. Maybe you can go to the dark forests with this lantern.",
       "requiredRegion": ["West Forest", "North Forest"],
       "spawn": true,
       "room": "Chil Room",

@@ -4,8 +4,6 @@
 //
 
 #include "Passage.h"
-
-#include <utility>
 #include "../../command/PassageDefaultEnterCommand.h"
 
 std::string Passage::oppositeDirection(const std::string &s) {

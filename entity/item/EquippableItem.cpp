@@ -1,5 +1,4 @@
 #include "EquippableItem.h"
-#include <iostream>
 
 EquippableItem::EquippableItem(
     const std::string& n,

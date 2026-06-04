@@ -5,10 +5,6 @@
 
 #include "ZOOrkEngine.h"
 
-#include <utility>
-#include <algorithm>
-#include <iostream>
-
 ZOOrkEngine::ZOOrkEngine(int startX, int startY) {
     player = Player::instance();
     checkpointManager = CheckpointManager::instance();
@@ -36,7 +32,7 @@ void ZOOrkEngine::run() {
 
         if (command == "go") {
             handleGoCommand(arguments);
-        } else if ((command == "look") || (command == "inspect")) {
+        } else if ((command == "look") || (command == "see")) {
             handleLookCommand();
         } else if ((command == "take") || (command == "get")) {
             handleTakeCommand(arguments);
@@ -44,7 +40,7 @@ void ZOOrkEngine::run() {
             handleDropCommand(arguments);
         } else if (command == "use") {
             handleUseCommand(arguments);
-        } else if (command == "talk" || command == "speak") {
+        } else if (command == "talk" || command == "inspect") {
             handleTalkCommand(arguments);
         } else if (command == "inventory") {
             handleInventoryCommand();
@@ -320,9 +316,9 @@ void ZOOrkEngine::handleHelpCommand() {
     std::cout << "  teleport <x> <y>    -> Teleport to (x,y)\n";
 
     std::cout << "\nLOOKING / INTERACTION:\n";
-    std::cout << "  look | inspect -> Inspect the current room\n";
-    std::cout << "  map            -> Show the room map again\n";
-    std::cout << "  talk <npc>     -> Talk to a nearby NPC\n";
+    std::cout << "  look | see                 -> Print the description of the current room and your surroundings\n";
+    std::cout << "  map                        -> Show the room map again\n";
+    std::cout << "  talk <npc> | inspect <npc> -> Talk to a nearby NPC or inspect a nearby non takeable object\n";
 
     std::cout << "\nITEM COMMANDS:\n";
     std::cout << "  take <item> | get <item>  -> Pick up an item\n";

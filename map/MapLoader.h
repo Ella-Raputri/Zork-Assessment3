@@ -5,7 +5,10 @@
 #include <memory>
 #include <vector>
 #include <unordered_map>
-#include <algorithm>  
+#include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <iostream>  
 
 #include "../utils/Color.h"
 #include "../location/cell/Cell.h"

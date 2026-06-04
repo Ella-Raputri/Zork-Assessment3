@@ -9,6 +9,7 @@
 #include "../room/NullRoom.h"
 #include "../room/Room.h"
 #include <iostream>
+#include <utility>
 
 class Passage : public Location {
 public:

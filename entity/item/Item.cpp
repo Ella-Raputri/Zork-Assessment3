@@ -1,5 +1,4 @@
 #include "Item.h"
-#include <iostream>
 
 Item::Item(const std::string &n, const std::string &d, const std::string &id, ItemType type)
     : GameObject(n, d), type(type), itemId(id) {}

@@ -20,6 +20,8 @@
 #include "CheckpointManager.h"
 
 #include <iostream>
+#include <utility>
+#include <algorithm>
 #include <sstream>
 #include <string>
 #include <vector>
