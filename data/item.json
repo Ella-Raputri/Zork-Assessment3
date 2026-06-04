@@ -31,8 +31,7 @@
       "room": "outside",
       "x": 11,
       "y": 4,
-      "use": -1,
-      "message": "The door is easily opened."
+      "use": -1
     },
 
     {
