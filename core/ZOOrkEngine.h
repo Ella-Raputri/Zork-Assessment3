@@ -7,7 +7,6 @@
 #define ZOORK_ZOORKENGINE_H
 
 #include "../entity/character/Player.h"
-#include "../location/Location.h"
 #include "../location/passage/Passage.h"
 #include "../location/cell/DoorCell.h"
 #include "../entity/character/NPC.h"
@@ -35,7 +34,7 @@ public:
 
 private:
     bool gameOver = false;
-    Player *player;
+    Player* player;
     CheckpointManager* checkpointManager;
     
     std::shared_ptr<Room> world;

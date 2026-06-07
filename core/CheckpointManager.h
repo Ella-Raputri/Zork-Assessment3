@@ -1,4 +1,3 @@
-// CheckpointManager.h
 #ifndef ZOORK_CHECKPOINTMANAGER_H
 #define ZOORK_CHECKPOINTMANAGER_H
 
@@ -29,12 +28,6 @@ struct CheckpointData {
     std::string requiredCheckpointId = "";
 };
 
-enum class CheckpointResult {
-    NotMatched,
-    Success,
-    Failed
-};
-
 class CheckpointManager {
 public:
     static CheckpointManager* instance();
@@ -44,7 +37,7 @@ public:
                       std::unordered_map<std::string, std::shared_ptr<NPC>>& npcRegistry,
                       std::unordered_map<std::string, std::shared_ptr<Item>>& itemRegistry);
 
-    CheckpointResult tryTrigger(const std::string& npcName, int x, int y, Player* player);
+    void tryTrigger(const std::string& npcName, int x, int y, Player* player);
 
 private:
     CheckpointManager() = default;

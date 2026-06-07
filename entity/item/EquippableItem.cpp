@@ -4,11 +4,11 @@ EquippableItem::EquippableItem(
     const std::string& n,
     const std::string& d,
     const std::string& id,
-    const std::vector<std::string>& requiredRegion
+    const std::vector<std::string>& requiredRegions
 )
     : Item(n, d, id, ItemType::Equippable),
       equipped(false),
-      requiredRegion(requiredRegion)
+      requiredRegions(requiredRegions)
 {}
 
 void EquippableItem::equip() {
@@ -31,18 +31,14 @@ bool EquippableItem::isEquipped() const {
     return equipped;
 }
 
-const std::vector<std::string>& EquippableItem::getRequiredRegion() {
-    return requiredRegion;
-}
-
 void EquippableItem::use() {
     std::cout << "This item must be equipped, not used.\n";
 }
 
 bool EquippableItem::isRequiredRegion(const std::string& region) const {
     return std::find(
-        requiredRegion.begin(),
-        requiredRegion.end(),
+        requiredRegions.begin(),
+        requiredRegions.end(),
         region
-    ) != requiredRegion.end();
+    ) != requiredRegions.end();
 }

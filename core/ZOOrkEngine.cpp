@@ -284,7 +284,7 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
 
             if (npc && makeLowercase(npc->getName()) == npcName) {
                 npc->talk();
-                CheckpointResult triggered = checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
+                checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
                 return;
             }
         }

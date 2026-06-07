@@ -1,4 +1,3 @@
-// MapLoader.cpp
 #include "MapLoader.h"
 
 std::vector<std::string> MapLoader::split(

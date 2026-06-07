@@ -7,7 +7,7 @@ CheckpointManager* CheckpointManager::instance() {
     return _instance;
 }
 
-CheckpointResult CheckpointManager::tryTrigger(const std::string& npcName, int x, int y, Player* player) {
+void CheckpointManager::tryTrigger(const std::string& npcName, int x, int y, Player* player) {
     for (auto& cp : checkpoints) {
         if (cp.triggered){
             continue;
@@ -42,13 +42,12 @@ CheckpointResult CheckpointManager::tryTrigger(const std::string& npcName, int x
         }
 
         for (auto& effect : cp.onTrigger) {
-            if (!effect()) return CheckpointResult::Failed;
+            if (!effect()) return;
         }
         cp.triggered = true;
         std::cout << "\n[Checkpoint reached: " << cp.id << "]\n";
-        return CheckpointResult::Success;
+        return;
     }
-    return CheckpointResult::NotMatched;
 }
 
 std::function<bool()> CheckpointManager::buildEffect(

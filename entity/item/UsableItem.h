@@ -2,7 +2,6 @@
 #define ZOORK_USABLEITEM_H
 
 #include "Item.h"
-#include "../../command/Command.h"
 #include <memory>
 
 class UsableItem : public Item {
