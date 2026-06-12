@@ -8,6 +8,7 @@
 ZOOrkEngine::ZOOrkEngine(int startX, int startY) {
     player = Player::instance();
     checkpointManager = CheckpointManager::instance();
+    std::cout << "Welcome to ZOOrk, a C++ text adventure game, inspired by Zork.\n";
     world = initMap();
 
     player->setCurrentRoom(world.get());

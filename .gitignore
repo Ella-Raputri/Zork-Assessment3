@@ -41,3 +41,5 @@
 .vscode/
 *.swp
 *.swo
+
+!ZOOrk.exe
