@@ -293,14 +293,14 @@
           "type": "move_npc",
           "npc": "Seegy",
 	        "room": "outside",
-          "x": 26,
+          "x": 27,
           "y": 9
         },
         {
           "type": "move_npc",
           "npc": "Chil",
 	        "room": "outside",
-          "x": 27,
+          "x": 26,
           "y": 9
         },
         {
@@ -332,7 +332,7 @@
       "requiredClueIds": [],
       "requiredNPCName": "Seegy",
       "requiredCheckpointId": "9",
-      "triggerX": 26,
+      "triggerX": 27,
       "triggerY": 9,
       "effects": [
         {

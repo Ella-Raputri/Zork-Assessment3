@@ -184,12 +184,6 @@ void Room::addPassage(const std::string &direction, std::shared_ptr<Passage> p) 
     passageMap[direction] = std::move(p);
 }
 
-void Room::removePassage(const std::string &direction) {
-    if (passageMap.contains(direction)) {
-        passageMap.erase(direction);
-    }
-}
-
 std::shared_ptr<Passage> Room::getPassage(const std::string &direction) {
     if (passageMap.contains(direction)) {
         return passageMap[direction];

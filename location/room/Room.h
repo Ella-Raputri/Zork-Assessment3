@@ -9,7 +9,6 @@
 #include "../../entity/character/NPC.h"
 #include "../../entity/character/Player.h"
 #include "../../command/RoomDefaultEnterCommand.h"
-#include "../../entity/item/Item.h"
 #include "../Location.h"
 #include "../cell/Cell.h"
 #include "../cell/DoorCell.h"
@@ -61,7 +60,6 @@ public:
     bool isValidPos(int x, int y) const;
 
     void addPassage(const std::string & direction, std::shared_ptr<Passage> p);
-    void removePassage(const std::string & direction);
     std::shared_ptr<Passage> getPassage(const std::string & direction);
     std::shared_ptr<Passage> getPassageByPosition(int x, int y);
 

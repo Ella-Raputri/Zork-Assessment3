@@ -93,7 +93,7 @@ void MapLoader::applyRegions(
                         "You are in " + region.name,
                         region.name,
                         region.requiredItem,
-                        "Restricted area: need " + itemName,
+                        "Restricted area: need to equip " + itemName,
                         region.color
                     );
                 }
