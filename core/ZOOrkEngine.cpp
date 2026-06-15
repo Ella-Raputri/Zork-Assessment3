@@ -334,6 +334,7 @@ void ZOOrkEngine::handleHelpCommand() {
 
     std::cout << "\nLOOKING / INTERACTION:\n";
     std::cout << "  look | see                 -> Print the description of the current room and your surroundings\n";
+    std::cout << "  look <thing> | see <thing> -> Print the description of the item or NPC that you look\n";
     std::cout << "  map                        -> Show the room map again\n";
     std::cout << "  talk <npc> | inspect <npc> -> Talk to a nearby NPC or inspect a nearby non takeable object\n";
 

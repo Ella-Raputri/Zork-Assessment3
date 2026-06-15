@@ -96,6 +96,7 @@ To make our life easier, I have also included a compiled ZOOrk.exe in the root o
 
 ### Interaction:
 - `look` or `see`: print the description of the surroundings.
+- `look <thing>` or `see <thing>`: print the description of the item or NPC that you look.
 - `map`: print the room map.
 - `talk <npc>` or `inspect <npc>`: talk to a nearby NPC or inspect a nearby non-takeable object.
 
