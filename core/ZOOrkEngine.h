@@ -41,7 +41,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Room>> interiors;
 
     void handleGoCommand(std::vector<std::string>);
-    void handleLookCommand();
+    void handleLookCommand(std::vector<std::string>);
 
     void handleTakeCommand(std::vector<std::string>);
     void handleDropCommand(std::vector<std::string>);
@@ -62,6 +62,7 @@ private:
     static std::string makeLowercase(std::string);
 
     std::shared_ptr<DoorCell> getNearbyDoor();
+    std::shared_ptr<NPC> getNearbyNPC(const std::string& name);
     std::shared_ptr<Room> initMap();
 };
 

@@ -34,7 +34,7 @@ void ZOOrkEngine::run() {
         if (command == "go") {
             handleGoCommand(arguments);
         } else if ((command == "look") || (command == "see")) {
-            handleLookCommand();
+            handleLookCommand(arguments);
         } else if ((command == "take") || (command == "get")) {
             handleTakeCommand(arguments);
         } else if (command == "drop") {
@@ -122,56 +122,81 @@ void ZOOrkEngine::handleGoCommand(std::vector<std::string> arguments) {
     player->checkEquippedRegion();
 }
 
-void ZOOrkEngine::handleLookCommand() {
-    std::cout << player->getCurrentRoom()->getDescription() << std::endl;
-
+void ZOOrkEngine::handleLookCommand(std::vector<std::string> arguments) {
     Room* currentRoom = player->getCurrentRoom();
     int currX = player->getX();
     int currY = player->getY();
     auto cell = currentRoom->getCell(currX, currY);
 
-    std::unordered_set<std::string> objects;
-    for (int dy = -1; dy <= 1; dy++) {
-        for (int dx = -1; dx <= 1; dx++) {
-            int neighborX = currX + dx, neighborY = currY + dy;
+    if(arguments.empty()){
+        std::cout << currentRoom->getDescription() << std::endl;
 
-            if (!currentRoom->isValidPos(neighborX, neighborY)) {
-                continue;
-            }
+        std::unordered_set<std::string> objects;
+        for (int dy = -1; dy <= 1; dy++) {
+            for (int dx = -1; dx <= 1; dx++) {
+                int neighborX = currX + dx, neighborY = currY + dy;
 
-            auto npc = currentRoom->getNPCAt(neighborX, neighborY);
-            if (npc) {
-                objects.insert(npc->getName());
-            }
+                if (!currentRoom->isValidPos(neighborX, neighborY)) {
+                    continue;
+                }
 
-            auto neighborCell = currentRoom->getCell(neighborX, neighborY);
-            if (neighborCell &&
-                neighborCell->getSymbol() != cell->getSymbol() &&
-                neighborCell->getSymbol() != 'd')
-            {
-                objects.insert(neighborCell->getRegionTag());
+                auto npc = currentRoom->getNPCAt(neighborX, neighborY);
+                if (npc) {
+                    objects.insert(npc->getName());
+                }
+
+                auto neighborCell = currentRoom->getCell(neighborX, neighborY);
+                if (neighborCell &&
+                    neighborCell->getSymbol() != cell->getSymbol() &&
+                    neighborCell->getSymbol() != 'd')
+                {
+                    objects.insert(neighborCell->getRegionTag());
+                }
             }
+        }
+
+        if(!objects.empty()){
+            std::cout << "You see ";
+            for (auto it = objects.begin(); it != objects.end(); ++it) {
+                std::cout << *it;
+                if (std::next(it) != objects.end()) {
+                    std::cout << ", ";
+                }
+            }
+            std::cout << " nearby.\n";
+        }
+
+        if (cell->hasItems()) {
+            std::cout << "You see some items in the ground: " << std::endl;
+            for (const auto& item : cell->getItems()) {
+                std::cout << "- " << item->getName()
+                        << ": " << item->getDescription() << "\n";
+            }
+        }
+        return;
+    }
+
+    std::string target = combineArguments(arguments);
+    for (const auto& item : cell->getItems()) {
+        if (makeLowercase(item->getName()) == target) {
+            std::cout << item->getDescription() << std::endl;
+            return;
         }
     }
 
-    if(!objects.empty()){
-        std::cout << "You see ";
-        for (auto it = objects.begin(); it != objects.end(); ++it) {
-            std::cout << *it;
-            if (std::next(it) != objects.end()) {
-                std::cout << ", ";
-            }
-        }
-        std::cout << " nearby.\n";
+    auto invItem = player->getItemByName(target);
+    if (invItem) {
+        std::cout << invItem->getDescription() << std::endl;
+        return;
     }
 
-    if (cell->hasItems()) {
-        std::cout << "You see some items in the ground: " << std::endl;
-        for (const auto& item : cell->getItems()) {
-            std::cout << "- " << item->getName()
-                      << ": " << item->getDescription() << "\n";
-        }
+    auto npc = getNearbyNPC(target);
+    if (npc) {
+        std::cout << npc->getDescription() << std::endl;
+        return;
     }
+
+    std::cout << "You don't see any " << target << " here." << std::endl;
 }
 
 void ZOOrkEngine::handleTakeCommand(std::vector<std::string> arguments) {
@@ -274,23 +299,14 @@ void ZOOrkEngine::handleTalkCommand(std::vector<std::string> arguments) {
     }
 
     std::string npcName = combineArguments(arguments);
-    Room* room = player->getCurrentRoom();
+    auto npc = getNearbyNPC(npcName);
 
-    int px = player->getX();
-    int py = player->getY();
-
-    for (int dy = -1; dy <= 1; dy++) {
-        for (int dx = -1; dx <= 1; dx++) {
-            auto npc = room->getNPCAt(px + dx, py + dy);
-
-            if (npc && makeLowercase(npc->getName()) == npcName) {
-                npc->talk();
-                checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
-                return;
-            }
-        }
+    if (!npc) {
+        std::cout << "Nobody by that name is nearby." << std::endl;
+        return;
     }
-    std::cout << "Nobody by that name is nearby." << std::endl;
+    npc->talk();
+    checkpointManager->tryTrigger(npc->getName(), npc->getX(), npc->getY(), player);
 }
 
 void ZOOrkEngine::handleEquipCommand(std::vector<std::string> arguments) {
@@ -445,6 +461,24 @@ std::shared_ptr<DoorCell> ZOOrkEngine::getNearbyDoor() {
             auto door = std::dynamic_pointer_cast<DoorCell>(cell);
             if (door) {
                 return door;
+            }
+        }
+    }
+    return nullptr;
+}
+
+std::shared_ptr<NPC> ZOOrkEngine::getNearbyNPC(const std::string& name) {
+    Room* room = player->getCurrentRoom();
+
+    int px = player->getX();
+    int py = player->getY();
+
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx++) {
+            auto npc = room->getNPCAt(px + dx, py + dy);
+
+            if (npc && makeLowercase(npc->getName()) == makeLowercase(name)){
+                return npc;
             }
         }
     }
