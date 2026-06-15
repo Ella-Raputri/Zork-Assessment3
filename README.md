@@ -53,7 +53,7 @@ cmake --build build
 #### Windows Powershell
 
 ```powershell
-.\build\ZOOrk.exe
+.\build\Debug\ZOOrk.exe
 ```
 
 ### Run the Application (Without Building It)
